@@ -265,7 +265,7 @@ class UserenaManager(UserManager):
 
         # it is safe to rely on settings.ANONYMOUS_USER_ID since it is a
         # requirement of django-guardian
-        for user in get_user_model().objects.exclude(id=settings.ANONYMOUS_USER_ID):
+        for user in get_user_model().objects.exclude(username=settings.ANONYMOUS_USER_NAME):
             try:
                 user_profile = get_user_profile(user=user)
             except ObjectDoesNotExist:

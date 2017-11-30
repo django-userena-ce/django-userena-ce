@@ -194,7 +194,6 @@ LOGGING = {
     }
 }
 
-# Needed for Django guardian
-ANONYMOUS_USER_ID = -1
+ANONYMOUS_USER_NAME = "AnonymousUser"
 
 USERENA_USE_HTTPS = False
