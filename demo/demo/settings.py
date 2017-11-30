@@ -118,7 +118,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'guardian',
-    'south',
     'userena',
     'userena.contrib.umessages',
     'profiles',
