@@ -123,5 +123,11 @@ USERENA_REGISTER_PROFILE = getattr(settings, 'USERENA_REGISTER_PROFILE', True)
 
 USERENA_REGISTER_USER = getattr(settings, 'USERENA_REGISTER_USER', True)
 
-if not hasattr(settings, 'ANONYMOUS_USER_NAME'):
+if hasattr(settings, 'ANONYMOUS_USER_ID'):
+    raise ImproperlyConfigured('settings.ANONYMOUS_USER_ID is deprecated for settings.ANONYMOUS_USER_NAME. See https://django-guardian.readthedocs.io/en/stable/configuration.html')
+
+try:
+    if settings.ANONYMOUS_USER_NAME == None:
+        raise ImproperlyConfigured('settings.ANONYMOUS_USER_NAME must not be None.')
+except AttributeError:
     raise ImproperlyConfigured('ANONYMOUS_USER_NAME must be set in settings. See https://django-guardian.readthedocs.io/en/stable/configuration.html')
