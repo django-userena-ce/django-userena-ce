@@ -1,6 +1,6 @@
 # UPDATES
 
-## Version 0.1.0
+## Version 3.0.0
 
 Initial version of django-userena-ce that forks from django-userena. Note this
 still does not support Django > 1.9.
