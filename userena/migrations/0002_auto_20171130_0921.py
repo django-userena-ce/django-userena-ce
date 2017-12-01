@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AlterModelManagers(
             name='userenasignup',
             managers=[
-                (b'objects', userena.managers.UserenaManager()),
+                ('objects', userena.managers.UserenaManager()),
             ],
         ),
         migrations.AlterField(
