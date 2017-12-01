@@ -1,8 +1,22 @@
 # UPDATES
 
+## Version 0.1.0
+
+Initial version of django-userena-ce that forks from django-userena. Note this
+still does not support Django > 1.9.
+
+Fixes and improvements:
+- Adds missing migration
+
+Backwards incompatible changes:
+- Now uses django-guardian >= 1.4.2. This means that settings.ANONYMOUS_USER_ID
+  is deprecated for settings.ANONYMOUS_USER_NAME.
+- Dropped support for Django < 1.8, Python2 < 2.7 and Python3 < 3.4.
+
+# django-userena history
+
 This file contains all the backwards-incompatible (since 1.0.1) and other
 significant (since 1.4.1) changes.
-
 
 ## Version 2.0.1
 

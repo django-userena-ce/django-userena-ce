@@ -3,6 +3,9 @@
 [![Build Status](https://travis-ci.org/bread-and-pepper/django-userena.svg)](https://travis-ci.org/bread-and-pepper/django-userena)
 [![Coverage Status](https://img.shields.io/coveralls/bread-and-pepper/django-userena.svg)](https://coveralls.io/r/bread-and-pepper/django-userena)
 
+Due to a lack of maintainance this project is a community edition fork of
+[django-userena](https://github.com/bread-and-pepper/django-userena)
+
 Userena is a Django application that supplies your Django project with full
 account management. It's a fully customizable application that takes care of
 the signup, activation, messaging and more. It's BSD licensed, which means you
