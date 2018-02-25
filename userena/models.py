@@ -48,7 +48,8 @@ class UserenaSignup(models.Model):
     """
     user = models.OneToOneField(user_model_label,
                                 verbose_name=_('user'),
-                                related_name='userena_signup')
+                                related_name='userena_signup',
+                                on_delete=models.CASCADE)
 
     last_active = models.DateTimeField(_('last active'),
                                        blank=True,

@@ -16,7 +16,8 @@ class Profile(UserenaBaseProfile):
     user = models.OneToOneField(user_model_label,
                                 unique=True,
                                 verbose_name=_('user'),
-                                related_name='profile')
+                                related_name='profile',
+                                on_delete=models.CASCADE)
 
     gender = models.PositiveSmallIntegerField(_('gender'),
                                               choices=GENDER_CHOICES,
@@ -31,4 +32,5 @@ class SecondProfile(UserenaBaseProfile):
     user = models.OneToOneField(user_model_label,
                                 unique=True,
                                 verbose_name=_('user'),
-                                related_name='profile_second')
+                                related_name='profile_second',
+                                on_delete=models.CASCADE)

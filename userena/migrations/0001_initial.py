@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('email_unconfirmed', models.EmailField(help_text='Temporary email address when the user requests an email change.', max_length=75, verbose_name='unconfirmed email address', blank=True)),
                 ('email_confirmation_key', models.CharField(max_length=40, verbose_name='unconfirmed email verification key', blank=True)),
                 ('email_confirmation_key_created', models.DateTimeField(null=True, verbose_name='creation date of email confirmation key', blank=True)),
-                ('user', models.OneToOneField(related_name=b'userena_signup', verbose_name='user', to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(related_name='userena_signup', verbose_name='user', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': 'userena registration',

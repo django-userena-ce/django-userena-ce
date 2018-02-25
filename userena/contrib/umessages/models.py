@@ -18,13 +18,16 @@ class MessageContact(models.Model):
 
     """
     um_from_user = models.ForeignKey(user_model_label, verbose_name=_("from user"),
-                                  related_name=('um_from_users'))
+                                     related_name=('um_from_users'),
+                                     on_delete=models.CASCADE)
 
     um_to_user = models.ForeignKey(user_model_label, verbose_name=_("to user"),
-                                related_name=('um_to_users'))
+                                   related_name=('um_to_users'),
+                                   on_delete=models.CASCADE)
 
     latest_message = models.ForeignKey('Message',
-                                       verbose_name=_("latest message"))
+                                       verbose_name=_("latest message"),
+                                       on_delete=models.CASCADE)
 
     objects = MessageContactManager()
 
@@ -63,10 +66,12 @@ class MessageRecipient(models.Model):
 
     """
     user = models.ForeignKey(user_model_label,
-                             verbose_name=_("recipient"))
+                             verbose_name=_("recipient"),
+                             on_delete=models.CASCADE)
 
     message = models.ForeignKey('Message',
-                                verbose_name=_("message"))
+                                verbose_name=_("message"),
+                                on_delete=models.CASCADE)
 
     read_at = models.DateTimeField(_("read at"),
                                    null=True,
@@ -98,7 +103,8 @@ class Message(models.Model):
 
     sender = models.ForeignKey(user_model_label,
                                related_name='sent_messages',
-                               verbose_name=_("sender"))
+                               verbose_name=_("sender"),
+                               on_delete=models.CASCADE)
 
     recipients = models.ManyToManyField(user_model_label,
                                         through='MessageRecipient',

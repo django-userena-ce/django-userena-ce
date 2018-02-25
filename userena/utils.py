@@ -1,7 +1,11 @@
 from django.apps import apps
 from django.conf import settings
 from django.utils.encoding import smart_bytes
-from django.utils.functional import allow_lazy
+try:
+    # django.VERSION < 2.0
+    from django.utils.functional import allow_lazy
+except ImportError:
+    from django.utils.functional import keep_lazy_text
 from django.utils.http import urlencode
 from django.utils.six import text_type
 from django.utils.text import Truncator
@@ -17,8 +21,12 @@ import warnings
 def truncate_words(s, num, end_text='...'):
     truncate = end_text and ' %s' % end_text or ''
     return Truncator(s).words(num, truncate=truncate)
-truncate_words = allow_lazy(truncate_words, text_type)
 
+try:
+    # django.VERSION < 2.0
+    truncate_words = allow_lazy(truncate_words, text_type)
+except NameError:
+    truncate_words = keep_lazy_text(truncate_words)
 
 def get_gravatar(email, size=80, default='identicon'):
     """ Get's a Gravatar for a email address.
