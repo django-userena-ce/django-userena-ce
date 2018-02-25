@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.utils.encoding import smart_text
 
-from userena.compat import make_options
 from userena.models import UserenaSignup
 
 arguments = (
@@ -26,8 +25,6 @@ class Command(BaseCommand):
     This command checks that all permissions are correct.
 
     """
-    option_list = make_options(arguments)
-
     def add_arguments(self, parser):
             for arg, attrs in arguments:
                 parser.add_argument(arg, **attrs)

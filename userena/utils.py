@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.conf import settings
 from django.utils.encoding import smart_bytes
 from django.utils.functional import allow_lazy
@@ -6,7 +7,7 @@ from django.utils.six import text_type
 from django.utils.text import Truncator
 
 from userena import settings as userena_settings
-from userena.compat import SiteProfileNotAvailable, get_model
+from userena.compat import SiteProfileNotAvailable
 
 from hashlib import sha1, md5
 import random, datetime
@@ -129,7 +130,7 @@ def get_profile_model():
         raise SiteProfileNotAvailable
 
     try:
-        profile_mod = get_model(*settings.AUTH_PROFILE_MODULE.rsplit('.', 1))
+        profile_mod = apps.get_model(*settings.AUTH_PROFILE_MODULE.rsplit('.', 1))
     except LookupError:
         profile_mod = None
 
