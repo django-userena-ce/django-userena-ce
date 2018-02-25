@@ -6,7 +6,7 @@
 Userena Introduction
 ====================
 
-This documentation covers |release| release of django-userena application.
+This documentation covers |release| release of django-userena-ce application.
 A Django application that takes care of your account needs.
 
 Why userena?

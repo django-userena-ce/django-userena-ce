@@ -134,7 +134,7 @@ form. First you override the signup form and add the fields.
 
             # Get the profile, the `save` method above creates a profile for each
             # user because it calls the manager method `create_user`.
-            # See: https://github.com/bread-and-pepper/django-userena/blob/master/userena/managers.py#L65
+            # See: https://github.com/django-userena-ce/django-userena-ce/blob/master/userena/managers.py#L65
             user_profile = new_user.get_profile()
 
             user_profile.first_name = self.cleaned_data['first_name']

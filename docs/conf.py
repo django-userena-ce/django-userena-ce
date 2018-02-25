@@ -42,7 +42,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'django-userena'
+project = u'django-userena-ce'
 copyright = u'2010, 2011 Bread & Pepper'
 
 # The version info for the project you're documenting, acts as replacement for

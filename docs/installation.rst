@@ -66,7 +66,7 @@ Manual installation with easy_install.
 Clone the Git repository from Github. Then you can direct easy_install to the
 ``setup.py`` file. For ex.::
 
-    git clone git://github.com/bread-and-pepper/django-userena.git
+    git clone git://github.com/django-userena-ce/django-userena-ce.git
     cd django-userena
     easy_install setup.py
 
@@ -77,7 +77,7 @@ Automatic installation of development version with pip.
 You can tell `pip`_ to install django-userena by supplying it with the git
 repository on Github. Do this by typing the following in your terminal::
 
-    pip install -e git+git://github.com/bread-and-pepper/django-userena.git#egg=userena
+    pip install -e git+git://github.com/django-userena-ce/django-userena-ce.git#egg=userena
 
 
 Manual installation of development version with git.
@@ -85,7 +85,7 @@ Manual installation of development version with git.
 
 Clone userena with::
     
-    git clone git://github.com/bread-and-pepper/django-userena.git
+    git clone git://github.com/django-userena-ce/django-userena-ce.git
 
 You now have a directory ``django-userena`` which contains the ``userena``
 application. You can add userena to your ``$PYTHONPATH`` by symlinking it. For
