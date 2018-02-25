@@ -1,7 +1,10 @@
 from django.apps import apps
 from django.conf import settings
 from django.utils.encoding import smart_bytes
-from django.utils.functional import allow_lazy
+try:
+    from django.utils.functional import allow_lazy
+except ImportError:
+    from django.utils.functional import keep_lazy as allow_lazy
 from django.utils.http import urlencode
 from django.utils.six import text_type
 from django.utils.text import Truncator

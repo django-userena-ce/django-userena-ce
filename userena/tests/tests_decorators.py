@@ -1,10 +1,10 @@
 from django.test import TestCase
-from django.core.urlresolvers import reverse
+try:
+    # django.VERSION < 2.0
+    from django.core.urlresolvers import reverse
+except ImportError:
+    from django.urls import reverse
 
-from userena.utils import get_gravatar
-from userena import settings as userena_settings
-
-import re
 
 class DecoratorTests(TestCase):
     """ Test the decorators """

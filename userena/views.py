@@ -1,4 +1,8 @@
-from django.core.urlresolvers import reverse
+try:
+    # django.VERSION < 2.0
+    from django.core.urlresolvers import reverse
+except ImportError:
+    from django.urls import reverse
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, REDIRECT_FIELD_NAME
 from django.contrib.auth import get_user_model

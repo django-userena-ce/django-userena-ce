@@ -2,7 +2,11 @@ import re
 
 from datetime import datetime, timedelta
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
+try:
+    # django.VERSION < 2.0
+    from django.core.urlresolvers import reverse
+except ImportError:
+    from django.urls import reverse
 from django.core import mail
 from django.contrib.auth.forms import PasswordChangeForm
 from django.test import TestCase

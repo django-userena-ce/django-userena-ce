@@ -5,11 +5,18 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 
 from django.contrib import admin
+from django.core.exceptions import ImproperlyConfigured
+
 admin.autodiscover()
+
+try:
+    admin_urls = include(admin.site.urls)
+except ImproperlyConfigured:
+    admin_urls = admin.site.urls
 
 urlpatterns = [
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin_urls),
 
     # Demo Override the signup form with our own, which includes a
     # first and last name.

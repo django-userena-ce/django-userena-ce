@@ -30,9 +30,9 @@ class Migration(migrations.Migration):
             name='MessageContact',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('latest_message', models.ForeignKey(verbose_name='latest message', to='umessages.Message')),
-                ('um_from_user', models.ForeignKey(related_name='um_from_users', verbose_name='from user', to=settings.AUTH_USER_MODEL)),
-                ('um_to_user', models.ForeignKey(related_name='um_to_users', verbose_name='to user', to=settings.AUTH_USER_MODEL)),
+                ('latest_message', models.ForeignKey(verbose_name='latest message', to='umessages.Message', on_delete=models.CASCADE)),
+                ('um_from_user', models.ForeignKey(related_name='um_from_users', verbose_name='from user', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
+                ('um_to_user', models.ForeignKey(related_name='um_to_users', verbose_name='to user', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ['latest_message'],
@@ -46,8 +46,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('read_at', models.DateTimeField(null=True, verbose_name='read at', blank=True)),
                 ('deleted_at', models.DateTimeField(null=True, verbose_name='recipient deleted at', blank=True)),
-                ('message', models.ForeignKey(verbose_name='message', to='umessages.Message')),
-                ('user', models.ForeignKey(verbose_name='recipient', to=settings.AUTH_USER_MODEL)),
+                ('message', models.ForeignKey(verbose_name='message', to='umessages.Message', on_delete=models.CASCADE)),
+                ('user', models.ForeignKey(verbose_name='recipient', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': 'recipient',
@@ -62,7 +62,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='message',
             name='sender',
-            field=models.ForeignKey(related_name='sent_messages', verbose_name='sender', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(related_name='sent_messages', verbose_name='sender', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE),
         ),
         migrations.AlterUniqueTogether(
             name='messagecontact',
