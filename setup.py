@@ -17,7 +17,7 @@ install_requires = [
     'easy_thumbnails',
     'django-guardian>=1.4.2,<=1.4.9',
     'html2text==2014.12.29',
-    'Django>=1.8,<1.10'
+    'Django>=1.8,<2.0'
 ]
 
 try:
