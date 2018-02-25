@@ -134,7 +134,13 @@ def signup(request, signup_form=SignupForm,
                                         kwargs={'username': user.username})
 
             # A new signed user should logout the old one.
-            if request.user.is_authenticated():
+            try:
+                # django.VERSION < 1.11
+                authenticated = request.user.is_authenticated()
+            except TypeError:
+                authenticated = request.user.is_authenticated
+
+            if authenticated:
                 logout(request)
 
             if (userena_settings.USERENA_SIGNIN_AFTER_SIGNUP and
@@ -491,7 +497,13 @@ def signout(request, next_page=userena_settings.USERENA_REDIRECT_ON_SIGNOUT,
         ``userena/signout.html``.
 
     """
-    if request.user.is_authenticated() and userena_settings.USERENA_USE_MESSAGES: # pragma: no cover
+    try:
+        # django.VERSION < 1.11
+        authenticated = request.user.is_authenticated()
+    except TypeError:
+        authenticated = request.user.is_authenticated
+
+    if authenticated and userena_settings.USERENA_USE_MESSAGES: # pragma: no cover
         messages.success(request, _('You have been signed out.'), fail_silently=True)
     userena_signals.account_signout.send(sender=None, user=request.user)
     return Signout(request, next_page, template_name, *args, **kwargs)

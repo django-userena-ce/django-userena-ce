@@ -91,7 +91,7 @@ TEMPLATES = [
     },
 ]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -103,9 +103,13 @@ MIDDLEWARE_CLASSES = (
 )
 
 # Session verification will become mandatory in Django 1.10
-MIDDLEWARE_CLASSES += (
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-)
+import django
+
+if django.VERSION < (2, 0):
+    MIDDLEWARE_CLASSES = MIDDLEWARE
+    MIDDLEWARE_CLASSES += (
+        'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    )
 
 # Add the Guardian and userena authentication backends
 AUTHENTICATION_BACKENDS = (
