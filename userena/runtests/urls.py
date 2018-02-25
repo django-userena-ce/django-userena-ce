@@ -10,6 +10,7 @@ from django.core.exceptions import ImproperlyConfigured
 admin.autodiscover()
 
 try:
+    # django.VERSION < 2.0
     admin_urls = include(admin.site.urls)
 except ImproperlyConfigured:
     admin_urls = admin.site.urls
