@@ -122,7 +122,7 @@ AUTH_PROFILE_MODULE = 'profiles.Profile'
 USERENA_DISABLE_PROFILE_LIST = True
 USERENA_MUGSHOT_SIZE = 140
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'userena.runtests.urls'
 WSGI_APPLICATION = 'demo.wsgi.application'
 
 INSTALLED_APPS = (
