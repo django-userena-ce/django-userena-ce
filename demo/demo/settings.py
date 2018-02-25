@@ -1,6 +1,5 @@
 # Django settings for Userena demo project.
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 import os
 settings_dir = os.path.dirname(__file__)
@@ -68,14 +67,26 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '_g-js)o8z#8=9pr1&amp;05h^1_#)91sbo-)g^(*=-+epxmt4kc9m#'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(PROJECT_ROOT, 'demo/templates/')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+            ]
+        },
+    },
+]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -104,10 +115,6 @@ USERENA_MUGSHOT_SIZE = 140
 ROOT_URLCONF = 'demo.urls'
 WSGI_APPLICATION = 'demo.wsgi.application'
 
-TEMPLATE_DIRS = (
-    os.path.join(PROJECT_ROOT, 'demo/templates/'),
-)
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -121,6 +128,7 @@ INSTALLED_APPS = (
     'userena',
     'userena.contrib.umessages',
     'profiles',
+    'easy_thumbnails',
 )
 
 LOGGING = {
@@ -148,7 +156,4 @@ LOGGING = {
 }
 
 # Needed for Django guardian
-ANONYMOUS_USER_ID = -1
-
-# Test runner
-TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner'
+ANONYMOUS_USER_NAME = 'AnonymousUser'
