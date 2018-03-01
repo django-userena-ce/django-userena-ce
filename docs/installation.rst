@@ -12,26 +12,11 @@ For further information, consult the `Django download page
 <http://www.djangoproject.com/download/>`_, which offers convenient packaged
 downloads and installation instructions.
 
-Support for Django versions below 1.7
+Support for Django versions below 1.8
 -------------------------------------
 
-Starting from version 2.0.0 django-userena supports Django 1.9 release and
-drops the support for Django 1.4. It is tested and works for all releases
-from 1.5 to 1.9 but some older versions of Django require some additional work
-in order to ensure full compatibility:
-
-* Django versions below 1.7 require South for data migrations. django-userena
-  provides new-style migrations for built-in Django schema migrations engine
-  (available starting from Django 1.7) but provides old South migrations in
-  ``userena.south_migrations`` and ``userena.contrib.umessages.south_migrations``
-  subpackages. South (starting from version 1.0.0) should be able to pick
-  them easily if you still use it even for Django versions 1.7 or greater.
-  Anyway, South support in django-userena is deprecated and will be removed
-  in some future major release (3.0.0 or 4.0.0 version).
-* django-guardian is one of the main dependecies of django-userena and every
-  release of this package seems to drop some bacwards compatibility without
-  resonable versioning scheme. This is why for Django 1.5 and 1.6 you
-  need to fix django-guardian on version 1.3.2 or lower manually.
+From version 3.0.0 django-userena-ce does not support Django versions < 1.8,
+from version 4.0.0 only django versions 1.11 and 2.0 will be supported.
 
 Installing django-userena.
 --------------------------
@@ -54,12 +39,12 @@ Automatic install with `pip
 <http://www.pip-installer.org/en/latest/index.html>`_. All you have to do is
 run the following command::
 
-    pip install django-userena
+    pip install django-userena-ce
 
 If you want to have a specific version of userena, you can do so by adding the
 following::
 
-    pip install django-userena==1.0.1
+    pip install django-userena-ce==3.1.0
 
 Manual installation with easy_install.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -106,7 +91,7 @@ your project. This means modifying ``AUTHENTICATION_BACKENDS``,
 Begin by adding ``userena``, ``guardian`` and ``easy_thumbnails`` to the
 ``INSTALLED_APPS`` in your settings.py file of your project.
 ``django.contrib.sites`` must also be present if it is not already (see `Django docs
-<https://docs.djangoproject.com/en/1.8/ref/contrib/sites/>`_.).
+<https://docs.djangoproject.com/en/1.11/ref/contrib/sites/>`_.).
 
 Next add ``UserenaAuthenticationBackend`` and ``ObjectPermissionBackend`` 
 also in your settings.py file, from django-guardian, at the top of ``AUTHENTICATION_BACKENDS``. 
@@ -218,15 +203,15 @@ This should have you a working accounts application for your project. See the
 Required settings
 ~~~~~~~~~~~~~~~~~
 
-Django-guardian requires you to set the ``ANONYMOUS_USER_ID`` setting. I always
-set this to ``-1``. As noted before, you are also required to set the
+Django-guardian requires you to set the ``ANONYMOUS_USER_NAME`` setting.
+As noted before, you are also required to set the
 ``AUTH_PROFILE_MODULE`` to your custom defined profile.
 
 For example, add the following into your settings.py file:
 
 .. code-block:: python
 
-    ANONYMOUS_USER_ID = -1
+    ANONYMOUS_USER_NAME = 'AnonymousUser'
 
     AUTH_PROFILE_MODULE = 'accounts.MyProfile'
 

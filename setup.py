@@ -1,5 +1,6 @@
-from setuptools import setup, find_packages
 import sys
+
+from setuptools import setup, find_packages
 
 userena = __import__('userena')
 
@@ -17,7 +18,7 @@ install_requires = [
     'easy_thumbnails',
     'django-guardian>=1.4.2,<=1.4.9',
     'html2text==2014.12.29',
-    'Django>=1.8'
+    'Django>=1.8',
 ]
 
 try:
@@ -36,14 +37,15 @@ setup(name='django-userena-ce',
       download_url='https://github.com/django-userena-ce/django-userena-ce/downloads',
       packages=find_packages(exclude=['demo', 'demo.*']),
       include_package_data=True,
-      install_requires = install_requires,
+      install_requires=install_requires,
       test_suite='tests.main',
       classifiers=[
           'Development Status :: 4 - Beta',
           'Environment :: Web Environment',
           'Framework :: Django',
           'Framework :: Django :: 1.8',
-          'Framework :: Django :: 1.9',
+          'Framework :: Django :: 1.11',
+          'Framework :: Django :: 2.0',
           'Intended Audience :: Developers',
           'License :: OSI Approved :: BSD License',
           'Operating System :: OS Independent',

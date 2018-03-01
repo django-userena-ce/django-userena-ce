@@ -1,6 +1,13 @@
 # UPDATES
 
-## Version 3.0.1
+## Version 3.1.0
+
+Added support for Django 1.11 and Django 2.0, dropped support for Django 1.9 
+and Django 1.10.
+
+This is the final release that will support Django 1.8.
+
+## Version 3.0.2
 
 Initial version of django-userena-ce that forks from django-userena. Note this
 still does not support Django > 1.9.

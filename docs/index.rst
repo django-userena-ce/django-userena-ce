@@ -46,10 +46,11 @@ and add it, or if you can't code it, contact us to do it.
 Deprecation warnigns
 ====================
 
-2.0.0 version:
+4.0.0 version:
 
 - ``userena.utils.get_user_model()`` is deprecated and will be removed in
-  version 3.0.0. Use ``django.contrib.auth.get_user_model()``
+  version 4.0.0. Use ``django.contrib.auth.get_user_model()``
+- Support for Django < 1.11 will be removed in version 4.0.0
 
 
 Changes and releases
