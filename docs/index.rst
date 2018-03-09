@@ -59,8 +59,8 @@ Changes and releases
 For changes history and available releases see following pages on GitHub
 repository:
 
-* `UDATES.md <https://github.com/django-guardian/django-guardian/blob/devel/CHANGES.md>`_
-* `releases <https://github.com/django-guardian/django-guardian/releases>`_
+* `UDATES.md <https://github.com/django-userena-ce/django-userena-ce/blob/master/UPDATES.md>`_
+* `releases <https://github.com/django-userena-ce/django-userena-ce/releases>`_
 
 
 Contents
