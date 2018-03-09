@@ -254,3 +254,15 @@ model. To check if all permissions are there, run the ``check_permissions`` in
 the management :ref:`commands`.
 
 .. _Github: https://github.com/lukaszb/django-guardian
+
+Migrating from bread-and-pepper/django-userena
+==============================================
+
+This project was forked from bread-and-pepper/django-userena v2.0.1. 
+To migrate from this project you just need to install the package
+and update a key which was changed in django-guardian:
+
+1. Remove django-userena-ce from your installation
+2. `pip install django-userena-ce==3.1.0`
+3. Update your django settings, remove `ANONYMOUS_USER_ID` and set `ANONYMOUS_USER_NAME`
+
