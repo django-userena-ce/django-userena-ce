@@ -39,3 +39,7 @@ demo/media/admin
 
 # Backup files
 *~
+
+# Pycharm 
+.idea/
+
