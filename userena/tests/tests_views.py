@@ -478,7 +478,9 @@ class UserenaViewsTests(TestCase):
 
         # get confirmation request page
         response = self.client.get(confirm_url)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
+
+        confirm_url = response.url
 
         # post new password and check if redirected with success
         response = self.client.post(confirm_url,

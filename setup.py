@@ -18,7 +18,7 @@ install_requires = [
     'easy_thumbnails',
     'django-guardian>=1.4.2,<=1.4.9',
     'html2text==2014.12.29',
-    'Django>=1.8',
+    'Django>=1.11',
 ]
 
 try:
@@ -43,7 +43,6 @@ setup(name='django-userena-ce',
           'Development Status :: 4 - Beta',
           'Environment :: Web Environment',
           'Framework :: Django',
-          'Framework :: Django :: 1.8',
           'Framework :: Django :: 1.11',
           'Framework :: Django :: 2.0',
           'Intended Audience :: Developers',

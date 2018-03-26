@@ -1,5 +1,10 @@
 # UPDATES
 
+## Version 4.0.0
+
+- Drops support for Django 1.8
+- Fix security issue of leaking password reset token through the Referrer (bread-and-pepper/django-userena/548)
+
 ## Version 3.1.0
 
 Added support for Django 1.11 and Django 2.0, dropped support for Django 1.9 
