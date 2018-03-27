@@ -1,5 +1,5 @@
 # Django
-Django==1.4
+Django==2.0.3
 
 # Imaging library needed for easy_thumbnails
 http://effbot.org/downloads/Imaging-1.1.7.tar.gz
