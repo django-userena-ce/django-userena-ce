@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/django-userena-ce/django-userena-ce.svg?branch=master)](https://travis-ci.org/django-userena-ce/django-userena-ce)
 [![Coverage Status](https://coveralls.io/repos/github/django-userena-ce/django-userena-ce/badge.svg?branch=master)](https://coveralls.io/github/django-userena-ce/django-userena-ce?branch=master)
 [![Documentation Status](https://readthedocs.org/projects/django-userena-ce/badge/?version=latest)](http://django-userena-ce.readthedocs.io/en/latest/?badge=latest)
+[![Updates](https://pyup.io/repos/github/django-userena-ce/django-userena-ce/shield.svg)](https://pyup.io/repos/github/django-userena-ce/django-userena-ce/)
 
 Due to a lack of maintainance this project is a community edition fork of
 [django-userena](https://github.com/bread-and-pepper/django-userena)
