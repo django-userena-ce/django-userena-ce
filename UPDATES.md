@@ -4,6 +4,7 @@
 
 - Drops support for Django 1.8
 - Fix security issue of leaking password reset token through the Referrer (bread-and-pepper/django-userena/548)
+- Removed deprecated `userena.utils.get_user_model()`
 
 ## Version 3.1.0
 

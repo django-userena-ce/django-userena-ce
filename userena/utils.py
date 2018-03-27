@@ -195,11 +195,3 @@ def get_datetime_now():
 # to get_user_model deferred to execution time
 
 user_model_label = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
-
-
-def get_user_model():
-    warnings.warn("Use Django's django.contrib.auth.get_user_model directly. "
-                  "This function will be removed in future versions of "
-                  "django-userena.", DeprecationWarning)
-    from django.contrib.auth import get_user_model
-    return get_user_model()
