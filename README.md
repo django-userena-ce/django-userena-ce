@@ -1,5 +1,6 @@
 # Django Userena
 
+[![PyPI version](https://badge.fury.io/py/django-userena-ce.svg)](https://badge.fury.io/py/django-userena-ce)
 [![Build Status](https://travis-ci.org/django-userena-ce/django-userena-ce.svg?branch=master)](https://travis-ci.org/django-userena-ce/django-userena-ce)
 [![Coverage Status](https://coveralls.io/repos/github/django-userena-ce/django-userena-ce/badge.svg?branch=master)](https://coveralls.io/github/django-userena-ce/django-userena-ce?branch=master)
 [![Documentation Status](https://readthedocs.org/projects/django-userena-ce/badge/?version=latest)](http://django-userena-ce.readthedocs.io/en/latest/?badge=latest)
