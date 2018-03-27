@@ -14,4 +14,4 @@ django-guardian==1.4.9
 South==1.0.2
 
 # Coverage for testing
-django_coverage
+django_coverage==1.2.4
