@@ -17,14 +17,11 @@ addons:
 
 env:
 
-  - TOX_ENV=py27-django18
   - TOX_ENV=py27-django111
 
-  - TOX_ENV=py34-django18
   - TOX_ENV=py34-django111
   - TOX_ENV=py34-django20
 
-  - TOX_ENV=py35-django18
   - TOX_ENV=py35-django111
   - TOX_ENV=py35-django20
 
