@@ -1,35 +1,18 @@
 language: python
-python: 2.7
-sudo: false
-
-# note: python3.5 is not preinstalled on docker-based (i.e. sudo: false)
-#       Travis workers at the moment of this writing, so we need to get
-#       it via addon repository.
-addons:
-  apt:
-    sources:
-      - deadsnakes
-    packages:
-      - python3.5
-      - python3.5-dev
-      - python3.6
-      - python3.6-dev
-
-env:
-
-  - TOX_ENV=py27-django111
-
-  - TOX_ENV=py34-django111
-  - TOX_ENV=py34-django20
-
-  - TOX_ENV=py35-django111
-  - TOX_ENV=py35-django20
-
-  - TOX_ENV=py36-django111
-  - TOX_ENV=py36-django20
-
-  - TOX_ENV=coverage
-install:
-  - pip install -U 'tox==2.9.1'
-script:
-  - tox -e $TOX_ENV
+python:
+- 2.7
+- 3.4
+- 3.5
+- 3.6
+install: pip install -U tox-travis
+script: tox
+deploy:
+  provider: pypi
+  distributions: sdist bdist_wheel
+  user: jamesmeakin
+  password:
+    secure: Fh0pb66Euqcl/gPJiNfOzNflJFWO6blKuJXsgbzFI8WXOil0bN6x5l3ijVhWE8Tno7wzWjEkc6F03xMs6jkwd2vEGH3LOm1FZavKJxJpQwzYIWmT9zJjbHozSVI9rmD8hEsvcetE1O6soNXd5NsZVjqvy1sl1MolfncvMtkH9glhYmOVJK76D14IN87QjgF4vaNLnnCotf6CTvaUW+sXFx4Etu56YJBjLeNgVQYE3jZD8OgB/adhyG2JJKpbGujMkkZDjWo8/e3AWC+FZr7z6lfByb1PSUykCwUDMVw80evjmoXVeXwGqc1F8X1bG2IzCUw+DZ6/m6+9eTO7gedfSVA1aO0uu0VsIesf0Fcoquaoe9pkRsXhqzQ7LO8jnaWPFCJinbGzclWCwGsYj5W/MLFebo12HljiTOxvI0DWA1v9cuJP6ZJ+UhqOkiMOl0GR5281eJ+L3RY+wvARe2dsqR59sG12LlFJi2lSBfGfEWVb0rlIyQiw7rRVySJz+vxaK32LhP89iPaDyQDX6XNYF7tEpqll0Hm5xpaneQ0UjMoR7VCFJHynZj1x/V0ILUVC1z4O3elRdfPyL96Dsnclcl+ker/iGyDCwrn69VcHAIiMUKmMTJKCYllZG65h7HF7IlrI+bE0Wa05623cu7xRUIRMDXwmWd9DOxxIfPg2tYM=
+  on:
+    tags: true
+    repo: django-userena-ce/django-userena-ce
+    python: 3.6

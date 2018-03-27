@@ -43,7 +43,7 @@ run the following command::
 If you want to have a specific version of userena, you can do so by adding the
 following::
 
-    pip install django-userena-ce==3.1.0
+    pip install django-userena-ce==4.0.0
 
 Manual installation with easy_install.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
