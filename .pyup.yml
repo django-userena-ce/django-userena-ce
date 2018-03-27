@@ -1,2 +1,3 @@
+search: False
 requirements:
   - requirements_dev.txt
