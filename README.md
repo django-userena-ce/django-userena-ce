@@ -1,4 +1,4 @@
-# Django Userena
+# Django Userena (Community Edition)
 
 [![PyPI version](https://badge.fury.io/py/django-userena-ce.svg)](https://badge.fury.io/py/django-userena-ce)
 [![Build Status](https://travis-ci.org/django-userena-ce/django-userena-ce.svg?branch=master)](https://travis-ci.org/django-userena-ce/django-userena-ce)
@@ -7,7 +7,7 @@
 [![Updates](https://pyup.io/repos/github/django-userena-ce/django-userena-ce/shield.svg)](https://pyup.io/repos/github/django-userena-ce/django-userena-ce/)
 
 Due to a lack of maintainance this project is a community edition fork of
-[django-userena](https://github.com/bread-and-pepper/django-userena)
+[django-userena](https://github.com/bread-and-pepper/django-userena).
 
 Userena is a Django application that supplies your Django project with full
 account management. It's a fully customizable application that takes care of
