@@ -1,5 +1,9 @@
 # UPDATES
 
+## Version 4.1.0
+
+- Replaces `userena.views.signout` with the class based `userena.views.SignoutView`
+
 ## Version 4.0.0
 
 - Drops support for Django 1.8
