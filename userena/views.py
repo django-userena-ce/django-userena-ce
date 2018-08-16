@@ -522,7 +522,7 @@ def signout(request, next_page=userena_settings.USERENA_REDIRECT_ON_SIGNOUT,
     if authenticated and userena_settings.USERENA_USE_MESSAGES:  # pragma: no cover
         messages.success(request, _('You have been signed out.'), fail_silently=True)
     userena_signals.account_signout.send(sender=None, user=request.user)
-    return Signout(request, next_page, template_name, *args, **kwargs)
+    return Signout.as_view(next_page=next_page, template_name=template_name, *args, **kwargs)(request)
 
 
 @secure_required
