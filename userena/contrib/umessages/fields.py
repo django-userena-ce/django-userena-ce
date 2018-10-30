@@ -12,7 +12,7 @@ class CommaSeparatedUserInput(widgets.Input):
             value = ''
         elif isinstance(value, (list, tuple)):
             value = (', '.join([user.username for user in value]))
-        return super().render(name, value, attrs, renderer)
+        return super(CommaSeparatedUserInput, self).render(name, value, attrs, renderer)
 
 class CommaSeparatedUserField(forms.Field):
     """
