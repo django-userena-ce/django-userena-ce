@@ -27,12 +27,14 @@ class UserenaAuthenticationBackendTests(TestCase):
              'password': 'blowfish'},
         ]
         for invalid_dict in invalid_data_dicts:
-            result = self.backend.authenticate(identification=invalid_dict['identification'],
+            result = self.backend.authenticate(request=None,
+                                               identification=invalid_dict['identification'],
                                                password=invalid_dict['password'])
             self.assertFalse(isinstance(result, User))
 
         # Valid username and password
-        result = self.backend.authenticate(identification='john',
+        result = self.backend.authenticate(request=None,
+                                           identification='john',
                                            password='blowfish')
         self.assertTrue(isinstance(result, User))
 
@@ -48,12 +50,14 @@ class UserenaAuthenticationBackendTests(TestCase):
              'password': 'blowfish'},
         ]
         for invalid_dict in invalid_data_dicts:
-            result = self.backend.authenticate(identification=invalid_dict['identification'],
+            result = self.backend.authenticate(request=None,
+                                               identification=invalid_dict['identification'],
                                                password=invalid_dict['password'])
             self.assertFalse(isinstance(result, User))
 
         # Valid e-email address and password
-        result = self.backend.authenticate(identification='john@example.com',
+        result = self.backend.authenticate(request=None,
+                                           identification='john@example.com',
                                            password='blowfish')
         self.assertTrue(isinstance(result, User))
 

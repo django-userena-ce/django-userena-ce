@@ -14,7 +14,7 @@ urlpatterns = [
         userena_views.signin,
         name='userena_signin'),
     url(r'^signout/$',
-        userena_views.signout,
+        userena_views.SignoutView.as_view(),
         name='userena_signout'),
 
     # Reset password

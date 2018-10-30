@@ -222,6 +222,7 @@ class UserenaBaseProfile(models.Model):
 
         """
         abstract = True
+        default_permissions = ('add', 'change', 'delete')
         permissions = PROFILE_PERMISSIONS
 
     def __str__(self):
@@ -353,4 +354,5 @@ class UserenaLanguageBaseProfile(UserenaBaseProfile):
 
     class Meta:
         abstract = True
+        default_permissions = ('add', 'change', 'delete')
         permissions = PROFILE_PERMISSIONS

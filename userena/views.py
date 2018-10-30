@@ -1,3 +1,6 @@
+from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.decorators import method_decorator
+
 try:
     # django.VERSION < 2.0
     from django.core.urlresolvers import reverse
@@ -7,7 +10,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, REDIRECT_FIELD_NAME
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.views import logout as Signout
+from django.contrib.auth.views import LogoutView
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.contrib import messages
@@ -481,9 +484,8 @@ def signin(request, auth_form=AuthenticationForm,
     return ExtraContextTemplateView.as_view(template_name=template_name,
                                             extra_context=extra_context)(request)
 
-@secure_required
-def signout(request, next_page=userena_settings.USERENA_REDIRECT_ON_SIGNOUT,
-            template_name='userena/signout.html', *args, **kwargs):
+
+class SignoutView(LogoutView, SuccessMessageMixin):
     """
     Signs out the user and adds a success message ``You have been signed
     out.`` If next_page is defined you will be redirected to the URI. If
@@ -497,16 +499,23 @@ def signout(request, next_page=userena_settings.USERENA_REDIRECT_ON_SIGNOUT,
         ``userena/signout.html``.
 
     """
-    try:
-        # django.VERSION < 1.11
-        authenticated = request.user.is_authenticated()
-    except TypeError:
-        authenticated = request.user.is_authenticated
+    template_name = 'userena/signout.html'
+    next_page = userena_settings.USERENA_REDIRECT_ON_SIGNOUT
 
-    if authenticated and userena_settings.USERENA_USE_MESSAGES: # pragma: no cover
-        messages.success(request, _('You have been signed out.'), fail_silently=True)
-    userena_signals.account_signout.send(sender=None, user=request.user)
-    return Signout(request, next_page, template_name, *args, **kwargs)
+    def get_success_message(self, cleaned_data):
+        authenticated = self.request.user.is_authenticated
+
+        if authenticated and userena_settings.USERENA_USE_MESSAGES: # pragma: no cover
+            return  _('You have been signed out.')
+        else:
+            return ''
+
+    @method_decorator(secure_required)
+    def dispatch(self, request, *args, **kwargs):
+        response = super(SignoutView, self).dispatch(request, *args, **kwargs)
+        userena_signals.account_signout.send(sender=None, user=request.user)
+        return response
+
 
 @secure_required
 @permission_required_or_403('change_user', (get_user_model(), 'username', 'username'))

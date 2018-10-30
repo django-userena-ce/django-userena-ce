@@ -1,5 +1,11 @@
 # UPDATES
 
+## Version 4.1.0
+
+- Adds support for Django 2.1 and Python 3.7
+- Replaces `userena.views.signout` with the class based `userena.views.SignoutView`
+- Adds request argument to `userena.backends.authenticate` 
+
 ## Version 4.0.0
 
 - Drops support for Django 1.8
