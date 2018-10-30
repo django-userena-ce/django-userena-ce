@@ -1,4 +1,5 @@
 from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.decorators import method_decorator
 
 try:
     # django.VERSION < 2.0
@@ -509,7 +510,7 @@ class SignoutView(LogoutView, SuccessMessageMixin):
         else:
             return ''
 
-    # TODO: secure_required
+    @method_decorator(secure_required)
     def dispatch(self, request, *args, **kwargs):
         response = super(SignoutView, self).dispatch(request, *args, **kwargs)
         userena_signals.account_signout.send(sender=None, user=request.user)
