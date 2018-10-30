@@ -9,10 +9,14 @@ class UserenaAuthenticationBackend(ModelBackend):
     ``username`` to the login form.
 
     """
-    def authenticate(self, identification, password=None, check_password=True):
+    def authenticate(self, request, identification, password=None, check_password=True):
         """
         Authenticates a user through the combination email/username with
         password.
+
+        :param request:
+            The authenticate() method of authentication backends requires
+            request as the first positional argument from Django 2.1.
 
         :param identification:
             A string containing the username or e-mail of the user that is
