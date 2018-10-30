@@ -3,6 +3,7 @@
 ## Version 4.1.0
 
 - Adds support for Django 2.1 and Python 3.7
+- Note: you will probably need to generate a migrations for concrete implementations of `UserenaBaseProfile` and `UserenaLanguageBaseProfile`
 - Replaces `userena.views.signout` with the class based `userena.views.SignoutView`
 - Adds request argument to `userena.backends.authenticate` 
 
