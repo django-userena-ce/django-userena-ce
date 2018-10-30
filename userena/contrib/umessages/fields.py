@@ -7,12 +7,12 @@ from django.utils.translation import ugettext_lazy as _
 class CommaSeparatedUserInput(widgets.Input):
     input_type = 'text'
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         if value is None:
             value = ''
         elif isinstance(value, (list, tuple)):
             value = (', '.join([user.username for user in value]))
-        return super(CommaSeparatedUserInput, self).render(name, value, attrs)
+        return super().render(name, value, attrs, renderer)
 
 class CommaSeparatedUserField(forms.Field):
     """
