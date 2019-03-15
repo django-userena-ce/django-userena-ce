@@ -1,15 +1,12 @@
 import re
+from datetime import timedelta
 
-from datetime import datetime, timedelta
 from django.contrib.auth import get_user_model
-try:
-    # django.VERSION < 2.0
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
-from django.core import mail
 from django.contrib.auth.forms import PasswordChangeForm
+from django.core import mail
 from django.test import TestCase
+from django.urls import reverse
+from django.utils import timezone
 
 from userena import forms
 from userena import settings as userena_settings
@@ -51,7 +48,7 @@ class UserenaViewsTests(TestCase):
                                'password2': 'swordfish',
                                'tos': 'on'})
         user = User.objects.get(email='alice@example.com')
-        user.date_joined = datetime.today() - timedelta(days=30)
+        user.date_joined = timezone.now() - timedelta(days=30)
         user.save()
         response = self.client.get(reverse('userena_activate',
                                            kwargs={'activation_key': user.userena_signup.activation_key}))
@@ -72,7 +69,7 @@ class UserenaViewsTests(TestCase):
                                'password2': 'swordfish',
                                'tos': 'on'})
         user = User.objects.get(email='alice@example.com')
-        user.date_joined = datetime.today() - timedelta(days=30)
+        user.date_joined = timezone.now() - timedelta(days=30)
         user.save()
         old_key = user.userena_signup.activation_key
         response = self.client.get(reverse('userena_activate_retry',

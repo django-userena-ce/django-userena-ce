@@ -4,7 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 from userena.models import UserenaBaseProfile
 from userena.utils import user_model_label
 
-import datetime
 
 class Profile(UserenaBaseProfile):
     """ Default profile """
@@ -27,6 +26,7 @@ class Profile(UserenaBaseProfile):
     location = models.CharField(_('location'), max_length=255, blank=True)
     about_me = models.TextField(_('about me'), blank=True)
     language = models.TextField(_('language'), blank=True)
+
 
 class SecondProfile(UserenaBaseProfile):
     user = models.OneToOneField(user_model_label,

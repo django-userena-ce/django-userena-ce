@@ -21,11 +21,6 @@ install_requires = [
     'Django>=1.11',
 ]
 
-try:
-    from collections import OrderedDict
-except ImportError:
-    install_requires.append('ordereddict')
-
 setup(name='django-userena-ce',
       version=userena.get_version(),
       description='Complete user management application for Django',

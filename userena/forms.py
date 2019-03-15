@@ -1,22 +1,18 @@
 #encoding:utf-8
 from __future__ import unicode_literals
 
+import random
+from collections import OrderedDict
+from hashlib import sha1
+
 from django import forms
+from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth import authenticate
 
 from userena import settings as userena_settings
 from userena.models import UserenaSignup
 from userena.utils import get_profile_model
-
-from hashlib import sha1
-import random
-try:
-    from collections import OrderedDict
-except ImportError:
-    # Python 2.6 requires library
-    from ordereddict import OrderedDict
 
 attrs_dict = {'class': 'required'}
 
@@ -230,16 +226,10 @@ class EditProfileForm(forms.ModelForm):
     def __init__(self, *args, **kw):
         super(EditProfileForm, self).__init__(*args, **kw)
         # Put the first and last name at the top
-        try:  # in Django < 1.7
-            new_order = self.fields.keyOrder[:-2]
-            new_order.insert(0, 'first_name')
-            new_order.insert(1, 'last_name')
-            self.fields.keyOrder = new_order
-        except AttributeError:  # in Django > 1.7
-            new_order = [('first_name', self.fields['first_name']),
-                         ('last_name', self.fields['last_name'])]
-            new_order.extend(list(self.fields.items())[:-2])
-            self.fields = OrderedDict(new_order)
+        new_order = [('first_name', self.fields['first_name']),
+                     ('last_name', self.fields['last_name'])]
+        new_order.extend(list(self.fields.items())[:-2])
+        self.fields = OrderedDict(new_order)
 
     class Meta:
         model = get_profile_model()

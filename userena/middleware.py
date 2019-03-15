@@ -1,11 +1,7 @@
-from django.utils import translation
-from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
-try:
-    from django.utils.deprecation import MiddlewareMixin
-except ImportError:
-    # django.VERSION < 1.10
-    MiddlewareMixin = object
+from django.core.exceptions import ObjectDoesNotExist
+from django.utils import translation
+from django.utils.deprecation import MiddlewareMixin
 
 from userena import settings as userena_settings
 from userena.compat import SiteProfileNotAvailable
@@ -24,11 +20,7 @@ class UserenaLocaleMiddleware(MiddlewareMixin):
         lang_cookie = request.session.get(settings.LANGUAGE_COOKIE_NAME)
         if not lang_cookie:
 
-            try:
-                # django.VERSION < 1.11
-                authenticated = request.user.is_authenticated()
-            except TypeError:
-                authenticated = request.user.is_authenticated
+            authenticated = request.user.is_authenticated
 
             if authenticated:
                 try:
