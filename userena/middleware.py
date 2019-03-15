@@ -1,11 +1,7 @@
-from django.utils import translation
-from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
-try:
-    from django.utils.deprecation import MiddlewareMixin
-except ImportError:
-    # django.VERSION < 1.10
-    MiddlewareMixin = object
+from django.core.exceptions import ObjectDoesNotExist
+from django.utils import translation
+from django.utils.deprecation import MiddlewareMixin
 
 from userena import settings as userena_settings
 from userena.compat import SiteProfileNotAvailable
