@@ -1,5 +1,7 @@
 language: python
+
 dist: xenial
+
 matrix:
   include:
     - python: 2.7
@@ -10,8 +12,17 @@ matrix:
     # See https://github.com/travis-ci/travis-ci/issues/9815
     - python: 3.7
       sudo: true
+
+before_install:
+  - sudo apt-get autoremove sqlite3
+  - wget https://sqlite.org/2018/sqlite-tools-linux-x86-3220000.zip
+  - unzip sqlite-tools-linux-x86-3220000.zip
+  - sudo mv sqlite-tools-linux-x86-3220000/sqlite3 /usr/bin/sqlite3
+
 install: pip install -U tox-travis
+
 script: tox
+
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
