@@ -15,7 +15,7 @@ matrix:
 
 before_install:
   - python -c "import sqlite3; print(sqlite3.sqlite_version)"
-  - sudo apt-get autoremove --purge sqlite3
+  - sudo apt-get autoremove sqlite3 python-sqlite
   - python -c "import sqlite3; print(sqlite3.sqlite_version)"
   - wget https://sqlite.org/2018/sqlite-tools-linux-x86-3220000.zip
   - unzip sqlite-tools-linux-x86-3220000.zip
