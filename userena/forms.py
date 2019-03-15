@@ -1,22 +1,18 @@
 #encoding:utf-8
 from __future__ import unicode_literals
 
+import random
+from collections import OrderedDict
+from hashlib import sha1
+
 from django import forms
+from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth import authenticate
 
 from userena import settings as userena_settings
 from userena.models import UserenaSignup
 from userena.utils import get_profile_model
-
-from hashlib import sha1
-import random
-try:
-    from collections import OrderedDict
-except ImportError:
-    # Python 2.6 requires library
-    from ordereddict import OrderedDict
 
 attrs_dict = {'class': 'required'}
 
