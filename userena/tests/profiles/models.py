@@ -28,7 +28,7 @@ class Profile(UserenaBaseProfile):
     language = models.TextField(_('language'), blank=True)
 
     class Meta:
-        ordering = ["user"]
+        ordering = ["user.username"]
 
 
 class SecondProfile(UserenaBaseProfile):
