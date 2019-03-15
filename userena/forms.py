@@ -226,16 +226,10 @@ class EditProfileForm(forms.ModelForm):
     def __init__(self, *args, **kw):
         super(EditProfileForm, self).__init__(*args, **kw)
         # Put the first and last name at the top
-        try:  # in Django < 1.7
-            new_order = self.fields.keyOrder[:-2]
-            new_order.insert(0, 'first_name')
-            new_order.insert(1, 'last_name')
-            self.fields.keyOrder = new_order
-        except AttributeError:  # in Django > 1.7
-            new_order = [('first_name', self.fields['first_name']),
-                         ('last_name', self.fields['last_name'])]
-            new_order.extend(list(self.fields.items())[:-2])
-            self.fields = OrderedDict(new_order)
+        new_order = [('first_name', self.fields['first_name']),
+                     ('last_name', self.fields['last_name'])]
+        new_order.extend(list(self.fields.items())[:-2])
+        self.fields = OrderedDict(new_order)
 
     class Meta:
         model = get_profile_model()
