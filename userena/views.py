@@ -137,11 +137,7 @@ def signup(request, signup_form=SignupForm,
                                         kwargs={'username': user.username})
 
             # A new signed user should logout the old one.
-            try:
-                # django.VERSION < 1.11
-                authenticated = request.user.is_authenticated()
-            except TypeError:
-                authenticated = request.user.is_authenticated
+            authenticated = request.user.is_authenticated
 
             if authenticated:
                 logout(request)

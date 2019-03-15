@@ -24,11 +24,7 @@ class UserenaLocaleMiddleware(MiddlewareMixin):
         lang_cookie = request.session.get(settings.LANGUAGE_COOKIE_NAME)
         if not lang_cookie:
 
-            try:
-                # django.VERSION < 1.11
-                authenticated = request.user.is_authenticated()
-            except TypeError:
-                authenticated = request.user.is_authenticated
+            authenticated = request.user.is_authenticated
 
             if authenticated:
                 try:
