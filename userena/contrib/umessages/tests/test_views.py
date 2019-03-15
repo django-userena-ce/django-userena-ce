@@ -1,10 +1,6 @@
-from django.test import TestCase
 from django.contrib.auth import get_user_model
-try:
-    # django.VERSION < 2.0
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
+from django.test import TestCase
+from django.urls import reverse
 
 from userena.contrib.umessages.forms import ComposeForm
 from userena.contrib.umessages.models import Message, MessageRecipient

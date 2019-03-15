@@ -1,34 +1,28 @@
-from django.contrib.messages.views import SuccessMessageMixin
-from django.utils.decorators import method_decorator
+import warnings
 
-try:
-    # django.VERSION < 2.0
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
-from django.shortcuts import redirect, get_object_or_404
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, REDIRECT_FIELD_NAME
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import LogoutView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.exceptions import PermissionDenied
+from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import redirect, get_object_or_404
+from django.urls import reverse
+from django.utils.decorators import method_decorator
+from django.utils.translation import ugettext as _
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
-from django.contrib import messages
-from django.core.exceptions import PermissionDenied
-from django.utils.translation import ugettext as _
-from django.http import Http404, HttpResponseRedirect
-
-from userena.forms import (SignupForm, SignupFormOnlyEmail, AuthenticationForm,
-                           ChangeEmailForm, EditProfileForm)
-from userena.models import UserenaSignup
-from userena.decorators import secure_required
-from userena.utils import signin_redirect, get_profile_model, get_user_profile
-from userena import signals as userena_signals
-from userena import settings as userena_settings
-
 from guardian.decorators import permission_required_or_403
 
-import warnings
+from userena import settings as userena_settings
+from userena import signals as userena_signals
+from userena.decorators import secure_required
+from userena.forms import SignupForm, SignupFormOnlyEmail, AuthenticationForm, ChangeEmailForm, EditProfileForm
+from userena.models import UserenaSignup
+from userena.utils import signin_redirect, get_profile_model, get_user_profile
+
 
 class ExtraContextTemplateView(TemplateView):
     """ Add extra context to a simple template view """

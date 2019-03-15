@@ -1,9 +1,6 @@
 from django.test import TestCase
-try:
-    # django.VERSION < 2.0
-    from django.core.urlresolvers import reverse, NoReverseMatch
-except ImportError:
-    from django.urls import reverse, NoReverseMatch
+from django.urls import reverse, NoReverseMatch
+
 
 class UserenaUrlsTests(TestCase):
     """ Test url resolve """

@@ -1,11 +1,8 @@
-try:
-    # django.VERSION < 2.0
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
 from django.test import TestCase
+from django.urls import reverse
 
 from userena.tests.profiles.models import Profile
+
 
 class PrivacyTests(TestCase):
     """

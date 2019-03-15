@@ -1,22 +1,18 @@
-from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_http_methods
-from django.contrib.auth import get_user_model
-try:
-    # django.VERSION < 2.0
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
-from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
+from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
-from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.views.decorators.http import require_http_methods
 from django.views.generic.list import ListView
 
-from userena.contrib.umessages.models import Message, MessageRecipient, MessageContact
-from userena.contrib.umessages.forms import ComposeForm
-from userena.utils import get_datetime_now
 from userena import settings as userena_settings
+from userena.contrib.umessages.forms import ComposeForm
+from userena.contrib.umessages.models import Message, MessageRecipient, MessageContact
+from userena.utils import get_datetime_now
 
 
 class MessageListView(ListView):

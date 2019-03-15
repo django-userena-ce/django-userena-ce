@@ -1,9 +1,5 @@
 from django.test import TestCase
-try:
-    # django.VERSION < 2.0
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
+from django.urls import reverse
 
 
 class DecoratorTests(TestCase):

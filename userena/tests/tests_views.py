@@ -1,17 +1,12 @@
 import re
-
 from datetime import timedelta
-from django.contrib.auth import get_user_model
-from django.utils import timezone
 
-try:
-    # django.VERSION < 2.0
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
-from django.core import mail
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
+from django.core import mail
 from django.test import TestCase
+from django.urls import reverse
+from django.utils import timezone
 
 from userena import forms
 from userena import settings as userena_settings
