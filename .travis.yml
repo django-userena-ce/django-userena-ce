@@ -10,6 +10,12 @@ matrix:
     - python: 3.7
       dist: xenial
       sudo: true
+addons:
+  apt:
+    sources:
+      - travis-ci/sqlite3
+    packages:
+      - sqlite3
 install: pip install -U tox-travis
 script: tox
 deploy:
