@@ -102,15 +102,6 @@ MIDDLEWARE = (
     'userena.middleware.UserenaLocaleMiddleware',
 )
 
-# Session verification will become mandatory in Django 1.10
-import django
-
-if django.VERSION < (2, 0):
-    MIDDLEWARE_CLASSES = MIDDLEWARE
-    MIDDLEWARE_CLASSES += (
-        'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    )
-
 # Add the Guardian and userena authentication backends
 AUTHENTICATION_BACKENDS = (
     'userena.backends.UserenaAuthenticationBackend',
