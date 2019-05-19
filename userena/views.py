@@ -30,7 +30,7 @@ class ExtraContextTemplateView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ExtraContextTemplateView, self).get_context_data(*args, **kwargs)
-        if self.extra_context:
+        if self.extra_context is not None:
             context.update(self.extra_context)
         return context
 
@@ -57,7 +57,8 @@ class ProfileListView(ListView):
            and not self.request.user.is_staff:
             raise Http404
 
-        if not self.extra_context: self.extra_context = dict()
+        if self.extra_context is None:
+            self.extra_context = dict()
 
         context['page'] = page
         context['paginate_by'] = self.paginate_by
@@ -143,7 +144,8 @@ def signup(request, signup_form=SignupForm,
 
             return redirect(redirect_to)
 
-    if not extra_context: extra_context = dict()
+    if extra_context is None:
+        extra_context = dict()
     extra_context['form'] = form
     return ExtraContextTemplateView.as_view(template_name=template_name,
                                             extra_context=extra_context)(request)
@@ -209,17 +211,20 @@ def activate(request, activation_key,
                                             kwargs={'username': user.username})
                 return redirect(redirect_to)
             else:
-                if not extra_context: extra_context = dict()
+                if extra_context is None:
+                    extra_context = dict()
                 return ExtraContextTemplateView.as_view(template_name=template_name,
                                                         extra_context=extra_context)(
                                         request)
         else:
-            if not extra_context: extra_context = dict()
+            if extra_context is None:
+                extra_context = dict()
             extra_context['activation_key'] = activation_key
             return ExtraContextTemplateView.as_view(template_name=retry_template_name,
                                                 extra_context=extra_context)(request)
     except UserenaSignup.DoesNotExist:
-        if not extra_context: extra_context = dict()
+        if extra_context is None:
+            extra_context = dict()
         return ExtraContextTemplateView.as_view(template_name=template_name,
                                                 extra_context=extra_context)(request)
 
@@ -256,7 +261,8 @@ def activate_retry(request, activation_key,
         if UserenaSignup.objects.check_expired_activation(activation_key):
             new_key = UserenaSignup.objects.reissue_activation(activation_key)
             if new_key:
-                if not extra_context: extra_context = dict()
+                if extra_context is None:
+                    extra_context = dict()
                 return ExtraContextTemplateView.as_view(template_name=template_name,
                                                     extra_context=extra_context)(request)
             else:
@@ -309,7 +315,8 @@ def email_confirm(request, confirmation_key,
                                     kwargs={'username': user.username})
         return redirect(redirect_to)
     else:
-        if not extra_context: extra_context = dict()
+        if extra_context is None:
+            extra_context = dict()
         return ExtraContextTemplateView.as_view(template_name=template_name,
                                             extra_context=extra_context)(request)
 
@@ -345,7 +352,8 @@ def direct_to_user_template(request, username, template_name,
     """
     user = get_object_or_404(get_user_model(), username__iexact=username)
 
-    if not extra_context: extra_context = dict()
+    if extra_context is None:
+        extra_context = dict()
     extra_context['viewed_user'] = user
     extra_context['profile'] = get_user_profile(user=user)
     return ExtraContextTemplateView.as_view(template_name=template_name,
@@ -383,7 +391,8 @@ def disabled_account(request, username, template_name, extra_context=None):
     if user.is_active:
         raise Http404
 
-    if not extra_context: extra_context = dict()
+    if extra_context is None:
+        extra_context = dict()
     extra_context['viewed_user'] = user
     extra_context['profile'] = get_user_profile(user=user)
     return ExtraContextTemplateView.as_view(template_name=template_name,
@@ -465,7 +474,8 @@ def signin(request, auth_form=AuthenticationForm,
                 return redirect(reverse('userena_disabled',
                                         kwargs={'username': user.username}))
 
-    if not extra_context: extra_context = dict()
+    if extra_context is None:
+        extra_context = dict()
     extra_context.update({
         'form': form,
         'next': request.GET.get(redirect_field_name,
@@ -572,7 +582,8 @@ def email_change(request, username, email_form=ChangeEmailForm,
                                         kwargs={'username': user.username})
             return redirect(redirect_to)
 
-    if not extra_context: extra_context = dict()
+    if extra_context is None:
+        extra_context = dict()
     extra_context['form'] = form
     extra_context['profile'] = get_user_profile(user=user)
     return ExtraContextTemplateView.as_view(template_name=template_name,
@@ -637,7 +648,8 @@ def password_change(request, username, template_name='userena/password_form.html
                                         kwargs={'username': user.username})
             return redirect(redirect_to)
 
-    if not extra_context: extra_context = dict()
+    if extra_context is None:
+        extra_context = dict()
     extra_context['form'] = form
     extra_context['profile'] = get_user_profile(user=user)
     return ExtraContextTemplateView.as_view(template_name=template_name,
@@ -716,7 +728,8 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
             else: redirect_to = reverse('userena_profile_detail', kwargs={'username': username})
             return redirect(redirect_to)
 
-    if not extra_context: extra_context = dict()
+    if extra_context is None:
+        extra_context = dict()
     extra_context['form'] = form
     extra_context['profile'] = profile
     return ExtraContextTemplateView.as_view(template_name=template_name,
@@ -748,7 +761,8 @@ def profile_detail(request, username,
     profile = get_user_profile(user=user)
     if not profile.can_view_profile(request.user):
         raise PermissionDenied
-    if not extra_context: extra_context = dict()
+    if extra_context is None:
+        extra_context = dict()
     extra_context['profile'] = profile
     extra_context['hide_email'] = userena_settings.USERENA_HIDE_EMAIL
     return ExtraContextTemplateView.as_view(template_name=template_name,
@@ -809,7 +823,8 @@ def profile_list(request, page=1, template_name='userena/profile_list.html',
     profile_model = get_profile_model()
     queryset = profile_model.objects.get_visible_profiles(request.user)
 
-    if not extra_context: extra_context = dict()
+    if extra_context is None:
+        extra_context = dict()
     return ProfileListView.as_view(queryset=queryset,
                                    paginate_by=paginate_by,
                                    page=page,
