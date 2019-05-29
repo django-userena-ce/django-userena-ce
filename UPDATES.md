@@ -1,5 +1,9 @@
 # UPDATES
 
+## Version 4.1.1
+
+- Moves the zh_CN and zh_TW locale directories
+
 ## Version 4.1.0
 
 - Adds support for Django 2.1 and Python 3.7
