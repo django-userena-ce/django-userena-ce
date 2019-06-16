@@ -233,12 +233,14 @@ Django admin screen (e.g. http://<yoursite.com>/admin/sites/ ) and then
 put the id for that site in the SITE_ID setting variable.:
 
 .. code-block:: python
+
    SITE_ID = <site.id of your site> # will probably be '1' if this is your 
                                     # first.
                                     
 To look up your site_id open a shell in manage.py (manage.py shell) and:
 
 .. code-block:: python
+
    from django.contrib.sites.models import Site
    for s in Site.objects.all():
       print "id: {0}  name: {1}".format(s.id, s.name)
