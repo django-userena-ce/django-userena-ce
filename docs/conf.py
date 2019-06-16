@@ -12,15 +12,16 @@
 # serve to show the default.
 
 import sys, os
+import django
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.append(os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('..'))
 sys.path.append(os.path.abspath('../demo'))
 userena = __import__('userena')
-demo = __import__('demo')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'demo.settings'
+django.setup()
 
 
 # -- General configuration -----------------------------------------------------
