@@ -17,7 +17,8 @@ except IOError:
 
 def django_guardian_version():
     if sys.version_info < (3,5):
-        return 'django-guardian<2'
+        # Django Guardian does not support Python < 3.5 after version 2
+        return 'django-guardian>=1.4.2,<2'
     else:
         return 'django-guardian>=1.4.2'
 
