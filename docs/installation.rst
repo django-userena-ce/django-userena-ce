@@ -80,10 +80,20 @@ example::
 
 Now userena is available to your project.
 
+Start New App
+~~~~~~~~~~~~~
+
+You need to create a new app on your Django project. 
+In your Command Prompt shell, type: ``python manage.py startapp accounts``. 
+We are creating a new app for Userena titled 'accounts'.
+
+Next, add ``accounts`` to the ``INSTALLED_APPS`` in your settings.py file.
+
+
 Required settings
 -----------------
 
-You need to make some changes Django settings if you want to use Userena in
+Next, you need to make some changes in the Django settings if you want to use Userena in
 your project. This means modifying ``AUTHENTICATION_BACKENDS``,
 ``INSTALLED_APPS`` and optionally ``MIDDLEWARE_CLASSES``.
 
@@ -104,15 +114,6 @@ the following:
         'guardian.backends.ObjectPermissionBackend',
         'django.contrib.auth.backends.ModelBackend',
     )
-
-Start New App
-~~~~~~~~~~~~~
-
-Next, you need to create a new app on your Django project. 
-In your Command Prompt shell, type: ``python manage.py startapp accounts``. 
-We are creating a new app for Userena titled 'accounts'.
-
-Next, add ``accounts`` to the ``INSTALLED_APPS`` in your settings.py file.
 
 Email Backend
 ~~~~~~~~~~~~~
@@ -171,7 +172,8 @@ must also connect itself to the :class:`User` model of Django.
         user = models.OneToOneField(User,
                                     unique=True,
                                     verbose_name=_('user'),
-                                    related_name='my_profile') 
+                                    related_name='my_profile',
+                                    on_delete=models.CASCADE) 
         favourite_snack = models.CharField(_('favourite snack'),
                                            max_length=5)
 
@@ -245,7 +247,11 @@ To look up your site_id open a shell in manage.py (manage.py shell) and:
    for s in Site.objects.all():
       print "id: {0}  name: {1}".format(s.id, s.name)
 
-Set SITE_ID to the id of the desired name.
+Set SITE_ID to the id of the desired name. (eks: 1)
+
+Run Migrations
+~~~~~~~~~~~~~~~~
+run `python manage.py makemigrations` and `python manage.py migrate`
 
 Permission check
 ~~~~~~~~~~~~~~~~
