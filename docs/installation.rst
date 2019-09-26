@@ -5,7 +5,7 @@ Installation.
 
 Before install django-userena, you'll need to have a copy of `Django
 <http://www.djangoproject.com>`_ 1.11, 2.1 or 2.2 installed. django-userena is
-tested under Python 2.7, 3.4, 3.5, 3.6, 3.7 (all versions on which
+tested under Python 2.7, 3.5, 3.6, 3.7 (all versions on which
 Django 1.11 and higher is declared to work)
 
 For further information, consult the `Django download page

@@ -1,5 +1,9 @@
 # UPDATES
 
+## Version 4.1.2
+
+- Dropped support for Python 3.4
+
 ## Version 4.1.1
 
 - Moves the zh_CN and zh_TW locale directories
