@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Userena documentation build configuration file, created by
 # sphinx-quickstart on Fri Jul  2 09:28:08 2010.

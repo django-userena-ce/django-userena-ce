@@ -11,15 +11,9 @@ from profiles.views import promo
 
 admin.autodiscover()
 
-try:
-    # django.VERSION < 2.0
-    admin_urls = include(admin.site.urls)
-except ImproperlyConfigured:
-    admin_urls = admin.site.urls
-
 urlpatterns = [
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^admin/', admin_urls),
+    url(r'^admin/', admin.site.urls),
 
     # Demo Override the signup form with our own, which includes a
     # first and last name.

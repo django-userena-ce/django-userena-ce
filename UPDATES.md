@@ -1,5 +1,9 @@
 # UPDATES
 
+## Version 5.0.0
+
+- Dropped support for Python 2.7, 3.4, and Django 1.11
+
 ## Version 4.1.1
 
 - Moves the zh_CN and zh_TW locale directories
