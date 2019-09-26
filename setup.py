@@ -35,6 +35,7 @@ setup(name='django-userena-ce',
       packages=find_packages(exclude=['demo', 'demo.*']),
       include_package_data=True,
       install_requires=install_requires,
+      python_requires='>=3.5',
       test_suite='tests.main',
       classifiers=[
           'Development Status :: 4 - Beta',
