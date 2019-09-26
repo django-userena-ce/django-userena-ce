@@ -8,7 +8,8 @@ from userena import settings as userena_settings
 
 class SignupFormTests(TestCase):
     """ Test the signup form. """
-    fixtures = ['users']
+
+    fixtures = ["users"]
 
     def test_signup_form(self):
         """
@@ -18,62 +19,98 @@ class SignupFormTests(TestCase):
         """
         invalid_data_dicts = [
             # Non-alphanumeric username.
-            {'data': {'username': 'foo@bar',
-                      'email': 'foo@example.com',
-                      'password': 'foo',
-                      'password2': 'foo',
-                      'tos': 'on'},
-             'error': ('username', [_('Username must contain only letters, numbers, dots and underscores.')])},
+            {
+                "data": {
+                    "username": "foo@bar",
+                    "email": "foo@example.com",
+                    "password": "foo",
+                    "password2": "foo",
+                    "tos": "on",
+                },
+                "error": (
+                    "username",
+                    [
+                        _(
+                            "Username must contain only letters, numbers, dots and underscores."
+                        )
+                    ],
+                ),
+            },
             # Password is not the same
-            {'data': {'username': 'katy-',
-                      'email': 'katy@newexample.com',
-                      'password1': 'foo',
-                      'password2': 'foo2',
-                      'tos': 'on'},
-             'error': ('__all__', [_('The two password fields didn\'t match.')])},
-
+            {
+                "data": {
+                    "username": "katy-",
+                    "email": "katy@newexample.com",
+                    "password1": "foo",
+                    "password2": "foo2",
+                    "tos": "on",
+                },
+                "error": ("__all__", [_("The two password fields didn't match.")]),
+            },
             # Already taken username
-            {'data': {'username': 'john',
-                      'email': 'john@newexample.com',
-                      'password1': 'foo',
-                      'password2': 'foo',
-                      'tos': 'on'},
-             'error': ('username', [_('This username is already taken.')])},
-
+            {
+                "data": {
+                    "username": "john",
+                    "email": "john@newexample.com",
+                    "password1": "foo",
+                    "password2": "foo",
+                    "tos": "on",
+                },
+                "error": ("username", [_("This username is already taken.")]),
+            },
             # Forbidden username
-            {'data': {'username': 'SignUp',
-                      'email': 'foo@example.com',
-                      'password': 'foo',
-                      'password2': 'foo2',
-                      'tos': 'on'},
-             'error': ('username', [_('This username is not allowed.')])},
-
+            {
+                "data": {
+                    "username": "SignUp",
+                    "email": "foo@example.com",
+                    "password": "foo",
+                    "password2": "foo2",
+                    "tos": "on",
+                },
+                "error": ("username", [_("This username is not allowed.")]),
+            },
             # Already taken email
-            {'data': {'username': 'alice',
-                      'email': 'john@example.com',
-                      'password': 'foo',
-                      'password2': 'foo',
-                      'tos': 'on'},
-             'error': ('email', [_('This email is already in use. Please supply a different email.')])},
+            {
+                "data": {
+                    "username": "alice",
+                    "email": "john@example.com",
+                    "password": "foo",
+                    "password2": "foo",
+                    "tos": "on",
+                },
+                "error": (
+                    "email",
+                    [
+                        _(
+                            "This email is already in use. Please supply a different email."
+                        )
+                    ],
+                ),
+            },
         ]
 
         # Override locale settings since we are checking for existence of error
         # messaged written in english. Note: it should not be necessasy but
         # we have experienced such locale issues during tests on Travis builds.
         # See: https://github.com/bread-and-pepper/django-userena/issues/446
-        with override('en'):
+        with override("en"):
             for invalid_dict in invalid_data_dicts:
-                form = forms.SignupForm(data=invalid_dict['data'])
+                form = forms.SignupForm(data=invalid_dict["data"])
                 self.assertFalse(form.is_valid())
-                self.assertEqual(form.errors[invalid_dict['error'][0]],
-                                 invalid_dict['error'][1])
+                self.assertEqual(
+                    form.errors[invalid_dict["error"][0]], invalid_dict["error"][1]
+                )
 
         # And finally, a valid form.
-        form = forms.SignupForm(data={'username': 'foo.bla',
-                                      'email': 'foo@example.com',
-                                      'password1': 'foo',
-                                      'password2': 'foo',
-                                      'tos': 'on'})
+        form = forms.SignupForm(
+            data={
+                "username": "foo.bla",
+                "email": "foo@example.com",
+                "password1": "foo",
+                "password2": "foo",
+                "tos": "on",
+            }
+        )
 
         self.assertTrue(form.is_valid())
 
@@ -81,7 +118,7 @@ class SignupFormTests(TestCase):
 class AuthenticationFormTests(TestCase):
     """ Test the ``AuthenticationForm`` """
 
-    fixtures = ['users',]
+    fixtures = ["users"]
 
     def test_signin_form(self):
         """
@@ -89,30 +126,39 @@ class AuthenticationFormTests(TestCase):
 
         """
         invalid_data_dicts = [
-            {'data': {'identification': '',
-                      'password': 'inhalefish'},
-             'error': ('identification', ['Either supply us with your email or username.'])},
-            {'data': {'identification': 'john',
-                      'password': 'inhalefish'},
-             'error': ('__all__', ['Please enter a correct username or email and password. Note that both fields are case-sensitive.'])}
+            {
+                "data": {"identification": "", "password": "inhalefish"},
+                "error": (
+                    "identification",
+                    ["Either supply us with your email or username."],
+                ),
+            },
+            {
+                "data": {"identification": "john", "password": "inhalefish"},
+                "error": (
+                    "__all__",
+                    [
+                        "Please enter a correct username or email and password. Note that both fields are case-sensitive."
+                    ],
+                ),
+            },
         ]
 
         # Override locale settings since we are checking for existence of error
         # messaged written in english. Note: it should not be necessasy but
         # we have experienced such locale issues during tests on Travis builds.
         # See: https://github.com/bread-and-pepper/django-userena/issues/446
-        with override('en'):
+        with override("en"):
             for invalid_dict in invalid_data_dicts:
-                form = forms.AuthenticationForm(data=invalid_dict['data'])
+                form = forms.AuthenticationForm(data=invalid_dict["data"])
                 self.assertFalse(form.is_valid())
-                self.assertEqual(form.errors[invalid_dict['error'][0]],
-                                 invalid_dict['error'][1])
+                self.assertEqual(
+                    form.errors[invalid_dict["error"][0]], invalid_dict["error"][1]
+                )
 
         valid_data_dicts = [
-            {'identification': 'john',
-             'password': 'blowfish'},
-            {'identification': 'john@example.com',
-             'password': 'blowfish'}
+            {"identification": "john", "password": "blowfish"},
+            {"identification": "john@example.com", "password": "blowfish"},
         ]
 
         for valid_dict in valid_data_dicts:
@@ -127,12 +173,12 @@ class AuthenticationFormTests(TestCase):
         """
         userena_settings.USERENA_WITHOUT_USERNAMES = True
 
-        form = forms.AuthenticationForm(data={'identification': "john",
-                                              'password': "blowfish"})
+        form = forms.AuthenticationForm(
+            data={"identification": "john", "password": "blowfish"}
+        )
 
         correct_label = "Email"
-        self.assertEqual(form.fields['identification'].label,
-                         correct_label)
+        self.assertEqual(form.fields["identification"].label, correct_label)
 
         # Restore default settings
         userena_settings.USERENA_WITHOUT_USERNAMES = False
@@ -146,7 +192,8 @@ class SignupFormOnlyEmailTests(TestCase):
     username for a successfull signup.
 
     """
-    fixtures = ['users']
+
+    fixtures = ["users"]
 
     def test_signup_form_only_email(self):
         """
@@ -154,14 +201,16 @@ class SignupFormOnlyEmailTests(TestCase):
         generated in the save method
 
         """
-        valid_data = {'email': 'hans@gretel.com',
-                      'password1': 'blowfish',
-                      'password2': 'blowfish'}
+        valid_data = {
+            "email": "hans@gretel.com",
+            "password1": "blowfish",
+            "password2": "blowfish",
+        }
 
         form = forms.SignupFormOnlyEmail(data=valid_data)
 
         # Should have no username field
-        self.assertFalse(form.fields.get('username', False))
+        self.assertFalse(form.fields.get("username", False))
 
         # Form should be valid.
         self.assertTrue(form.is_valid())
@@ -174,33 +223,41 @@ class SignupFormOnlyEmailTests(TestCase):
 
 class ChangeEmailFormTests(TestCase):
     """ Test the ``ChangeEmailForm`` """
-    fixtures = ['users']
+
+    fixtures = ["users"]
 
     def test_change_email_form(self):
         user = get_user_model().objects.get(pk=1)
         invalid_data_dicts = [
             # No change in e-mail address
-            {'data': {'email': 'john@example.com'},
-             'error': ('email', ['You\'re already known under this email.'])},
+            {
+                "data": {"email": "john@example.com"},
+                "error": ("email", ["You're already known under this email."]),
+            },
             # An e-mail address used by another
-            {'data': {'email': 'jane@example.com'},
-             'error': ('email', ['This email is already in use. Please supply a different email.'])},
+            {
+                "data": {"email": "jane@example.com"},
+                "error": (
+                    "email",
+                    ["This email is already in use. Please supply a different email."],
+                ),
+            },
         ]
 
         # Override locale settings since we are checking for existence of error
         # messaged written in english. Note: it should not be necessasy but
         # we have experienced such locale issues during tests on Travis builds.
         # See: https://github.com/bread-and-pepper/django-userena/issues/446
-        with override('en'):
+        with override("en"):
             for invalid_dict in invalid_data_dicts:
-                form = forms.ChangeEmailForm(user, data=invalid_dict['data'])
+                form = forms.ChangeEmailForm(user, data=invalid_dict["data"])
                 self.assertFalse(form.is_valid())
-                self.assertEqual(form.errors[invalid_dict['error'][0]],
-                                 invalid_dict['error'][1])
+                self.assertEqual(
+                    form.errors[invalid_dict["error"][0]], invalid_dict["error"][1]
+                )
 
         # Test a valid post
-        form = forms.ChangeEmailForm(user,
-                                     data={'email': 'john@newexample.com'})
+        form = forms.ChangeEmailForm(user, data={"email": "john@newexample.com"})
         self.assertTrue(form.is_valid())
 
     def test_form_init(self):
@@ -210,4 +267,5 @@ class ChangeEmailFormTests(TestCase):
 
 class EditAccountFormTest(TestCase):
     """ Test the ``EditAccountForm`` """
+
     pass

@@ -6,11 +6,12 @@ from userena.contrib.umessages.models import Message, MessageRecipient
 
 import datetime
 
+
 class ComposeForm(forms.Form):
     to = CommaSeparatedUserField(label=_("To"))
-    body = forms.CharField(label=_("Message"),
-                           widget=forms.Textarea({'class': 'message'}),
-                           required=True)
+    body = forms.CharField(
+        label=_("Message"), widget=forms.Textarea({"class": "message"}), required=True
+    )
 
     def save(self, sender):
         """
@@ -25,11 +26,9 @@ class ComposeForm(forms.Form):
         :return: The saved :class:`Message`.
 
         """
-        um_to_user_list = self.cleaned_data['to']
-        body = self.cleaned_data['body']
+        um_to_user_list = self.cleaned_data["to"]
+        body = self.cleaned_data["body"]
 
-        msg = Message.objects.send_message(sender,
-                                           um_to_user_list,
-                                           body)
+        msg = Message.objects.send_message(sender, um_to_user_list, body)
 
         return msg

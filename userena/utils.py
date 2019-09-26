@@ -14,15 +14,15 @@ from userena import settings as userena_settings
 from userena.compat import SiteProfileNotAvailable
 
 
-def truncate_words(s, num, end_text='...'):
-    truncate = end_text and ' %s' % end_text or ''
+def truncate_words(s, num, end_text="..."):
+    truncate = end_text and " %s" % end_text or ""
     return Truncator(s).words(num, truncate=truncate)
 
 
 truncate_words = keep_lazy_text(truncate_words)
 
 
-def get_gravatar(email, size=80, default='identicon'):
+def get_gravatar(email, size=80, default="identicon"):
     """ Get's a Gravatar for a email address.
 
     :param size:
@@ -55,18 +55,18 @@ def get_gravatar(email, size=80, default='identicon'):
 
     """
     if userena_settings.USERENA_MUGSHOT_GRAVATAR_SECURE:
-        base_url = 'https://secure.gravatar.com/avatar/'
-    else: base_url = '//www.gravatar.com/avatar/'
+        base_url = "https://secure.gravatar.com/avatar/"
+    else:
+        base_url = "//www.gravatar.com/avatar/"
 
-    gravatar_url = '%(base_url)s%(gravatar_id)s?' % \
-            {'base_url': base_url,
-             'gravatar_id': md5(email.lower().encode('utf-8')).hexdigest()}
+    gravatar_url = "%(base_url)s%(gravatar_id)s?" % {
+        "base_url": base_url,
+        "gravatar_id": md5(email.lower().encode("utf-8")).hexdigest(),
+    }
 
-    gravatar_url += urlencode({
-        's': str(size),
-        'd': default
-    })
+    gravatar_url += urlencode({"s": str(size), "d": default})
     return gravatar_url
+
 
 def signin_redirect(redirect=None, user=None):
     """
@@ -87,11 +87,15 @@ def signin_redirect(redirect=None, user=None):
     :return: String containing the URI to redirect to.
 
     """
-    if redirect: return redirect
+    if redirect:
+        return redirect
     elif user is not None:
-        return userena_settings.USERENA_SIGNIN_REDIRECT_URL % \
-                {'username': user.username}
-    else: return settings.LOGIN_REDIRECT_URL
+        return userena_settings.USERENA_SIGNIN_REDIRECT_URL % {
+            "username": user.username
+        }
+    else:
+        return settings.LOGIN_REDIRECT_URL
+
 
 def generate_sha1(string, salt=None):
     """
@@ -112,12 +116,13 @@ def generate_sha1(string, salt=None):
         string = str(string)
 
     if not salt:
-        salt = sha1(str(random.random()).encode('utf-8')).hexdigest()[:5]
+        salt = sha1(str(random.random()).encode("utf-8")).hexdigest()[:5]
 
-    salted_bytes = (smart_bytes(salt) + smart_bytes(string))
+    salted_bytes = smart_bytes(salt) + smart_bytes(string)
     hash_ = sha1(salted_bytes).hexdigest()
 
     return salt, hash_
+
 
 def get_profile_model():
     """
@@ -127,12 +132,13 @@ def get_profile_model():
     :return: The model that is used as profile.
 
     """
-    if (not hasattr(settings, 'AUTH_PROFILE_MODULE')) or \
-           (not settings.AUTH_PROFILE_MODULE):
+    if (not hasattr(settings, "AUTH_PROFILE_MODULE")) or (
+        not settings.AUTH_PROFILE_MODULE
+    ):
         raise SiteProfileNotAvailable
 
     try:
-        profile_mod = apps.get_model(*settings.AUTH_PROFILE_MODULE.rsplit('.', 1))
+        profile_mod = apps.get_model(*settings.AUTH_PROFILE_MODULE.rsplit(".", 1))
     except LookupError:
         profile_mod = None
 
@@ -140,19 +146,20 @@ def get_profile_model():
         raise SiteProfileNotAvailable
     return profile_mod
 
+
 def get_user_profile(user):
     profile_model = get_profile_model()
     try:
         profile = user.get_profile()
     except AttributeError:
-        related_name = profile_model._meta.get_field('user')\
-                                    .related_query_name()
+        related_name = profile_model._meta.get_field("user").related_query_name()
         profile = getattr(user, related_name, None)
     except profile_model.DoesNotExist:
         profile = None
     if profile:
         return profile
     return profile_model.objects.create(user=user)
+
 
 def get_protocol():
     """
@@ -162,10 +169,13 @@ def get_protocol():
     setting.
 
     """
-    protocol = 'http'
-    if getattr(settings, 'USERENA_USE_HTTPS', userena_settings.DEFAULT_USERENA_USE_HTTPS):
-        protocol = 'https'
+    protocol = "http"
+    if getattr(
+        settings, "USERENA_USE_HTTPS", userena_settings.DEFAULT_USERENA_USE_HTTPS
+    ):
+        protocol = "https"
     return protocol
+
 
 def get_datetime_now():
     """
@@ -179,13 +189,15 @@ def get_datetime_now():
     """
     try:
         from django.utils import timezone
-        return timezone.now() # pragma: no cover
-    except ImportError: # pragma: no cover
+
+        return timezone.now()  # pragma: no cover
+    except ImportError:  # pragma: no cover
         return datetime.datetime.now()
+
 
 # Django 1.5 compatibility utilities, providing support for custom User models.
 # Since get_user_model() causes a circular import if called when app models are
 # being loaded, the user_model_label should be used when possible, with calls
 # to get_user_model deferred to execution time
 
-user_model_label = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
+user_model_label = getattr(settings, "AUTH_USER_MODEL", "auth.User")

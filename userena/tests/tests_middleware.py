@@ -16,8 +16,7 @@ def has_profile(user):
     try:
         profile = user.get_profile()
     except AttributeError:
-        related_name = profile_model._meta.get_field('user')\
-                                    .related_query_name()
+        related_name = profile_model._meta.get_field("user").related_query_name()
         profile = getattr(user, related_name, None)
     except profile_model.DoesNotExist:
         profile = None
@@ -25,19 +24,16 @@ def has_profile(user):
     return bool(profile)
 
 
-
 class UserenaLocaleMiddlewareTests(TestCase):
     """ Test the ``UserenaLocaleMiddleware`` """
-    fixtures = ['users', 'profiles']
+
+    fixtures = ["users", "profiles"]
 
     def _get_request_with_user(self, user):
         """ Fake a request with an user """
         request = HttpRequest()
-        request.META = {
-            'SERVER_NAME': 'testserver',
-            'SERVER_PORT': 80,
-        }
-        request.method = 'GET'
+        request.META = {"SERVER_NAME": "testserver", "SERVER_PORT": 80}
+        request.method = "GET"
         request.session = {}
 
         # Add user
@@ -46,8 +42,7 @@ class UserenaLocaleMiddlewareTests(TestCase):
 
     def test_preference_user(self):
         """ Test the language preference of two users """
-        users = ((1, 'nl'),
-                 (2, 'en'))
+        users = ((1, "nl"), (2, "en"))
 
         for pk, lang in users:
             user = User.objects.get(pk=pk)
@@ -74,15 +69,15 @@ class UserenaLocaleMiddlewareTests(TestCase):
         req = self._get_request_with_user(user)
         UserenaLocaleMiddleware().process_request(req)
 
-        self.assertFalse(hasattr(req, 'LANGUAGE_CODE'))
+        self.assertFalse(hasattr(req, "LANGUAGE_CODE"))
 
     def test_without_language_field(self):
         """ Middleware should do nothing if the profile has no language field """
-        userena_settings.USERENA_LANGUAGE_FIELD = 'non_existant_language_field'
+        userena_settings.USERENA_LANGUAGE_FIELD = "non_existant_language_field"
         user = User.objects.get(pk=1)
 
         req = self._get_request_with_user(user)
 
         # Middleware should do nothing
         UserenaLocaleMiddleware().process_request(req)
-        self.assertFalse(hasattr(req, 'LANGUAGE_CODE'))
+        self.assertFalse(hasattr(req, "LANGUAGE_CODE"))

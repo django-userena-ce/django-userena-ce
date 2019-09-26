@@ -5,6 +5,7 @@ from userena.contrib.umessages import signals
 
 import datetime
 
+
 class MessageContactManager(models.Manager):
     """ Manager for the :class:`MessageContact` model """
 
@@ -18,22 +19,22 @@ class MessageContactManager(models.Manager):
         """
         created = False
         try:
-            contact = self.get(Q(um_from_user=um_from_user, um_to_user=um_to_user) |
-                               Q(um_from_user=um_to_user, um_to_user=um_from_user))
+            contact = self.get(
+                Q(um_from_user=um_from_user, um_to_user=um_to_user)
+                | Q(um_from_user=um_to_user, um_to_user=um_from_user)
+            )
 
         except self.model.DoesNotExist:
             created = True
-            contact = self.create(um_from_user=um_from_user,
-                                  um_to_user=um_to_user,
-                                  latest_message=message)
+            contact = self.create(
+                um_from_user=um_from_user, um_to_user=um_to_user, latest_message=message
+            )
 
         return (contact, created)
 
     def update_contact(self, um_from_user, um_to_user, message):
         """ Get or update a contacts information """
-        contact, created = self.get_or_create(um_from_user,
-                                              um_to_user,
-                                              message)
+        contact, created = self.get_or_create(um_from_user, um_to_user, message)
 
         # If the contact already existed, update the message
         if not created:
@@ -55,6 +56,7 @@ class MessageContactManager(models.Manager):
         contacts = self.filter(Q(um_from_user=user) | Q(um_to_user=user))
         return contacts
 
+
 class MessageManager(models.Manager):
     """ Manager for the :class:`Message` model. """
 
@@ -72,24 +74,32 @@ class MessageManager(models.Manager):
             String containing the message.
 
         """
-        msg = self.model(sender=sender,
-                         body=body)
+        msg = self.model(sender=sender, body=body)
         msg.save()
 
         # Save the recipients
         msg.save_recipients(um_to_user_list)
         msg.update_contacts(um_to_user_list)
-        signals.email_sent.send(sender=None,msg=msg)
+        signals.email_sent.send(sender=None, msg=msg)
 
         return msg
 
     def get_conversation_between(self, um_from_user, um_to_user):
         """ Returns a conversation between two users """
-        messages = self.filter(Q(sender=um_from_user, recipients=um_to_user,
-                                 sender_deleted_at__isnull=True) |
-                               Q(sender=um_to_user, recipients=um_from_user,
-                                 messagerecipient__deleted_at__isnull=True))
+        messages = self.filter(
+            Q(
+                sender=um_from_user,
+                recipients=um_to_user,
+                sender_deleted_at__isnull=True,
+            )
+            | Q(
+                sender=um_to_user,
+                recipients=um_from_user,
+                messagerecipient__deleted_at__isnull=True,
+            )
+        )
         return messages
+
 
 class MessageRecipientManager(models.Manager):
     """ Manager for the :class:`MessageRecipient` model. """
@@ -105,9 +115,9 @@ class MessageRecipientManager(models.Manager):
             An integer with the amount of unread messages.
 
         """
-        unread_total = self.filter(user=user,
-                                   read_at__isnull=True,
-                                   deleted_at__isnull=True).count()
+        unread_total = self.filter(
+            user=user, read_at__isnull=True, deleted_at__isnull=True
+        ).count()
 
         return unread_total
 
@@ -125,9 +135,11 @@ class MessageRecipientManager(models.Manager):
             An integer with the amount of unread messages.
 
         """
-        unread_total = self.filter(message__sender=um_from_user,
-                                   user=um_to_user,
-                                   read_at__isnull=True,
-                                   deleted_at__isnull=True).count()
+        unread_total = self.filter(
+            message__sender=um_from_user,
+            user=um_to_user,
+            read_at__isnull=True,
+            deleted_at__isnull=True,
+        ).count()
 
         return unread_total

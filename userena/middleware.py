@@ -16,6 +16,7 @@ class UserenaLocaleMiddleware(MiddlewareMixin):
     switch languages depending if the cookie is set.
 
     """
+
     def process_request(self, request):
         lang_cookie = request.session.get(settings.LANGUAGE_COOKIE_NAME)
         if not lang_cookie:
@@ -33,4 +34,5 @@ class UserenaLocaleMiddleware(MiddlewareMixin):
                         lang = getattr(profile, userena_settings.USERENA_LANGUAGE_FIELD)
                         translation.activate(lang)
                         request.LANGUAGE_CODE = translation.get_language()
-                    except AttributeError: pass
+                    except AttributeError:
+                        pass

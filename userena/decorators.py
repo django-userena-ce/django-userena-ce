@@ -19,11 +19,17 @@ def secure_required(view_func):
     support it.
 
     """
+
     def _wrapped_view(request, *args, **kwargs):
         if not request.is_secure():
-            if getattr(settings, 'USERENA_USE_HTTPS', userena_settings.DEFAULT_USERENA_USE_HTTPS):
+            if getattr(
+                settings,
+                "USERENA_USE_HTTPS",
+                userena_settings.DEFAULT_USERENA_USE_HTTPS,
+            ):
                 request_url = request.build_absolute_uri(request.get_full_path())
-                secure_url = request_url.replace('http://', 'https://')
+                secure_url = request_url.replace("http://", "https://")
                 return HttpResponsePermanentRedirect(secure_url)
         return view_func(request, *args, **kwargs)
+
     return wraps(view_func, assigned=available_attrs(view_func))(_wrapped_view)

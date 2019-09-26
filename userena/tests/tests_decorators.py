@@ -12,7 +12,7 @@ class DecoratorTests(TestCase):
 
         """
         with self.settings(USERENA_USE_HTTPS=True):
-            response = self.client.get(reverse('userena_signin'))
+            response = self.client.get(reverse("userena_signin"))
 
             # Test for the permanent redirect
             self.assertEqual(response.status_code, 301)
@@ -20,4 +20,4 @@ class DecoratorTests(TestCase):
             # Test if the redirected url contains 'https'. Couldn't use
             # ``assertRedirects`` here because the redirected to page is
             # non-existant.
-            self.assertTrue('https' in response.get('Location'))
+            self.assertTrue("https" in response.get("Location"))

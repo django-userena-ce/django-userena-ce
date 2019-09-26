@@ -9,15 +9,18 @@ from easy_thumbnails.fields import ThumbnailerImageField
 from guardian.shortcuts import get_perms
 from userena import settings as userena_settings
 from userena.managers import UserenaManager, UserenaBaseProfileManager
-from userena.utils import get_gravatar, generate_sha1, get_protocol, \
-    get_datetime_now, user_model_label
+from userena.utils import (
+    get_gravatar,
+    generate_sha1,
+    get_protocol,
+    get_datetime_now,
+    user_model_label,
+)
 import datetime
 from .mail import UserenaConfirmationMail
 
 
-PROFILE_PERMISSIONS = (
-            ('view_profile', 'Can view profile'),
-)
+PROFILE_PERMISSIONS = (("view_profile", "Can view profile"),)
 
 
 def upload_to_mugshot(instance, filename):
@@ -27,15 +30,19 @@ def upload_to_mugshot(instance, filename):
     can't just browse through the mugshot directory.
 
     """
-    extension = filename.split('.')[-1].lower()
+    extension = filename.split(".")[-1].lower()
     salt, hash = generate_sha1(instance.pk)
-    path = userena_settings.USERENA_MUGSHOT_PATH % {'username': instance.user.username,
-                                                    'id': instance.user.id,
-                                                    'date': instance.user.date_joined,
-                                                    'date_now': get_datetime_now().date()}
-    return '%(path)s%(hash)s.%(extension)s' % {'path': path,
-                                               'hash': hash[:10],
-                                               'extension': extension}
+    path = userena_settings.USERENA_MUGSHOT_PATH % {
+        "username": instance.user.username,
+        "id": instance.user.id,
+        "date": instance.user.date_joined,
+        "date_now": get_datetime_now().date(),
+    }
+    return "%(path)s%(hash)s.%(extension)s" % {
+        "path": path,
+        "hash": hash[:10],
+        "extension": extension,
+    }
 
 
 @python_2_unicode_compatible
@@ -45,44 +52,53 @@ class UserenaSignup(models.Model):
     functional user implementation on your Django website.
 
     """
-    user = models.OneToOneField(user_model_label,
-                                verbose_name=_('user'),
-                                related_name='userena_signup',
-                                on_delete=models.CASCADE)
 
-    last_active = models.DateTimeField(_('last active'),
-                                       blank=True,
-                                       null=True,
-                                       help_text=_('The last date that the user was active.'))
+    user = models.OneToOneField(
+        user_model_label,
+        verbose_name=_("user"),
+        related_name="userena_signup",
+        on_delete=models.CASCADE,
+    )
 
-    activation_key = models.CharField(_('activation key'),
-                                      max_length=40,
-                                      blank=True)
+    last_active = models.DateTimeField(
+        _("last active"),
+        blank=True,
+        null=True,
+        help_text=_("The last date that the user was active."),
+    )
 
-    activation_notification_send = models.BooleanField(_('notification send'),
-                                                       default=False,
-                                                       help_text=_('Designates whether this user has already got a notification about activating their account.'))
+    activation_key = models.CharField(_("activation key"), max_length=40, blank=True)
 
-    email_unconfirmed = models.EmailField(_('unconfirmed email address'),
-                                          blank=True,
-                                          help_text=_('Temporary email address when the user requests an email change.'))
+    activation_notification_send = models.BooleanField(
+        _("notification send"),
+        default=False,
+        help_text=_(
+            "Designates whether this user has already got a notification about activating their account."
+        ),
+    )
 
-    email_confirmation_key = models.CharField(_('unconfirmed email verification key'),
-                                              max_length=40,
-                                              blank=True)
+    email_unconfirmed = models.EmailField(
+        _("unconfirmed email address"),
+        blank=True,
+        help_text=_("Temporary email address when the user requests an email change."),
+    )
 
-    email_confirmation_key_created = models.DateTimeField(_('creation date of email confirmation key'),
-                                                          blank=True,
-                                                          null=True)
+    email_confirmation_key = models.CharField(
+        _("unconfirmed email verification key"), max_length=40, blank=True
+    )
+
+    email_confirmation_key_created = models.DateTimeField(
+        _("creation date of email confirmation key"), blank=True, null=True
+    )
 
     objects = UserenaManager()
 
     class Meta:
-        verbose_name = _('userena registration')
-        verbose_name_plural = _('userena registrations')
+        verbose_name = _("userena registration")
+        verbose_name_plural = _("userena registrations")
 
     def __str__(self):
-        return '%s' % self.user.username
+        return "%s" % self.user.username
 
     def change_email(self, email):
         """
@@ -120,12 +136,14 @@ class UserenaSignup(models.Model):
         a request is made to change this email address.
 
         """
-        context = {'user': self.user,
-                  'without_usernames': userena_settings.USERENA_WITHOUT_USERNAMES,
-                  'new_email': self.email_unconfirmed,
-                  'protocol': get_protocol(),
-                  'confirmation_key': self.email_confirmation_key,
-                  'site': Site.objects.get_current()}
+        context = {
+            "user": self.user,
+            "without_usernames": userena_settings.USERENA_WITHOUT_USERNAMES,
+            "new_email": self.email_unconfirmed,
+            "protocol": get_protocol(),
+            "confirmation_key": self.email_confirmation_key,
+            "site": Site.objects.get_current(),
+        }
 
         mailer = UserenaConfirmationMail(context=context)
         mailer.generate_mail("confirmation", "_old")
@@ -148,7 +166,9 @@ class UserenaSignup(models.Model):
         amount of days defined in ``USERENA_ACTIVATION_DAYS``.
 
         """
-        expiration_days = datetime.timedelta(days=userena_settings.USERENA_ACTIVATION_DAYS)
+        expiration_days = datetime.timedelta(
+            days=userena_settings.USERENA_ACTIVATION_DAYS
+        )
         expiration_date = self.user.date_joined + expiration_days
         if self.activation_key == userena_settings.USERENA_ACTIVATED:
             return True
@@ -164,12 +184,14 @@ class UserenaSignup(models.Model):
         user.
 
         """
-        context = {'user': self.user,
-                  'without_usernames': userena_settings.USERENA_WITHOUT_USERNAMES,
-                  'protocol': get_protocol(),
-                  'activation_days': userena_settings.USERENA_ACTIVATION_DAYS,
-                  'activation_key': self.activation_key,
-                  'site': Site.objects.get_current()}
+        context = {
+            "user": self.user,
+            "without_usernames": userena_settings.USERENA_WITHOUT_USERNAMES,
+            "protocol": get_protocol(),
+            "activation_days": userena_settings.USERENA_ACTIVATION_DAYS,
+            "activation_key": self.activation_key,
+            "site": Site.objects.get_current(),
+        }
 
         mailer = UserenaConfirmationMail(context=context)
         mailer.generate_mail("activation")
@@ -179,30 +201,38 @@ class UserenaSignup(models.Model):
 @python_2_unicode_compatible
 class UserenaBaseProfile(models.Model):
     """ Base model needed for extra profile functionality """
+
     PRIVACY_CHOICES = (
-        ('open', _('Open')),
-        ('registered', _('Registered')),
-        ('closed', _('Closed')),
+        ("open", _("Open")),
+        ("registered", _("Registered")),
+        ("closed", _("Closed")),
     )
 
-    MUGSHOT_SETTINGS = {'size': (userena_settings.USERENA_MUGSHOT_SIZE,
-                                 userena_settings.USERENA_MUGSHOT_SIZE),
-                        'crop': userena_settings.USERENA_MUGSHOT_CROP_TYPE}
+    MUGSHOT_SETTINGS = {
+        "size": (
+            userena_settings.USERENA_MUGSHOT_SIZE,
+            userena_settings.USERENA_MUGSHOT_SIZE,
+        ),
+        "crop": userena_settings.USERENA_MUGSHOT_CROP_TYPE,
+    }
 
-    mugshot = ThumbnailerImageField(_('mugshot'),
-                                    blank=True,
-                                    upload_to=upload_to_mugshot,
-                                    resize_source=MUGSHOT_SETTINGS,
-                                    help_text=_('A personal image displayed in your profile.'))
+    mugshot = ThumbnailerImageField(
+        _("mugshot"),
+        blank=True,
+        upload_to=upload_to_mugshot,
+        resize_source=MUGSHOT_SETTINGS,
+        help_text=_("A personal image displayed in your profile."),
+    )
 
-    privacy = models.CharField(_('privacy'),
-                               max_length=15,
-                               choices=PRIVACY_CHOICES,
-                               default=userena_settings.USERENA_DEFAULT_PRIVACY,
-                               help_text=_('Designates who can view your profile.'))
+    privacy = models.CharField(
+        _("privacy"),
+        max_length=15,
+        choices=PRIVACY_CHOICES,
+        default=userena_settings.USERENA_DEFAULT_PRIVACY,
+        help_text=_("Designates who can view your profile."),
+    )
 
     objects = UserenaBaseProfileManager()
-
 
     class Meta:
         """
@@ -220,12 +250,13 @@ class UserenaBaseProfile(models.Model):
         ``add_profile``, ``change_profile`` etc.
 
         """
+
         abstract = True
-        default_permissions = ('add', 'change', 'delete')
+        default_permissions = ("add", "change", "delete")
         permissions = PROFILE_PERMISSIONS
 
     def __str__(self):
-        return 'Profile of %(username)s' % {'username': self.user.username}
+        return "Profile of %(username)s" % {"username": self.user.username}
 
     def get_mugshot_url(self):
         """
@@ -247,16 +278,21 @@ class UserenaBaseProfile(models.Model):
 
         # Use Gravatar if the user wants to.
         if userena_settings.USERENA_MUGSHOT_GRAVATAR:
-            return get_gravatar(self.user.email,
-                                userena_settings.USERENA_MUGSHOT_SIZE,
-                                userena_settings.USERENA_MUGSHOT_DEFAULT)
+            return get_gravatar(
+                self.user.email,
+                userena_settings.USERENA_MUGSHOT_SIZE,
+                userena_settings.USERENA_MUGSHOT_DEFAULT,
+            )
 
         # Gravatar not used, check for a default image.
         else:
-            if userena_settings.USERENA_MUGSHOT_DEFAULT not in ['404', 'mm',
-                                                                'identicon',
-                                                                'monsterid',
-                                                                'wavatar']:
+            if userena_settings.USERENA_MUGSHOT_DEFAULT not in [
+                "404",
+                "mm",
+                "identicon",
+                "monsterid",
+                "wavatar",
+            ]:
                 return userena_settings.USERENA_MUGSHOT_DEFAULT
             else:
                 return None
@@ -280,15 +316,16 @@ class UserenaBaseProfile(models.Model):
         if user.first_name or user.last_name:
             # We will return this as translated string. Maybe there are some
             # countries that first display the last name.
-            name = _("%(first_name)s %(last_name)s") % \
-                {'first_name': user.first_name,
-                 'last_name': user.last_name}
+            name = _("%(first_name)s %(last_name)s") % {
+                "first_name": user.first_name,
+                "last_name": user.last_name,
+            }
         else:
             # Fallback to the username if usernames are used
             if not userena_settings.USERENA_WITHOUT_USERNAMES:
-                name = "%(username)s" % {'username': user.username}
+                name = "%(username)s" % {"username": user.username}
             else:
-                name = "%(email)s" % {'email': user.email}
+                name = "%(email)s" % {"email": user.email}
         return name.strip()
 
     def can_view_profile(self, user):
@@ -322,15 +359,14 @@ class UserenaBaseProfile(models.Model):
         """
         # Simple cases first, we don't want to waste CPU and DB hits.
         # Everyone.
-        if self.privacy == 'open':
+        if self.privacy == "open":
             return True
         # Registered users.
-        elif self.privacy == 'registered' \
-        and isinstance(user, get_user_model()):
+        elif self.privacy == "registered" and isinstance(user, get_user_model()):
             return True
 
         # Checks done by guardian for owner and admins.
-        elif 'view_profile' in get_perms(user, self):
+        elif "view_profile" in get_perms(user, self):
             return True
 
         # Fallback to closed profile.
@@ -345,13 +381,16 @@ class UserenaLanguageBaseProfile(UserenaBaseProfile):
     set the language of users when they are signed in.
 
     """
-    language = models.CharField(_('language'),
-                                max_length=5,
-                                choices=settings.LANGUAGES,
-                                default=settings.LANGUAGE_CODE[:2],
-                                help_text=_('Default language.'))
+
+    language = models.CharField(
+        _("language"),
+        max_length=5,
+        choices=settings.LANGUAGES,
+        default=settings.LANGUAGE_CODE[:2],
+        help_text=_("Default language."),
+    )
 
     class Meta:
         abstract = True
-        default_permissions = ('add', 'change', 'delete')
+        default_permissions = ("add", "change", "delete")
         permissions = PROFILE_PERMISSIONS

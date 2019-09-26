@@ -9,6 +9,7 @@ class UserenaAuthenticationBackend(ModelBackend):
     ``username`` to the login form.
 
     """
+
     def authenticate(self, request, identification, password=None, check_password=True):
         """
         Authenticates a user through the combination email/username with
@@ -36,19 +37,25 @@ class UserenaAuthenticationBackend(ModelBackend):
         User = get_user_model()
         try:
             django.core.validators.validate_email(identification)
-            try: user = User.objects.get(email__iexact=identification)
-            except User.DoesNotExist: return None
+            try:
+                user = User.objects.get(email__iexact=identification)
+            except User.DoesNotExist:
+                return None
         except django.core.validators.ValidationError:
-            try: user = User.objects.get(username__iexact=identification)
-            except User.DoesNotExist: return None
+            try:
+                user = User.objects.get(username__iexact=identification)
+            except User.DoesNotExist:
+                return None
         if check_password:
             if user.check_password(password):
                 return user
             return None
-        else: return user
+        else:
+            return user
 
     def get_user(self, user_id):
         User = get_user_model()
-        try: return User.objects.get(pk=user_id)
+        try:
+            return User.objects.get(pk=user_id)
         except User.DoesNotExist:
             return None

@@ -1,14 +1,13 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from userena.contrib.umessages.models import (Message, MessageContact,
-                                              MessageRecipient)
+from userena.contrib.umessages.models import Message, MessageContact, MessageRecipient
 
 User = get_user_model()
 
 
 class MessageManagerTests(TestCase):
-    fixtures = ['users', 'messages']
+    fixtures = ["users", "messages"]
 
     def test_get_conversation(self):
         """ Test that the conversation is returned between two users """
@@ -17,8 +16,9 @@ class MessageManagerTests(TestCase):
 
         messages = Message.objects.get_conversation_between(user_1, user_2)
 
+
 class MessageRecipientManagerTest(TestCase):
-    fixtures = ['users', 'messages']
+    fixtures = ["users", "messages"]
 
     def test_count_unread_messages_for(self):
         """ Test the unread messages count for user """
@@ -35,12 +35,15 @@ class MessageRecipientManagerTest(TestCase):
         jane = User.objects.get(pk=2)
 
         # Jane should have one unread message from john
-        unread_messages = MessageRecipient.objects.count_unread_messages_between(jane, john)
+        unread_messages = MessageRecipient.objects.count_unread_messages_between(
+            jane, john
+        )
 
         self.assertEqual(unread_messages, 1)
 
+
 class MessageContactManagerTest(TestCase):
-    fixtures = ['users', 'messages']
+    fixtures = ["users", "messages"]
 
     def test_get_contacts_for(self):
         """ Test if the correct contacts are returned """
@@ -51,6 +54,4 @@ class MessageContactManagerTest(TestCase):
         self.assertEqual(len(contacts), 1)
 
         jane = User.objects.get(pk=2)
-        self.assertEqual(contacts[0].um_to_user,
-                             jane)
-
+        self.assertEqual(contacts[0].um_to_user, jane)
