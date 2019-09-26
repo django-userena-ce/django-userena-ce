@@ -38,7 +38,7 @@ setup(name='django-userena-ce',
       python_requires='>=3.5',
       test_suite='tests.main',
       classifiers=[
-          'Development Status :: 4 - Beta',
+          'Development Status :: 5 - Production/Stable',
           'Environment :: Web Environment',
           'Framework :: Django',
           'Framework :: Django :: 2.1',
