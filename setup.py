@@ -26,7 +26,7 @@ install_requires = [
     'easy_thumbnails',
     django_guardian_version(),
     'html2text',
-    'Django>=1.11',
+    'Django>=2.1',
 ]
 
 setup(name='django-userena-ce',
@@ -47,7 +47,6 @@ setup(name='django-userena-ce',
           'Development Status :: 4 - Beta',
           'Environment :: Web Environment',
           'Framework :: Django',
-          'Framework :: Django :: 1.11',
           'Framework :: Django :: 2.1',
           'Framework :: Django :: 2.2',
           'Intended Audience :: Developers',
