@@ -15,16 +15,9 @@ except IOError:
     sys.exit(1)
 
 
-def django_guardian_version():
-    if sys.version_info < (3,5):
-        # Django Guardian does not support Python < 3.5 after version 2
-        return 'django-guardian>=1.4.2,<2'
-    else:
-        return 'django-guardian>=1.4.2'
-
 install_requires = [
     'easy_thumbnails',
-    django_guardian_version(),
+    'django-guardian>=1.4.2',
     'html2text',
     'Django>=2.1',
 ]
@@ -53,8 +46,6 @@ setup(name='django-userena-ce',
           'License :: OSI Approved :: BSD License',
           'Operating System :: OS Independent',
           'Programming Language :: Python',
-          'Programming Language :: Python :: 2',
-          'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3',
           'Programming Language :: Python :: 3.5',
           'Programming Language :: Python :: 3.6',

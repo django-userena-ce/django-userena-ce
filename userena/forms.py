@@ -1,6 +1,3 @@
-#encoding:utf-8
-from __future__ import unicode_literals
-
 import random
 from collections import OrderedDict
 from hashlib import sha1

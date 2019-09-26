@@ -2,7 +2,7 @@
 
 ## Version 5.0.0
 
-- Dropped support for Python 3.4, Django 1.11
+- Dropped support for Python 2.7, 3.4, and Django 1.11
 
 ## Version 4.1.1
 
