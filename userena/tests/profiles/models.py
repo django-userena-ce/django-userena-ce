@@ -26,6 +26,9 @@ class Profile(UserenaBaseProfile):
     about_me = models.TextField(_("about me"), blank=True)
     language = models.TextField(_("language"), blank=True)
 
+    class Meta(UserenaBaseProfile.Meta):
+        ordering = ["user"]
+
 
 class SecondProfile(UserenaBaseProfile):
     user = models.OneToOneField(
