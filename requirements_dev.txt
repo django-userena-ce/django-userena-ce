@@ -1,5 +1,5 @@
 pytest-django==3.5.1
 pytest-cov==2.8.1
 coveralls==1.8.2
-pip==19.2.3
+pip==19.3
 twine
