@@ -2,4 +2,4 @@ pytest-django==3.7.0
 pytest-cov==2.8.1
 coveralls==1.8.2
 pip==19.3.1
-twine
+twine==3.1.0
