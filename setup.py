@@ -19,7 +19,7 @@ install_requires = [
     'easy_thumbnails',
     'django-guardian>=2.0',
     'html2text',
-    'Django>=2.1',
+    'Django>=2.2',
 ]
 
 setup(name='django-userena-ce',
