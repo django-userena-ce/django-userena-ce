@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from django.utils.encoding import smart_text
+from django.utils.encoding import smart_str
 
 from userena.models import UserenaSignup
 
@@ -54,7 +54,7 @@ class Command(BaseCommand):
             for u in users:
                 self.stdout.write(
                     "Changed permissions for user: %s\n"
-                    % smart_text(u, encoding="utf-8", strings_only=False)
+                    % smart_str(u, encoding="utf-8", strings_only=False)
                 )
 
             for w in warnings:

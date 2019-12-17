@@ -4,8 +4,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.utils.translation import ugettext as _
-from django.utils.translation import ungettext
+from django.utils.translation import gettext as _
+from django.utils.translation import ngettext
 from django.views.decorators.http import require_http_methods
 from django.views.generic.list import ListView
 
@@ -223,13 +223,13 @@ def message_remove(request, undo=False):
         # Send messages
         if (len(changed_message_list) > 0) and userena_settings.USERENA_USE_MESSAGES:
             if undo:
-                message = ungettext(
+                message = ngettext(
                     "Message is succesfully restored.",
                     "Messages are succesfully restored.",
                     len(changed_message_list),
                 )
             else:
-                message = ungettext(
+                message = ngettext(
                     "Message is successfully removed.",
                     "Messages are successfully removed.",
                     len(changed_message_list),

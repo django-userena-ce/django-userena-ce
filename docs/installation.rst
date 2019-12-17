@@ -166,7 +166,7 @@ must also connect itself to the :class:`User` model of Django.
 .. code-block:: python
 
     from django.contrib.auth.models import User
-    from django.utils.translation import ugettext as _
+    from django.utils.translation import gettext as _
     from userena.models import UserenaBaseProfile
     
     class MyProfile(UserenaBaseProfile):

@@ -68,7 +68,7 @@ Backwards incompatible changes:
   fails on tests.
 - removed all `{% load url from future %}` from userena templates for
   compatibility with Django 1.9
-- `sha_constructor()`, `smart_text()`, and `md5_constructor` removed from
+- `sha_constructor()`, `smart_str()`, and `md5_constructor` removed from
   `userena.compat`
 - Use simple list literal as url patterns instead of
   `django.conf.urls.patterns()` function

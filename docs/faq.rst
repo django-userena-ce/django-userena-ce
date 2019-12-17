@@ -90,7 +90,7 @@ form. First you override the signup form and add the fields.
 .. code-block:: python
 
     from django import forms
-    from django.utils.translation import ugettext_lazy as _
+    from django.utils.translation import gettext_lazy as _
     from userena.forms import SignupForm
 
     class SignupFormExtra(SignupForm):

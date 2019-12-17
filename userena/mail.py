@@ -2,7 +2,7 @@ import re
 
 from django.conf import settings
 from django.template.loader import render_to_string
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.core.mail import EmailMultiAlternatives
 
 from userena import settings as userena_settings

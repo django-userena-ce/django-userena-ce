@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from userena.utils import truncate_words
 from userena.contrib.umessages.managers import (
