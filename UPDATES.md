@@ -1,5 +1,9 @@
 # UPDATES
 
+## Version 5.1.0
+
+- Adds support for Python 3.8 and Django 3.0
+
 ## Version 5.0.0
 
 - Dropped support for Python 2.7, 3.4, and Django 1.11
