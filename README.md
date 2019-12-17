@@ -14,6 +14,14 @@ account management. It's a fully customizable application that takes care of
 the signup, activation, messaging and more. It's BSD licensed, which means you
 can use it commercially for free!
 
+## Supported Software
+
+Software | Versions
+---|---
+Python | 3.5, 3.6, 3.7, 3.8
+Django | 2.2, 3.0
+Django Guardian | \>2.0
+
 ## [Documentation](https://django-userena-ce.readthedocs.io/en/latest/index.html)
 
 Complete documentation about the

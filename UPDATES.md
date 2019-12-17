@@ -2,8 +2,10 @@
 
 ## Version 5.0.0
 
-- Added support for Python 3.8 and Django 3.0
-- Dropped support for Python 2.7, 3.4, and Django 1.11
+- Dropped support for Django 1.11 as `django-guardian` has dropped support for Django 1.11 from guardian 2.0 onwards. 
+Users who need to stick with Django 1.11 and/or python 2 will need to use `django-userena-ce<5.0`.
+- Dropped support for Python 2.7, 3.4, and Django 2.1 as these are end of life.
+- Added support for Python 3.8 and Django 3.0.
 
 ## Version 4.1.1
 
