@@ -1,14 +1,13 @@
 import datetime
 import hashlib
 import re
+from urllib.parse import urlparse, parse_qs
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
 from django.core import mail
 from django.conf import settings
 from django.test import TestCase
-from django.utils.six import text_type
-from django.utils.six.moves.urllib_parse import urlparse, parse_qs
 
 from userena.models import UserenaSignup, upload_to_mugshot
 from userena import settings as userena_settings
@@ -121,7 +120,7 @@ class UserenaSignupModelTests(TestCase):
         new_user = UserenaSignup.objects.create_user(**self.user_info)
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(
-            text_type(mail.outbox[0].message()).find("multipart/alternative"), -1
+            str(mail.outbox[0].message()).find("multipart/alternative"), -1
         )
 
     def test_html_email(self):
@@ -138,13 +137,13 @@ class UserenaSignupModelTests(TestCase):
         userena_settings.USERENA_HTML_EMAIL = False
         self.assertEqual(len(mail.outbox), 1)
         self.assertTrue(
-            text_type(mail.outbox[0].message()).find("multipart/alternative") > -1
+            str(mail.outbox[0].message()).find("multipart/alternative") > -1
         )
-        self.assertTrue(text_type(mail.outbox[0].message()).find("text/plain") > -1)
-        self.assertTrue(text_type(mail.outbox[0].message()).find("text/html") > -1)
-        self.assertTrue(text_type(mail.outbox[0].message()).find("<html>") > -1)
+        self.assertTrue(str(mail.outbox[0].message()).find("text/plain") > -1)
+        self.assertTrue(str(mail.outbox[0].message()).find("text/html") > -1)
+        self.assertTrue(str(mail.outbox[0].message()).find("<html>") > -1)
         self.assertTrue(
-            text_type(mail.outbox[0].message()).find("<p>Thank you for signing up") > -1
+            str(mail.outbox[0].message()).find("<p>Thank you for signing up") > -1
         )
         self.assertFalse(mail.outbox[0].body.find("<p>Thank you for signing up") > -1)
 
@@ -165,13 +164,13 @@ class UserenaSignupModelTests(TestCase):
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertTrue(
-            text_type(mail.outbox[0].message()).find("multipart/alternative") > -1
+            str(mail.outbox[0].message()).find("multipart/alternative") > -1
         )
-        self.assertTrue(text_type(mail.outbox[0].message()).find("text/plain") > -1)
-        self.assertTrue(text_type(mail.outbox[0].message()).find("text/html") > -1)
-        self.assertTrue(text_type(mail.outbox[0].message()).find("<html>") > -1)
+        self.assertTrue(str(mail.outbox[0].message()).find("text/plain") > -1)
+        self.assertTrue(str(mail.outbox[0].message()).find("text/html") > -1)
+        self.assertTrue(str(mail.outbox[0].message()).find("<html>") > -1)
         self.assertTrue(
-            text_type(mail.outbox[0].message()).find("<p>Thank you for signing up") > -1
+            str(mail.outbox[0].message()).find("<p>Thank you for signing up") > -1
         )
         self.assertTrue(mail.outbox[0].body.find("Thank you for signing up") > -1)
 

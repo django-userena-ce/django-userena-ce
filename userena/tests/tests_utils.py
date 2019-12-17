@@ -1,9 +1,9 @@
-import sys, re, six
+import re, six
+from urllib.parse import urlparse, parse_qs
 
 from django.test import TestCase
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.utils.six.moves.urllib_parse import urlparse, parse_qs
 
 from userena.utils import (
     get_gravatar,
@@ -12,7 +12,6 @@ from userena.utils import (
     get_protocol,
     generate_sha1,
 )
-from userena import settings as userena_settings
 from userena.compat import SiteProfileNotAvailable
 
 

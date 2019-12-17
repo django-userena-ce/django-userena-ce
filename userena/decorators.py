@@ -1,7 +1,7 @@
+from functools import WRAPPER_ASSIGNMENTS, wraps
+
 from django.http import HttpResponsePermanentRedirect
-from django.utils.decorators import available_attrs
 from django.conf import settings
-from django.utils.functional import wraps
 
 from userena import settings as userena_settings
 
@@ -32,4 +32,4 @@ def secure_required(view_func):
                 return HttpResponsePermanentRedirect(secure_url)
         return view_func(request, *args, **kwargs)
 
-    return wraps(view_func, assigned=available_attrs(view_func))(_wrapped_view)
+    return wraps(view_func, assigned=WRAPPER_ASSIGNMENTS)(_wrapped_view)
