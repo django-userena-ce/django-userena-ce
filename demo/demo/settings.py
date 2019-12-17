@@ -21,16 +21,16 @@ DATABASES = {
 # Internationalization
 TIME_ZONE = 'America/Chicago'
 LANGUAGE_CODE = 'en-us'
-ugettext = lambda s: s
+gettext = lambda s: s
 LANGUAGES = (
-    ('en', ugettext('English')),
-    ('nl', ugettext('Dutch')),
-    ('fr', ugettext('French')),
-    ('pl', ugettext('Polish')),
-    ('pt', ugettext('Portugese')),
-    ('pt-br', ugettext('Brazilian Portuguese')),
-    ('es', ugettext('Spanish')),
-    ('el', ugettext('Greek')),
+    ('en', gettext('English')),
+    ('nl', gettext('Dutch')),
+    ('fr', gettext('French')),
+    ('pl', gettext('Polish')),
+    ('pt', gettext('Portugese')),
+    ('pt-br', gettext('Brazilian Portuguese')),
+    ('es', gettext('Spanish')),
+    ('el', gettext('Greek')),
 )
 LOCALE_PATHS = (
     os.path.join(PROJECT_ROOT, 'locale'),

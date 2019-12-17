@@ -1,6 +1,5 @@
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from userena.utils import truncate_words
 from userena.contrib.umessages.managers import (
@@ -11,7 +10,6 @@ from userena.contrib.umessages.managers import (
 from userena.utils import user_model_label
 
 
-@python_2_unicode_compatible
 class MessageContact(models.Model):
     """
     Contact model.
@@ -70,7 +68,6 @@ class MessageContact(models.Model):
             return self.um_from_user
 
 
-@python_2_unicode_compatible
 class MessageRecipient(models.Model):
     """
     Intermediate model to allow per recipient marking as
@@ -104,7 +101,6 @@ class MessageRecipient(models.Model):
         return self.read_at is None
 
 
-@python_2_unicode_compatible
 class Message(models.Model):
     """ Private message model, from user to user(s) """
 

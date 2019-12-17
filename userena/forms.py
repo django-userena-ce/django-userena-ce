@@ -5,7 +5,7 @@ from hashlib import sha1
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from userena import settings as userena_settings
 from userena.models import UserenaSignup

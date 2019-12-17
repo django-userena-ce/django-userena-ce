@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from userena.models import UserenaBaseProfile
 from userena.utils import user_model_label
@@ -25,6 +25,9 @@ class Profile(UserenaBaseProfile):
     location = models.CharField(_("location"), max_length=255, blank=True)
     about_me = models.TextField(_("about me"), blank=True)
     language = models.TextField(_("language"), blank=True)
+
+    class Meta(UserenaBaseProfile.Meta):
+        ordering = ["user"]
 
 
 class SecondProfile(UserenaBaseProfile):

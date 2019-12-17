@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from guardian.admin import GuardedModelAdmin
 
 from userena.models import UserenaSignup

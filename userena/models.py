@@ -3,8 +3,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from guardian.shortcuts import get_perms
 from userena import settings as userena_settings
@@ -45,7 +44,6 @@ def upload_to_mugshot(instance, filename):
     }
 
 
-@python_2_unicode_compatible
 class UserenaSignup(models.Model):
     """
     Userena model which stores all the necessary information to have a full
@@ -198,7 +196,6 @@ class UserenaSignup(models.Model):
         mailer.send_mail(self.user.email)
 
 
-@python_2_unicode_compatible
 class UserenaBaseProfile(models.Model):
     """ Base model needed for extra profile functionality """
 

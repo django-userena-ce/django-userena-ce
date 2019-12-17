@@ -4,9 +4,9 @@ Installation.
 =============
 
 Before install django-userena-ce, you'll need to have a copy of `Django
-<http://www.djangoproject.com>`_ 2.1 or 2.2 installed. django-userena-ce is
-tested under Python 3.5, 3.6, 3.7 (all versions on which
-Django 1.11 and higher is declared to work)
+<http://www.djangoproject.com>`_ 2.2 or 3.0 installed. django-userena-ce is
+tested under Python 3.5, 3.6, 3.7 and 3.8 (all versions on which
+Django 2.2 and higher is declared to work)
 
 For further information, consult the `Django download page
 <http://www.djangoproject.com/download/>`_, which offers convenient packaged
@@ -15,7 +15,7 @@ downloads and installation instructions.
 Support for old Django and Python Versions
 ------------------------------------------
 
-From version 5.0.0 only django versions 2.1 and 2.2 will be supported.
+From version 5.0.0 only django versions 2.2 and 3.0 will be supported.
 Django 1.11 and/or Python 2 users should install ``django-userena-ce<5.0``.
 
 Installing django-userena-ce
@@ -166,7 +166,7 @@ must also connect itself to the :class:`User` model of Django.
 .. code-block:: python
 
     from django.contrib.auth.models import User
-    from django.utils.translation import ugettext as _
+    from django.utils.translation import gettext as _
     from userena.models import UserenaBaseProfile
     
     class MyProfile(UserenaBaseProfile):

@@ -1,5 +1,5 @@
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from userena.contrib.umessages.fields import CommaSeparatedUserField
 from userena.contrib.umessages.models import Message, MessageRecipient

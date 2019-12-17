@@ -7,7 +7,6 @@ from django.conf import settings
 from django.utils.encoding import smart_bytes
 from django.utils.functional import keep_lazy_text
 from django.utils.http import urlencode
-from django.utils.six import text_type
 from django.utils.text import Truncator
 
 from userena import settings as userena_settings
@@ -112,7 +111,7 @@ def generate_sha1(string, salt=None):
     :return: Tuple containing the salt and hash.
 
     """
-    if not isinstance(string, (str, text_type)):
+    if not isinstance(string, str):
         string = str(string)
 
     if not salt:

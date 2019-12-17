@@ -4,10 +4,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import UserManager, Permission, AnonymousUser
 from django.contrib.contenttypes.models import ContentType
-from django.utils.encoding import smart_text
-from django.utils.translation import ugettext as _
+from django.utils.encoding import smart_str
+from django.utils.translation import gettext as _
 from django.conf import settings
-from django.utils.six import text_type
 
 from userena import settings as userena_settings
 from userena.utils import (
@@ -93,8 +92,8 @@ class UserenaManager(UserManager):
         :return: The newly created :class:`UserenaSignup` instance.
 
         """
-        if isinstance(user.username, text_type):
-            user.username = smart_text(user.username)
+        if isinstance(user.username, str):
+            user.username = smart_str(user.username)
         salt, activation_key = generate_sha1(user.username)
 
         try:
