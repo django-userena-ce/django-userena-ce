@@ -32,6 +32,8 @@ LANGUAGES = (
     ("pt-br", gettext("Brazilian Portuguese")),
     ("es", gettext("Spanish")),
     ("el", gettext("Greek")),
+    ("zh-hans", gettext("Simplified Chinese")),
+    ("zh-hant", gettext("Traditional Chinese")),
 )
 LOCALE_PATHS = (os.path.join(PROJECT_ROOT, "locale"),)
 

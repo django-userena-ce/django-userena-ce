@@ -1,5 +1,11 @@
 # UPDATES
 
+## Version 5.1.0
+
+- Increased max_length of the language codes to 8 to support BCP47. If you use
+  `UserenaLanguageBaseProfile` with `zh-Hans` or `zh-Hant` you will need to create
+  a new migration and apply it.
+
 ## Version 5.0.0
 
 - Dropped support for Django 1.11 as `django-guardian` has dropped support for Django 1.11 from guardian 2.0 onwards. 
