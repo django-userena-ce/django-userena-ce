@@ -376,12 +376,17 @@ class UserenaLanguageBaseProfile(UserenaBaseProfile):
 
     Use this model in combination with ``UserenaLocaleMiddleware`` automatically
     set the language of users when they are signed in.
-
     """
 
+    # Max length is 8 to support language identifiers according to BCP47
+    # https://tools.ietf.org/html/bcp47
+    # The language identifier is of the form lll-Ssss
+    #  - lll the language (shortest ISO 639 code, 3 letters max)
+    #  - a hyphen
+    #  - Ssss the script (ISO 15924 code, 4 letters)
     language = models.CharField(
         _("language"),
-        max_length=5,
+        max_length=8,
         choices=settings.LANGUAGES,
         default=settings.LANGUAGE_CODE[:2],
         help_text=_("Default language."),
