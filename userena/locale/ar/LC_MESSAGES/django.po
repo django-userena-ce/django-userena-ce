@@ -1,0 +1,930 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-04 13:25+0300\n"
+"PO-Revision-Date: 2020-02-04 19:17+0300\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.2.4\n"
+
+#: userena/contrib/umessages/admin.py:23
+msgid "Date/time"
+msgstr "التاريخ/الوقت"
+
+#: userena/contrib/umessages/fields.py:60
+#, python-format
+msgid "The following usernames are incorrect: %(users)s."
+msgstr "أسماء المستخدمين وأسماء المستخدمات التالية غير صحيحة: %(users)s."
+
+#: userena/contrib/umessages/forms.py:11
+msgid "To"
+msgstr "إلى"
+
+#: userena/contrib/umessages/forms.py:13
+msgid "Message"
+msgstr "الرسالة"
+
+#: userena/contrib/umessages/models.py:24
+msgid "from user"
+msgstr "من مستخدم"
+
+#: userena/contrib/umessages/models.py:31
+msgid "to user"
+msgstr "إلى مستخدم"
+
+#: userena/contrib/umessages/models.py:37
+msgid "latest message"
+msgstr "آخر رسالة"
+
+#: userena/contrib/umessages/models.py:45
+msgid "contact"
+msgstr "جهة اتصال"
+
+#: userena/contrib/umessages/models.py:46
+msgid "contacts"
+msgstr "جهات اتصال"
+
+#: userena/contrib/umessages/models.py:49
+#, python-format
+msgid "%(um_from_user)s and %(um_to_user)s"
+msgstr "%(um_from_user)s و %(um_to_user)s"
+
+#: userena/contrib/umessages/models.py:79
+#: userena/contrib/umessages/models.py:93
+msgid "recipient"
+msgstr "المتلقّيـ/ـة"
+
+#: userena/contrib/umessages/models.py:83
+#: userena/contrib/umessages/models.py:133
+msgid "message"
+msgstr "الرسالة"
+
+#: userena/contrib/umessages/models.py:86
+msgid "read at"
+msgstr "قُرئت الساعة"
+
+#: userena/contrib/umessages/models.py:88
+msgid "recipient deleted at"
+msgstr "حذفها المتلقي الساعة"
+
+#: userena/contrib/umessages/models.py:94
+#: userena/contrib/umessages/models.py:120
+msgid "recipients"
+msgstr "المتلّقون والمتلقيات"
+
+#: userena/contrib/umessages/models.py:97
+#, python-format
+msgid "%(message)s"
+msgstr "%(message)s"
+
+#: userena/contrib/umessages/models.py:107
+msgid "body"
+msgstr "نص الرسالة"
+
+#: userena/contrib/umessages/models.py:112
+msgid "sender"
+msgstr "المرسلـ/ـة"
+
+#: userena/contrib/umessages/models.py:123
+msgid "sent at"
+msgstr "أرسلت الساعة"
+
+#: userena/contrib/umessages/models.py:126
+msgid "sender deleted at"
+msgstr "حذفها المرسل الساعة"
+
+#: userena/contrib/umessages/models.py:134
+msgid "messages"
+msgstr "الرسائل"
+
+#: userena/contrib/umessages/templates/umessages/message_detail.html:4
+#, python-format
+msgid "Conversation with %(recipient)s"
+msgstr "محادثة مع %(recipient)s"
+
+#: userena/contrib/umessages/templates/umessages/message_detail.html:12
+#, python-format
+msgid "Received on %(sent_at)s"
+msgstr "أُستلمت يوم %(sent_at)s"
+
+#: userena/contrib/umessages/templates/umessages/message_form.html:4
+#: userena/contrib/umessages/templates/umessages/message_list.html:9
+msgid "Compose"
+msgstr "كتابة"
+
+#: userena/contrib/umessages/templates/umessages/message_form.html:10
+msgid "Compose message"
+msgstr "كتابة رسالة"
+
+#: userena/contrib/umessages/templates/umessages/message_form.html:13
+msgid "Send"
+msgstr "إرسال"
+
+#: userena/contrib/umessages/templates/umessages/message_list.html:4
+msgid "Messages"
+msgstr "الرسائل"
+
+#: userena/contrib/umessages/templates/umessages/message_list.html:8
+#, python-format
+msgid "%(unread_message_count)s new messages."
+msgstr "%(unread_message_count)s رسائل جديدة."
+
+#: userena/contrib/umessages/templates/umessages/message_list.html:20
+#, python-format
+msgid "%(latest_message)s (%(unread_between_count)s new)"
+msgstr "%(latest_message)s (%(unread_between_count)s جديدة)"
+
+#: userena/contrib/umessages/views.py:137
+msgid "Message is sent."
+msgstr "أرسلت الرسالة."
+
+#: userena/contrib/umessages/views.py:227
+msgid "Message is succesfully restored."
+msgid_plural "Messages are succesfully restored."
+msgstr[0] "أستعيدت الرسالة بنجاح."
+msgstr[1] "أستعيدت الرسالة بنجاح."
+msgstr[2] "أستعيدت الرسالتان بنجاح."
+msgstr[3] "أستعيدت الرسائل بنجاح."
+msgstr[4] "أستعيدت الرسائل بنجاح."
+msgstr[5] "أستعيدت الرسائل بنجاح."
+
+#: userena/contrib/umessages/views.py:233
+msgid "Message is successfully removed."
+msgid_plural "Messages are successfully removed."
+msgstr[0] "لم تحذف أي رسالة."
+msgstr[1] "حذفت الرسالة بنجاح."
+msgstr[2] "حذفت الرسالتين بنجاح."
+msgstr[3] "حذفت الرسائل بنجاح."
+msgstr[4] "حذفت الرسائل بنجاح."
+msgstr[5] "حذفت الرسائل بنجاح."
+
+#: userena/forms.py:31
+msgid "Username"
+msgstr "اسم المستخدمـ/ـة"
+
+#: userena/forms.py:34 userena/tests/tests_forms.py:34
+msgid "Username must contain only letters, numbers, dots and underscores."
+msgstr ""
+"ينبغي لاسم المستخدمـ/ـة أن يحتوي فقط على الحروف والأرقام والنقاط والشرطات "
+"السفلية."
+
+#: userena/forms.py:39 userena/forms.py:217
+#: userena/templates/userena/profile_detail.html:33
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: userena/forms.py:43
+msgid "Create password"
+msgstr "كلمة السر"
+
+#: userena/forms.py:47
+msgid "Repeat password"
+msgstr "إعادة كلمة السر"
+
+#: userena/forms.py:71
+msgid ""
+"This username is already taken but not confirmed. Please check your email "
+"for verification steps."
+msgstr ""
+"اسم المستخدمـ/ـة هذا موجود مسبقًا لكنه غير مؤكد. المرجو اتباع خطوات التأكيد "
+"المُرسلة إلى بريدك."
+
+#: userena/forms.py:74 userena/tests/tests_forms.py:59
+msgid "This username is already taken."
+msgstr "اسم المستخدمـ/ـة مأخوذ مسبقًا."
+
+#: userena/forms.py:79 userena/tests/tests_forms.py:70
+msgid "This username is not allowed."
+msgstr "لا يسمح باسم المستخدمـ/ـة هذا."
+
+#: userena/forms.py:92
+msgid ""
+"This email is already in use but not confirmed. Please check your email for "
+"verification steps."
+msgstr ""
+"البريد الإلكتروني هذا مستخدم مسبقًا لكنه غير مؤكد. المرجو اتباع خطوات التأكيد "
+"المُرسلة إلى بريدك."
+
+#: userena/forms.py:96 userena/forms.py:273 userena/tests/tests_forms.py:85
+msgid "This email is already in use. Please supply a different email."
+msgstr "البريد الإلكتروني هذا مستخدم مسبقًا، المرجو استخدام بريد آخر."
+
+#: userena/forms.py:109 userena/tests/tests_forms.py:48
+msgid "The two password fields didn't match."
+msgstr "حقلي كلمة السر لا يتتطابقان."
+
+#: userena/forms.py:163
+msgid "I have read and agree to the Terms of Service"
+msgstr "قرأت شروط الاستخدام ووافقت عليها"
+
+#: userena/forms.py:164
+msgid "You must agree to the terms to register."
+msgstr "يتعيّن الموافقة على الشروط للتسجيل."
+
+#: userena/forms.py:194
+msgid "Email or username"
+msgstr "البريد الإلكتروني أو اسم المستخدمـ/ـة"
+
+#: userena/forms.py:194
+msgid "Either supply us with your email or username."
+msgstr "المرجو تزويدنا بالبريد الإلكتروني أو اسم المسخدمـ/ـة."
+
+#: userena/forms.py:197
+msgid "Password"
+msgstr "كلمة السر"
+
+#: userena/forms.py:203 userena/forms.py:212
+#, python-format
+msgid "Remember me for %(days)s"
+msgstr "تذكّرني مدّة %(days)s"
+
+#: userena/forms.py:217
+msgid "Please supply your email."
+msgstr "المرجو تزويدنا ببريدك الإلكتروني."
+
+#: userena/forms.py:235
+msgid ""
+"Please enter a correct username or email and password. Note that both fields "
+"are case-sensitive."
+msgstr ""
+"المرجو إدخال اسم مستخدمـ/ـة أو بريد إلكتروني وكلمة سر صحيحين. المرجو التنبه "
+"أن كلا الحقلين."
+
+#: userena/forms.py:244 userena/templates/userena/email_confirm_complete.html:6
+msgid "New email"
+msgstr "رسالة جديدة"
+
+#: userena/forms.py:266
+msgid "You're already known under this email."
+msgstr "هذا هو بريدك لدينا."
+
+#: userena/forms.py:290
+msgid "First name"
+msgstr "الاسم الأول"
+
+#: userena/forms.py:291
+msgid "Last name"
+msgstr "الاسم الأخير"
+
+#: userena/mail.py:28
+msgid "Either message_plain or message_html should be not None"
+msgstr "إما message_plain أو message_html ينبغي ألا يكون None"
+
+#: userena/managers.py:276
+#, python-format
+msgid "No profile found for %(username)s"
+msgstr "لم يتم العثور على ملف شخصي %(username)s"
+
+#: userena/models.py:56 userena/tests/profiles/models.py:16
+#: userena/tests/profiles/models.py:37
+msgid "user"
+msgstr "المستخدمـ/ـة"
+
+#: userena/models.py:62
+msgid "last active"
+msgstr "آخر نشاط"
+
+#: userena/models.py:65
+msgid "The last date that the user was active."
+msgstr "آخر تاريخ لنشاط المسخدم/ـة."
+
+#: userena/models.py:68
+msgid "activation key"
+msgstr "مفتاح التفعيل"
+
+#: userena/models.py:71
+msgid "notification send"
+msgstr "أرسل الإشعار"
+
+#: userena/models.py:74
+msgid ""
+"Designates whether this user has already got a notification about activating "
+"their account."
+msgstr "يحدد هل وصل إشعار للمستخدمـ/ـة عن تفعيل الحساب."
+
+#: userena/models.py:79
+msgid "unconfirmed email address"
+msgstr "بريد إلكتروني غير مؤكد"
+
+#: userena/models.py:81
+msgid "Temporary email address when the user requests an email change."
+msgstr ""
+"عنوان البريد الإلكتروني مؤقت عندما يطلب المستخدم/تطلب المستخدمة تغيير البريد "
+"الإلكتروني."
+
+#: userena/models.py:85
+msgid "unconfirmed email verification key"
+msgstr "مفتاح تأكيد بريد غير مؤكد"
+
+#: userena/models.py:89
+msgid "creation date of email confirmation key"
+msgstr "تاريخ إنشاء مفتاح تأكيد البريد"
+
+#: userena/models.py:95
+msgid "userena registration"
+msgstr "تسجيل يوزرينا"
+
+#: userena/models.py:96
+msgid "userena registrations"
+msgstr "تسجيلات يوزرينا"
+
+#: userena/models.py:203
+msgid "Open"
+msgstr "مفتوح"
+
+#: userena/models.py:204
+msgid "Registered"
+msgstr "مسجّل"
+
+#: userena/models.py:205
+msgid "Closed"
+msgstr "مغلق"
+
+#: userena/models.py:217
+msgid "mugshot"
+msgstr "الصورة"
+
+#: userena/models.py:221
+msgid "A personal image displayed in your profile."
+msgstr "الصورة الشخصية التي تعرض في ملفك الشخصي."
+
+#: userena/models.py:225
+msgid "privacy"
+msgstr "الخصوصية"
+
+#: userena/models.py:229
+msgid "Designates who can view your profile."
+msgstr "تحدد من يستطيع مشاهدة ملفك الشخصي."
+
+#: userena/models.py:316
+#, python-format
+msgid "%(first_name)s %(last_name)s"
+msgstr "%(first_name)s %(last_name)s"
+
+#: userena/models.py:388 userena/tests/profiles/models.py:27
+msgid "language"
+msgstr "اللغة"
+
+#: userena/models.py:392
+msgid "Default language."
+msgstr "اللغة المبدئية."
+
+#: userena/runtests/settings.py:27
+msgid "English"
+msgstr "الإنجليزية"
+
+#: userena/runtests/settings.py:28
+msgid "Dutch"
+msgstr "الهولندية"
+
+#: userena/runtests/settings.py:29
+msgid "French"
+msgstr "الفرنسية"
+
+#: userena/runtests/settings.py:30
+msgid "Polish"
+msgstr "البولندية"
+
+#: userena/runtests/settings.py:31
+msgid "Portugese"
+msgstr "البرتغالية"
+
+#: userena/runtests/settings.py:32
+msgid "Brazilian Portuguese"
+msgstr "البرتغالية البرازيلية"
+
+#: userena/runtests/settings.py:33
+msgid "Spanish"
+msgstr "الإسبانية"
+
+#: userena/runtests/settings.py:34
+msgid "Greek"
+msgstr "اليونانية"
+
+#: userena/runtests/settings.py:35
+msgid "Simplified Chinese"
+msgstr "الصينية المبسّطة"
+
+#: userena/runtests/settings.py:36
+msgid "Traditional Chinese"
+msgstr "الصينية التقليدية"
+
+#: userena/settings.py:32
+msgid "a month"
+msgstr "شهر"
+
+#: userena/templates/userena/activate_fail.html:4
+#: userena/templates/userena/activate_retry.html:5
+msgid "Account activation failed."
+msgstr "فشل تفعيل الحساب."
+
+#: userena/templates/userena/activate_fail.html:5
+#: userena/templates/userena/activate_retry.html:6
+msgid "Your account could not be activated..."
+msgstr "لم يكن ممكنًا تفعيل حسابك...."
+
+#: userena/templates/userena/activate_fail.html:8
+msgid ""
+"Your account could not be activated. This could be because your activation "
+"link has aged."
+msgstr "لم يكن ممكنًا تفعيل حسابك. قد يكون ذلك لأن وصلة التفعيل باتت قديمة."
+
+#: userena/templates/userena/activate_fail.html:9
+msgid ""
+"Please try signing up again or contact us if you think something went wrong."
+msgstr "المرجو محاولة التسجيل مرة أخرى أو التواصل معنا عند الظنّ أن خطأً ما حدث."
+
+#: userena/templates/userena/activate_retry.html:9
+msgid "Your account could not be activated because activation link is expired."
+msgstr "لم يكن ممكنًا تفعيل حساب لأن صلاحية وصلة التفعيل انتهت."
+
+#: userena/templates/userena/activate_retry.html:10
+msgid "Request a new activation link."
+msgstr "اطلبـ/ـي رابط تفعيل جديد."
+
+#: userena/templates/userena/activate_retry_success.html:5
+msgid "Account re-activation succeeded."
+msgstr "نجحت إعادة تفعيل الحساب."
+
+#: userena/templates/userena/activate_retry_success.html:6
+msgid "Account re-activation"
+msgstr "إعادة تفعيل الحساب"
+
+#: userena/templates/userena/activate_retry_success.html:9
+msgid "You requested a new activation of your account.."
+msgstr "لقد طلبت تفعيلا جديدا لحسابك.."
+
+#: userena/templates/userena/activate_retry_success.html:10
+#: userena/templates/userena/signup_complete.html:12
+msgid ""
+"You have been sent an e-mail with an activation link to the supplied email."
+msgstr "لقد أُرسلت رسالة إلى البريد الإلكتروني الذي وضعته تحتوي وصلة التفعيل."
+
+#: userena/templates/userena/activate_retry_success.html:11
+#: userena/templates/userena/signup_complete.html:13
+#, python-format
+msgid ""
+"We will store your signup information for %(userena_activation_days)s days "
+"on our server. "
+msgstr ""
+"سنخزّن على خوادمنا معلومات تسجيلك مدة %(userena_activation_days)s يومًا. "
+
+#: userena/templates/userena/disabled.html:4
+msgid "Disabled account"
+msgstr "الحساب معطل"
+
+#: userena/templates/userena/disabled.html:5
+msgid "Your account has been disabled"
+msgstr "حسابك معطّل"
+
+#: userena/templates/userena/disabled.html:7
+msgid "It seems your account has been disabled."
+msgstr "يبدو أن حسابك معطّل."
+
+#: userena/templates/userena/disabled.html:8
+msgid ""
+"If you feel that injustice has been done to you, feel free to contact the "
+"administrators to find out why"
+msgstr ""
+"إذا شعرت أن هذا القرار ليس عادلا، لا تتردد بالتواصل مع الإداريين والإداريات "
+"لمعرفة السبب"
+
+#: userena/templates/userena/email_change_complete.html:4
+msgid "Email verification"
+msgstr "التحقق من البريد الإلكتروني"
+
+#: userena/templates/userena/email_change_complete.html:5
+msgid "Confirm your new email"
+msgstr "تأكيد بريدك الإلكتروني الجديد"
+
+#: userena/templates/userena/email_change_complete.html:8
+#, python-format
+msgid "You have received an email at %(email)s."
+msgstr "لقد تلقّيت رسالة موجّهة إلى %(email)s."
+
+#: userena/templates/userena/email_change_complete.html:9
+#, python-format
+msgid ""
+"To associate this email address with your account (%(username)s) click on "
+"the link provided in this email."
+msgstr ""
+"لربط هذا البريد الإلكتروني بحسابك (%(username)s) انقر/ي الوصلة المعطاة في "
+"هذه الرسالة."
+
+#: userena/templates/userena/email_confirm_complete.html:4
+msgid "Email changed!"
+msgstr "تغيّر البريد الإلكتروني!"
+
+#: userena/templates/userena/email_confirm_complete.html:8
+#, python-format
+msgid ""
+"Your new email address is saved. You can continue using %(site)s with this "
+"email."
+msgstr ""
+"حُفظ عنوان بريدك الإلكتروني الجديد. يمكنك الاستمرار باستخدام %(site)s بهذا "
+"البريد الإلكتروني."
+
+#: userena/templates/userena/email_confirm_fail.html:4
+msgid "Email verification failed."
+msgstr "فشل التحقق من البريد الإلكتروني."
+
+#: userena/templates/userena/email_confirm_fail.html:5
+#: userena/templates/userena/email_confirm_fail.html:8
+msgid "Your email could not be verified..."
+msgstr "لم يكن ممكنا التحقق من بريدك الإلكتروني..."
+
+#: userena/templates/userena/email_confirm_fail.html:9
+msgid "You could try changing it again in your account settings."
+msgstr "يمكنك محاولة تغييره مجددا في إعدادات حسابك."
+
+#: userena/templates/userena/email_form.html:4
+#: userena/templates/userena/password_form.html:6
+#: userena/templates/userena/profile_form.html:6
+#, python-format
+msgid "Account &raquo; %(username)s"
+msgstr "حساب %(username)s"
+
+#: userena/templates/userena/email_form.html:9
+#: userena/templates/userena/password_form.html:11
+#: userena/templates/userena/profile_detail.html:14
+#: userena/templates/userena/profile_form.html:12
+msgid "View profile"
+msgstr "عرض الملف الشخصي"
+
+#: userena/templates/userena/email_form.html:10
+#: userena/templates/userena/password_form.html:12
+#: userena/templates/userena/profile_form.html:13
+msgid "Edit profile"
+msgstr "تغيير الملف الشخصي"
+
+#: userena/templates/userena/email_form.html:11
+#: userena/templates/userena/password_form.html:4
+#: userena/templates/userena/password_form.html:13
+#: userena/templates/userena/password_form.html:21
+#: userena/templates/userena/profile_detail.html:16
+#: userena/templates/userena/profile_form.html:14
+msgid "Change password"
+msgstr "تغيير كلمة السر"
+
+#: userena/templates/userena/email_form.html:12
+#: userena/templates/userena/email_form.html:19
+#: userena/templates/userena/password_form.html:14
+#: userena/templates/userena/profile_detail.html:17
+#: userena/templates/userena/profile_form.html:15
+msgid "Change email"
+msgstr "تغيير البريد الإلكتروني"
+
+#: userena/templates/userena/email_form.html:16
+msgid "Change email address"
+msgstr "تغيير عنوان البريد الإلكتروني"
+
+#: userena/templates/userena/emails/activation_email_message.html:4
+#: userena/templates/userena/emails/confirmation_email_message_new.html:4
+#, python-format
+msgid "Dear %(username)s,</p>"
+msgstr "طابت أيامك بالخير %(username)s</p>"
+
+#: userena/templates/userena/emails/activation_email_message.html:5
+#, python-format
+msgid "<p>Thank you for signing up at %(site)s.</p>"
+msgstr "<p>شكرا لك على التسجيل في %(site)s.</p>"
+
+#: userena/templates/userena/emails/activation_email_message.html:7
+#: userena/templates/userena/emails/activation_email_message.txt:6
+msgid "To activate your account you should click on the link below:"
+msgstr "لتفعيل حسابك، عليك نقر الوصلة أدناه:"
+
+#: userena/templates/userena/emails/activation_email_message.html:11
+#: userena/templates/userena/emails/activation_email_message.txt:10
+#: userena/templates/userena/emails/confirmation_email_message_new.html:13
+#: userena/templates/userena/emails/confirmation_email_message_new.txt:12
+#: userena/templates/userena/emails/confirmation_email_message_old.html:13
+#: userena/templates/userena/emails/confirmation_email_message_old.txt:8
+#: userena/templates/userena/emails/password_reset_message.html:20
+#: userena/templates/userena/emails/password_reset_message.txt:14
+msgid "Thanks for using our site!"
+msgstr "شكرًا لاستخدام موقعنا!"
+
+#: userena/templates/userena/emails/activation_email_message.html:12
+#: userena/templates/userena/emails/activation_email_message.txt:12
+#: userena/templates/userena/emails/confirmation_email_message_new.html:14
+#: userena/templates/userena/emails/confirmation_email_message_new.txt:14
+#: userena/templates/userena/emails/confirmation_email_message_old.html:16
+#: userena/templates/userena/emails/confirmation_email_message_old.txt:10
+#: userena/templates/userena/emails/password_reset_message.html:21
+#: userena/templates/userena/emails/password_reset_message.txt:16
+msgid "Sincerely"
+msgstr "بإخلاص"
+
+#: userena/templates/userena/emails/activation_email_message.txt:2
+#: userena/templates/userena/emails/confirmation_email_message_new.txt:2
+#: userena/templates/userena/emails/confirmation_email_message_old.html:4
+#: userena/templates/userena/emails/confirmation_email_message_old.txt:2
+#, python-format
+msgid "Dear %(username)s,"
+msgstr "طابت أيامك بالخير %(username)s،"
+
+#: userena/templates/userena/emails/activation_email_message.txt:4
+#, python-format
+msgid "Thank you for signing up at %(site)s."
+msgstr "شكرا لك على التسجيل في %(site)s."
+
+#: userena/templates/userena/emails/activation_email_subject.txt:2
+#, python-format
+msgid "Your signup at %(site)s."
+msgstr "تسجيلك في %(site)s."
+
+#: userena/templates/userena/emails/confirmation_email_message_new.html:6
+#: userena/templates/userena/emails/confirmation_email_message_new.txt:4
+#, python-format
+msgid "You requested a change of your email address at %(site)s."
+msgstr "لقد طلبت تغيير عنوان بريدك الإلكتروني في %(site)s."
+
+#: userena/templates/userena/emails/confirmation_email_message_new.html:9
+#: userena/templates/userena/emails/confirmation_email_message_new.txt:7
+msgid "Please confirm this email address by clicking on the link below:"
+msgstr "المرجو تأكيد هذا عنوان البريد الإلكتروني هذا بالنقر على الوصلة أدناه:"
+
+#: userena/templates/userena/emails/confirmation_email_message_old.html:6
+#: userena/templates/userena/emails/confirmation_email_message_old.txt:4
+#, python-format
+msgid "There was a request to change your email address at %(site)s."
+msgstr "ثمة طلب لتغيير عنوان بريدك الإلكتروني في %(site)s."
+
+#: userena/templates/userena/emails/confirmation_email_message_old.html:10
+#: userena/templates/userena/emails/confirmation_email_message_old.txt:6
+#, python-format
+msgid ""
+"An email has been send to %(new_email)s which contains a verification link. "
+"Click on the link in this email to activate it."
+msgstr ""
+"أرسلت رسالة إلى %(new_email)s تحتوي وصلة تأكيد.  انقر على الوصلة في الرسالة "
+"لتفعيله."
+
+#: userena/templates/userena/emails/confirmation_email_subject_new.html:4
+#: userena/templates/userena/emails/confirmation_email_subject_new.txt:2
+#, python-format
+msgid "Email verification for %(site)s."
+msgstr "تأكيد بريدك في %(site)s."
+
+#: userena/templates/userena/emails/confirmation_email_subject_old.txt:2
+#, python-format
+msgid "A request to change your email address is made at %(site)s."
+msgstr "طُلب تغيير عنوان بريدك الإلكتروني في %(site)s."
+
+#: userena/templates/userena/emails/password_reset_message.html:5
+#, python-format
+msgid ""
+"You're receiving this e-mail because you requested a password reset\n"
+"            for your user account at %(site_name)s"
+msgstr ""
+"تصلك هذه الرسالة لأنك طلبت إعادة ضبط كلمة السر\n"
+"لحسابك في %(site_name)s"
+
+#: userena/templates/userena/emails/password_reset_message.html:9
+#: userena/templates/userena/emails/password_reset_message.txt:5
+msgid "Please go to the following page and choose a new password:"
+msgstr "المرجو التوجّه إلى الصفحة التالية لاختيار كلمة سرّ جديدة:"
+
+#: userena/templates/userena/emails/password_reset_message.html:17
+#, python-format
+msgid "Your username, in case you've forgotten: %(username)s"
+msgstr "اسم المستخدمـ/ـة في حال نسيانه: %(username)s"
+
+#: userena/templates/userena/emails/password_reset_message.txt:2
+#, python-format
+msgid ""
+"You're receiving this e-mail because you requested a password reset\n"
+"for your user account at %(site_name)s"
+msgstr ""
+"تصلك هذه الرسالة لأنك طلبت إعادة ضبط كلمة السر\n"
+"لحسابك في %(site_name)s"
+
+#: userena/templates/userena/emails/password_reset_message.txt:10
+#, python-format
+msgid ""
+"\n"
+"Your username, in case you've forgotten: %(username)s\n"
+msgstr ""
+"\n"
+"اسم المستخدمـ/ـة في حال نسيانه: %(username)s\n"
+
+#: userena/templates/userena/password_complete.html:4
+msgid "Password changed"
+msgstr "تغيّرت كلمة السر"
+
+#: userena/templates/userena/password_complete.html:5
+msgid "Your password has been changed"
+msgstr "تغيّرت كلمة سرّك"
+
+#: userena/templates/userena/password_complete.html:8
+msgid "From now on you can use your new password to signin"
+msgstr "من الآن فصاعدًا يمكنك استخدام كلمة السر الجديدة للدخول"
+
+#: userena/templates/userena/password_form.html:17
+msgid "Change Password"
+msgstr "غيّر كلمة السر"
+
+#: userena/templates/userena/password_reset_complete.html:4
+msgid "Password reset"
+msgstr "إعادة ضبط كلمة السر"
+
+#: userena/templates/userena/password_reset_complete.html:5
+msgid "Your password has been reset"
+msgstr "أعيد ضبط كلمة سرّك"
+
+#: userena/templates/userena/password_reset_complete.html:8
+#, python-format
+msgid ""
+"You can now <a href=\"%(signin_url)s\">signin</a> with your new password."
+msgstr "يمكنك الآن <a href=\"%(signin_url)s\">الدخول</a> بكلمة السر الجديدة."
+
+#: userena/templates/userena/password_reset_confirm_form.html:4
+#: userena/templates/userena/password_reset_confirm_form.html:17
+#: userena/templates/userena/password_reset_form.html:4
+msgid "Reset password"
+msgstr "استعادة كلمة السر"
+
+#: userena/templates/userena/password_reset_confirm_form.html:13
+#: userena/templates/userena/password_reset_form.html:9
+msgid "Reset Password"
+msgstr "استعادة كلمة السر"
+
+#: userena/templates/userena/password_reset_done.html:4
+#: userena/templates/userena/password_reset_done.html:5
+msgid "Password reset email sent"
+msgstr "أرسلت رسالة إعادة ضبط كلمة السر"
+
+#: userena/templates/userena/password_reset_done.html:8
+msgid ""
+"An e-mail has been sent to you which explains how to reset your password."
+msgstr "أُرسلت لك رسالة توضّح كيفية إعادة ضبط كلمة السر."
+
+#: userena/templates/userena/password_reset_form.html:13
+msgid "Send password"
+msgstr "أرسل كلمة السر"
+
+#: userena/templates/userena/profile_detail.html:4
+#, python-format
+msgid "%(username)s's profile."
+msgstr "ملف %(username)s الشخصي."
+
+#: userena/templates/userena/profile_detail.html:15
+msgid "Edit details"
+msgstr "عدّل التفاصيل"
+
+#: userena/templates/userena/profile_detail.html:25
+msgid "Your mugshot"
+msgstr "صورتك"
+
+#: userena/templates/userena/profile_detail.html:29
+msgid "Name"
+msgstr "الاسم"
+
+#: userena/templates/userena/profile_detail.html:37
+msgid "Age"
+msgstr "العمر"
+
+#: userena/templates/userena/profile_detail.html:41
+msgid "Website"
+msgstr "الموقع"
+
+#: userena/templates/userena/profile_detail.html:45
+msgid "Location"
+msgstr "المكان"
+
+#: userena/templates/userena/profile_detail.html:49
+msgid "About me"
+msgstr "عنّي"
+
+#: userena/templates/userena/profile_form.html:4
+msgid "Account setup"
+msgstr "ضبط حسابك"
+
+#: userena/templates/userena/profile_form.html:19
+msgid "Edit Profile"
+msgstr "عدّل الملف الشخصي"
+
+#: userena/templates/userena/profile_form.html:22
+msgid "Save changes"
+msgstr "احفظ التغييرات"
+
+#: userena/templates/userena/profile_list.html:4
+msgid "Profiles"
+msgstr "الملفات الشخصية"
+
+#: userena/templates/userena/profile_list.html:21
+msgid "previous"
+msgstr "السابق"
+
+#: userena/templates/userena/profile_list.html:25
+#, python-format
+msgid ""
+"\n"
+"      Page %(page)s of %(num_pages)s\n"
+"      "
+msgstr ""
+"\n"
+"      صفحة %(page)s من %(num_pages)s\n"
+"      "
+
+#: userena/templates/userena/profile_list.html:31
+msgid "next"
+msgstr "التالي"
+
+#: userena/templates/userena/signin_form.html:4
+#: userena/templates/userena/signin_form.html:10
+#: userena/templates/userena/signin_form.html:27
+msgid "Signin"
+msgstr "الدخول"
+
+#: userena/templates/userena/signin_form.html:28
+msgid "Forgot your password?"
+msgstr "أنسيت كلمة السر؟"
+
+#: userena/templates/userena/signout.html:4
+msgid "Signed out"
+msgstr "تم الخروج"
+
+#: userena/templates/userena/signout.html:5
+msgid "You have been signed out"
+msgstr "سُجّل خروجك"
+
+#: userena/templates/userena/signout.html:8
+msgid "You have been signed out. Till we meet again."
+msgstr "سُجّل خروجك. نلقاك قريبًا."
+
+#: userena/templates/userena/signup_complete.html:4
+msgid "Signup almost done!"
+msgstr "أوشك التسجيل على الاكتمال!"
+
+#: userena/templates/userena/signup_complete.html:6
+#: userena/templates/userena/signup_form.html:4
+#: userena/templates/userena/signup_form.html:10
+#: userena/templates/userena/signup_form.html:27
+msgid "Signup"
+msgstr "التسجيل"
+
+#: userena/templates/userena/signup_complete.html:9
+msgid "Thank you for signing up with us!"
+msgstr "شكرا لتسجيلك معنا!"
+
+#: userena/templates/userena/signup_complete.html:15
+msgid "You can now use the supplied credentials to signin."
+msgstr "يمكنك الآن استخدام البيانات المُزوّدة للدخول."
+
+#: userena/tests/profiles/models.py:11
+msgid "Male"
+msgstr "ذكر"
+
+#: userena/tests/profiles/models.py:11
+msgid "Female"
+msgstr "أنثى"
+
+#: userena/tests/profiles/models.py:22
+msgid "gender"
+msgstr "الجندر"
+
+#: userena/tests/profiles/models.py:24
+msgid "website"
+msgstr "الموقع"
+
+#: userena/tests/profiles/models.py:25
+msgid "location"
+msgstr "المكان"
+
+#: userena/tests/profiles/models.py:26
+msgid "about me"
+msgstr "عنّي"
+
+#: userena/views.py:241
+msgid "Your account has been activated and you have been signed in."
+msgstr "فُعّل حسابك وسُجّل دخولك."
+
+#: userena/views.py:363
+msgid "Your email address has been changed."
+msgstr "عُدّل بريدك الإلكتروني."
+
+#: userena/views.py:533
+msgid "You have been signed in."
+msgstr "سجّلت دخولك."
+
+#: userena/views.py:588
+msgid "You have been signed out."
+msgstr "سجّلت خروجك."
+
+#: userena/views.py:827
+msgid "Your profile has been updated."
+msgstr "حُدّث ملفك الشخصي."
