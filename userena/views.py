@@ -427,7 +427,7 @@ def disabled_account(request,
     account template.
 
     The ``disabled_account`` view has a high bar: it should only be
-    shown if the user has a completed activiation.  Otherwise,
+    shown if the user has a completed activation.  Otherwise,
     redirect to `userena_activation_pending``.
 
     If no ``UserenaSignup`` object can be found for the user, we will
@@ -481,7 +481,7 @@ def disabled_account(request,
 
 def activation_pending(request,
                        username,
-                       template_name="userena/activiation_pending.html",
+                       template_name="userena/activation_pending.html",
                        extra_context=None):
     """
     Checks if the account is not active, if so, returns the
@@ -493,7 +493,7 @@ def activation_pending(request,
 
     :param template_name:
         String defining the name of the template to use. Defaults to
-        ``userena/activiation_pending.html``.
+        ``userena/activation_pending.html``.
 
     **Keyword arguments**
 
@@ -519,9 +519,9 @@ def activation_pending(request,
     except UserenaSignup.DoesNotExist:
         userena = None
 
-    # If we know that the activiation process was completed, but the
+    # If we know that the activation process was completed, but the
     # user is now not active, it is safe to assume that the user was
-    # actually disbaled after completion of activiation.  In that
+    # actually disbaled after completion of activation.  In that
     # case, we will redirec to ``userena_disabled``.
     if userena and userena.activation_complected():
         return redirect(
@@ -627,9 +627,9 @@ def signin(
                 except UserenaSignup.DoesNotExist:
                     userena = None
                 # If the user is inactive, despiting completing the
-                # activiation process, show the 'Account disabled'
+                # activation process, show the 'Account disabled'
                 # page.  Otherwise, show the 'Activation pending'
-                # page to encourge activiation.
+                # page to encourge activation.
                 if userena and userena.activation_complected():
                     return redirect(
                         reverse("userena_disabled",
