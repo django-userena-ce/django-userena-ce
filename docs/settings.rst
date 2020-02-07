@@ -62,6 +62,14 @@ Default: ``2`` (integer)
 The amount of days, before the expiration of an account, that a notification
 get's send out. Warning the user of his coming demise.
 
+USERENA_ACTIVATION_RETRY
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Default: ``False`` (boolean)
+
+A boolean that designates whether a user is allowed to reissue a new
+activation key once the old key is expired.  As the new activation key
+is issued, it is also emailed automatically to the user.
+
 USERENA_ACTIVATED
 ~~~~~~~~~~~~~~~~~
 Default: ``ALREADY_ACTIVATED`` (string)
