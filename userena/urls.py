@@ -97,7 +97,6 @@ urlpatterns = [
     url(
         r"^(?P<username>[\@\.\+\w-]+)/disabled/$",
         userena_views.disabled_account,
-        {"template_name": "userena/disabled.html"},
         name="userena_disabled",
     ),
     # Change password

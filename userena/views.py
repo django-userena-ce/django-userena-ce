@@ -418,16 +418,19 @@ def direct_to_user_template(request, username, template_name, extra_context=None
     )(request)
 
 
-def disabled_account(request, username, template_name, extra_context=None):
+def disabled_account(request,
+                     username,
+                     template_name="userena/disabled.html",
+                     extra_context=None):
     """
-    Checks if the account is disabled, if so, returns the disabled account template.
+    Checks if the account is not active, if so, returns the disabled account template.
 
     :param username:
         String defining the username of the user that made the action.
 
     :param template_name:
         String defining the name of the template to use. Defaults to
-        ``userena/signup_complete.html``.
+        ``userena/disabled.html``.
 
     **Keyword arguments**
 
