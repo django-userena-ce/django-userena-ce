@@ -139,7 +139,7 @@ class SignupFormOnlyEmail(SignupForm):
     """
 
     def __init__(self, *args, **kwargs):
-        super(SignupFormOnlyEmail, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         del self.fields["username"]
 
     def save(self):
@@ -152,7 +152,7 @@ class SignupFormOnlyEmail(SignupForm):
                 break
 
         self.cleaned_data["username"] = username
-        return super(SignupFormOnlyEmail, self).save()
+        return super().save()
 
 
 class SignupFormTos(SignupForm):
@@ -206,7 +206,7 @@ class AuthenticationForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         """ A custom init because we need to change the label if no usernames is used """
-        super(AuthenticationForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         # Dirty hack, somehow the label doesn't get translated without declaring
         # it again here.
         self.fields["remember_me"].label = _("Remember me for %(days)s") % {
@@ -252,7 +252,7 @@ class ChangeEmailForm(forms.Form):
         address.
 
         """
-        super(ChangeEmailForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         if not isinstance(user, get_user_model()):
             raise TypeError(
                 "user must be an instance of %s" % get_user_model().__name__
@@ -291,7 +291,7 @@ class EditProfileForm(forms.ModelForm):
     last_name = forms.CharField(label=_("Last name"), max_length=30, required=False)
 
     def __init__(self, *args, **kw):
-        super(EditProfileForm, self).__init__(*args, **kw)
+        super().__init__(*args, **kw)
         # Put the first and last name at the top
         new_order = [
             ("first_name", self.fields["first_name"]),
@@ -305,7 +305,7 @@ class EditProfileForm(forms.ModelForm):
         exclude = ["user"]
 
     def save(self, force_insert=False, force_update=False, commit=True):
-        profile = super(EditProfileForm, self).save(commit=commit)
+        profile = super().save(commit=commit)
         # Save first and last name
         user = profile.user
         user.first_name = self.cleaned_data["first_name"]

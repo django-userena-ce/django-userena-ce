@@ -36,9 +36,7 @@ class ExtraContextTemplateView(TemplateView):
     extra_context = None
 
     def get_context_data(self, *args, **kwargs):
-        context = super(ExtraContextTemplateView, self).get_context_data(
-            *args, **kwargs
-        )
+        context = super().get_context_data(*args, **kwargs)
         if self.extra_context:
             context.update(self.extra_context)
         return context
@@ -58,7 +56,7 @@ class ProfileListView(ListView):
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
-        context = super(ProfileListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         try:
             page = int(self.request.GET.get("page", None))
         except (TypeError, ValueError):
@@ -591,7 +589,7 @@ class SignoutView(LogoutView, SuccessMessageMixin):
 
     @method_decorator(secure_required)
     def dispatch(self, request, *args, **kwargs):
-        response = super(SignoutView, self).dispatch(request, *args, **kwargs)
+        response = super().dispatch(request, *args, **kwargs)
         userena_signals.account_signout.send(sender=None, user=request.user)
         return response
 
