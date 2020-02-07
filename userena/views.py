@@ -423,7 +423,16 @@ def disabled_account(request,
                      template_name="userena/disabled.html",
                      extra_context=None):
     """
-    Checks if the account is not active, if so, returns the disabled account template.
+    Checks if the account is not active, if so, returns the disabled
+    account template.
+
+    The ``disabled_account`` view has a high bar: it should only be
+    shown if the user has a completed activiation.  Otherwise,
+    redirect to `userena_activation_pending``.
+
+    If no ``UserenaSignup`` object can be found for the user, we will
+    still assume that it was deleted after expiration but not that
+    account was deliberately disabled.
 
     :param username:
         String defining the username of the user that made the action.
@@ -448,10 +457,19 @@ def disabled_account(request,
         Profile of the viewed user.
 
     """
-    user = get_object_or_404(get_user_model(), username__iexact=username)
+    user = get_object_or_404(get_user_model(), username__iexact=username,
+                             is_active=False)
 
-    if user.is_active:
-        raise Http404
+    try:
+        userena = UserenaSignup.objects.get(user=user)
+    except UserenaSignup.DoesNotExist:
+        userena = None
+
+    if not userena or not userena.activation_complected():
+        return redirect(
+            reverse("userena_activation_pending",
+                    kwargs={"username": user.username})
+        )
 
     if not extra_context:
         extra_context = dict()
@@ -461,6 +479,63 @@ def disabled_account(request,
         template_name=template_name, extra_context=extra_context
     )(request)
 
+def activation_pending(request,
+                       username,
+                       template_name="userena/activiation_pending.html",
+                       extra_context=None):
+    """
+    Checks if the account is not active, if so, returns the
+    activation pending template.  This view is meant to take
+    precencent over the ``disabled_account`` view unless we know that the account was disabled after completion.
+
+    :param username:
+        String defining the username of the user that made the action.
+
+    :param template_name:
+        String defining the name of the template to use. Defaults to
+        ``userena/activiation_pending.html``.
+
+    **Keyword arguments**
+
+    ``extra_context``
+        A dictionary containing extra variables that should be passed to the
+        rendered template. The ``account`` key is always the ``User``
+        that completed the action.
+
+    **Extra context**
+
+    ``viewed_user``
+        The currently :class:`User` that is viewed.
+
+    ``profile``
+        Profile of the viewed user.
+
+    """
+    user = get_object_or_404(get_user_model(), username__iexact=username,
+                             is_active=False)
+
+    try:
+        userena = UserenaSignup.objects.get(user=user)
+    except UserenaSignup.DoesNotExist:
+        userena = None
+
+    # If we know that the activiation process was completed, but the
+    # user is now not active, it is safe to assume that the user was
+    # actually disbaled after completion of activiation.  In that
+    # case, we will redirec to ``userena_disabled``.
+    if userena and userena.activation_complected():
+        return redirect(
+            reverse("userena_disabled",
+                    kwargs={"username": user.username})
+        )
+
+    if not extra_context:
+        extra_context = dict()
+    extra_context["viewed_user"] = user
+    extra_context["profile"] = get_user_profile(user=user)
+    return ExtraContextTemplateView.as_view(
+        template_name=template_name, extra_context=extra_context
+    )(request)
 
 @secure_required
 def signin(
@@ -547,9 +622,24 @@ def signin(
                 )
                 return HttpResponseRedirect(redirect_to)
             else:
-                return redirect(
-                    reverse("userena_disabled", kwargs={"username": user.username})
-                )
+                try:
+                    userena = UserenaSignup.objects.get(user=user)
+                except UserenaSignup.DoesNotExist:
+                    userena = None
+                # If the user is inactive, despiting completing the
+                # activiation process, show the 'Account disabled'
+                # page.  Otherwise, show the 'Activation pending'
+                # page to encourge activiation.
+                if userena and userena.activation_complected():
+                    return redirect(
+                        reverse("userena_disabled",
+                                kwargs={"username": user.username})
+                    )
+                else:
+                    return redirect(
+                        reverse("userena_activation_pending",
+                                kwargs={"username": user.username})
+                    )
 
     if not extra_context:
         extra_context = dict()

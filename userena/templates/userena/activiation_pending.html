@@ -1,0 +1,9 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Not activated " %}{% endblock %}
+{% block content_title %}<h2>{% trans "Your account has not been activiated yet" %}</h2>{% endblock %}
+{% block content %}
+<p>{% trans "It seems you have not completed the activiation steps for your accounts." %}</p>
+<p>{% trans "If, for any reason, you are unable to complete the activiation steps, please contact the administrators for assistance." %}</p>
+{% endblock %}
