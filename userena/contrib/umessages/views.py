@@ -31,7 +31,7 @@ class MessageListView(ListView):
     context_object_name = "message_list"
 
     def get_context_data(self, **kwargs):
-        context = super(MessageListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context.update(self.extra_context)
         return context
 
@@ -49,7 +49,7 @@ class MessageDetailListView(MessageListView):
     template_name = "umessages/message_detail.html"
 
     def get_context_data(self, **kwargs):
-        context = super(MessageDetailListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["recipient"] = self.recipient
         return context
 
