@@ -98,8 +98,7 @@ def signin_redirect(redirect=None, user=None):
 
 def generate_nonce():
     """
-    Generates a nonce. Doesn't need to be very secure
-    because it's not used for password checking. We got Django for that.
+    Cryptographically generates a 40 char long nonce.
 
     :return: String containing the nonce.
 
