@@ -46,7 +46,7 @@ class UserenaSignupModelTests(TestCase):
 
         # Check if the correct path is returned
         MUGSHOT_RE = re.compile(
-            "^%(mugshot_path)s[a-f0-9]{10}.png$"
+            "^%(mugshot_path)s[\w]{10}.png$"
             % {"mugshot_path": userena_settings.USERENA_MUGSHOT_PATH}
         )
 

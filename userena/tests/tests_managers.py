@@ -44,9 +44,9 @@ class UserenaManagerTests(TestCase):
         # User should be inactive
         self.assertFalse(new_user.is_active)
 
-        # User has a valid SHA1 activation key
+        # User has a valid activation key
         self.assertTrue(
-            re.match("^[a-f0-9]{40}$", new_user.userena_signup.activation_key)
+            re.match("^[\w]{40}$", new_user.userena_signup.activation_key)
         )
 
         # User now has an profile.
@@ -159,10 +159,10 @@ class UserenaManagerTests(TestCase):
         user = User.objects.get(pk=1)
         user.userena_signup.change_email(new_email)
 
-        # Verify email with wrong SHA1
+        # Verify email with wrong nonce
         self.assertFalse(UserenaSignup.objects.confirm_email("sha1"))
 
-        # Correct SHA1, but non-existend in db.
+        # Correct nonce, but non-existent in db.
         self.assertFalse(UserenaSignup.objects.confirm_email(10 * "a1b2"))
 
     def test_delete_expired_users(self):

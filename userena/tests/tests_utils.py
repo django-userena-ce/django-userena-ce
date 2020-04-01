@@ -10,7 +10,7 @@ from userena.utils import (
     signin_redirect,
     get_profile_model,
     get_protocol,
-    generate_sha1,
+    generate_nonce,
 )
 from userena.compat import SiteProfileNotAvailable
 
@@ -20,17 +20,17 @@ class UtilsTests(TestCase):
 
     fixtures = ["users"]
 
-    def test_generate_sha(self):
-        s1 = six.u("\xc5se")
-        s2 = six.u("\xd8ystein")
-        s3 = six.u("\xc6gir")
-        h1 = generate_sha1(s1)
-        h2 = generate_sha1(s2)
-        h3 = generate_sha1(s3)
-        # Check valid SHA1 activation key
-        self.assertTrue(re.match("^[a-f0-9]{40}$", h1[1]))
-        self.assertTrue(re.match("^[a-f0-9]{40}$", h2[1]))
-        self.assertTrue(re.match("^[a-f0-9]{40}$", h3[1]))
+    def test_generate_nonce(self):
+        h1 = generate_nonce()
+        h2 = generate_nonce()
+        h3 = generate_nonce()
+        # Check valid activation key
+        self.assertTrue(re.match("^[\w]{40}$", h1))
+        self.assertTrue(re.match("^[\w]{40}$", h2))
+        self.assertTrue(re.match("^[\w]{40}$", h3))
+        self.assertNotEqual(h1, h2)
+        self.assertNotEqual(h2, h3)
+        self.assertNotEqual(h1, h3)
 
     def test_get_gravatar(self):
         template = "s=%(size)s&d=%(type)s"

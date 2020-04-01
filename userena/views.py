@@ -185,18 +185,16 @@ def activate(
     """
     Activate a user with an activation key.
 
-    The key is a SHA1 string. When the SHA1 is found with an
+    The key is a nonce. When the nonce is found with an
     :class:`UserenaSignup`, the :class:`User` of that account will be
     activated.  After a successful activation the view will redirect to
-    ``success_url``.  If the SHA1 is not found, the user will be shown the
+    ``success_url``.  If the nonce is not found, the user will be shown the
     ``template_name`` template displaying a fail message.
-    If the SHA1 is found but expired, ``retry_template_name`` is used instead,
+    If the nonce is found but expired, ``retry_template_name`` is used instead,
     so the user can proceed to :func:`activate_retry` to get a new activation key.
 
     :param activation_key:
-        String of a SHA1 string of 40 characters long. A SHA1 is always 160bit
-        long, with 4 bits per character this makes it --160/4-- 40 characters
-        long.
+        Cryptographically generated string, 40 characters long
 
     :param template_name:
         String containing the template name that is used when the
@@ -285,9 +283,7 @@ def activate_retry(
     :func:`activate` for error message display.
 
     :param activation_key:
-        String of a SHA1 string of 40 characters long. A SHA1 is always 160bit
-        long, with 4 bits per character this makes it --160/4-- 40 characters
-        long.
+        Cryptographically generated string, 40 characters long.
 
     :param template_name:
         String containing the template name that is used when new
@@ -336,7 +332,7 @@ def email_confirm(
     ``template_name``.
 
     :param confirmation_key:
-        String with a SHA1 representing the confirmation key used to verify a
+        String with representing the confirmation key used to verify a
         new email address.
 
     :param template_name:
