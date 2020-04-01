@@ -159,3 +159,5 @@ LOGGING = {
 
 # Needed for Django guardian
 ANONYMOUS_USER_NAME = 'AnonymousUser'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
