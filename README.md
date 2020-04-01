@@ -18,7 +18,7 @@ can use it commercially for free!
 
 Software | Versions
 ---|---
-Python | 3.5, 3.6, 3.7, 3.8
+Python | 3.6, 3.7, 3.8
 Django | 2.2, 3.0
 Django Guardian | \>2.0
 

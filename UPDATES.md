@@ -1,5 +1,9 @@
 # UPDATES
 
+## Version 6.0.0 (Unreleased)
+
+- Dropped support for Python 3.5
+
 ## Version 5.1.0
 
 - Increased max_length of the language codes to 8 to support BCP47. If you use
