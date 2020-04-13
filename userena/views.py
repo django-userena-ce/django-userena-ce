@@ -432,10 +432,9 @@ def direct_to_user_template(request, username, template_name, extra_context=None
     )(request)
 
 
-def disabled_account(request,
-                     username,
-                     template_name="userena/disabled.html",
-                     extra_context=None):
+def disabled_account(
+    request, username, template_name="userena/disabled.html", extra_context=None
+):
     """
     Checks if the account is not active, if so, returns the disabled
     account template.
@@ -471,8 +470,9 @@ def disabled_account(request,
         Profile of the viewed user.
 
     """
-    user = get_object_or_404(get_user_model(), username__iexact=username,
-                             is_active=False)
+    user = get_object_or_404(
+        get_user_model(), username__iexact=username, is_active=False
+    )
 
     try:
         userena = UserenaSignup.objects.get(user=user)
@@ -481,8 +481,7 @@ def disabled_account(request,
 
     if not userena or not userena.activation_complected():
         return redirect(
-            reverse("userena_activation_pending",
-                    kwargs={"username": user.username})
+            reverse("userena_activation_pending", kwargs={"username": user.username})
         )
 
     if not extra_context:
@@ -493,14 +492,15 @@ def disabled_account(request,
         template_name=template_name, extra_context=extra_context
     )(request)
 
-def activation_pending(request,
-                       username,
-                       template_name="userena/activation_pending.html",
-                       extra_context=None):
+
+def activation_pending(
+    request, username, template_name="userena/activate_pending.html", extra_context=None
+):
     """
     Checks if the account is not active, if so, returns the
     activation pending template.  This view is meant to take
-    precencent over the ``disabled_account`` view unless we know that the account was disabled after completion.
+    precedent over the ``disabled_account`` view unless we know that the
+    account was disabled after completion.
 
     :param username:
         String defining the username of the user that made the action.
@@ -525,8 +525,9 @@ def activation_pending(request,
         Profile of the viewed user.
 
     """
-    user = get_object_or_404(get_user_model(), username__iexact=username,
-                             is_active=False)
+    user = get_object_or_404(
+        get_user_model(), username__iexact=username, is_active=False
+    )
 
     try:
         userena = UserenaSignup.objects.get(user=user)
@@ -535,13 +536,10 @@ def activation_pending(request,
 
     # If we know that the activation process was completed, but the
     # user is now not active, it is safe to assume that the user was
-    # actually disbaled after completion of activation.  In that
-    # case, we will redirec to ``userena_disabled``.
+    # actually disabled after completion of activation.  In that
+    # case, we will redirect to ``userena_disabled``.
     if userena and userena.activation_complected():
-        return redirect(
-            reverse("userena_disabled",
-                    kwargs={"username": user.username})
-        )
+        return redirect(reverse("userena_disabled", kwargs={"username": user.username}))
 
     if not extra_context:
         extra_context = dict()
@@ -550,6 +548,7 @@ def activation_pending(request,
     return ExtraContextTemplateView.as_view(
         template_name=template_name, extra_context=extra_context
     )(request)
+
 
 @secure_required
 def signin(
@@ -646,13 +645,14 @@ def signin(
                 # page to encourge activation.
                 if userena and userena.activation_complected():
                     return redirect(
-                        reverse("userena_disabled",
-                                kwargs={"username": user.username})
+                        reverse("userena_disabled", kwargs={"username": user.username})
                     )
                 else:
                     return redirect(
-                        reverse("userena_activation_pending",
-                                kwargs={"username": user.username})
+                        reverse(
+                            "userena_activation_pending",
+                            kwargs={"username": user.username},
+                        )
                     )
 
     if not extra_context:
