@@ -97,8 +97,13 @@ urlpatterns = [
     url(
         r"^(?P<username>[\@\.\+\w-]+)/disabled/$",
         userena_views.disabled_account,
-        {"template_name": "userena/disabled.html"},
         name="userena_disabled",
+    ),
+    # Activation pending
+    url(
+        r"^(?P<username>[\@\.\+\w-]+)/pending/$",
+        userena_views.activation_pending,
+        name="userena_activation_pending",
     ),
     # Change password
     url(
