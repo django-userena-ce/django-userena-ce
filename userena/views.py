@@ -1,14 +1,14 @@
 import warnings
 
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout, REDIRECT_FIELD_NAME
+from django.contrib.auth import REDIRECT_FIELD_NAME, authenticate, login, logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import PermissionDenied
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
@@ -21,14 +21,14 @@ from userena import signals as userena_signals
 from userena.decorators import secure_required
 from userena.forms import (
     ActivationForm,
-    SignupForm,
-    SignupFormOnlyEmail,
     AuthenticationForm,
     ChangeEmailForm,
     EditProfileForm,
+    SignupForm,
+    SignupFormOnlyEmail,
 )
 from userena.models import UserenaSignup
-from userena.utils import signin_redirect, get_profile_model, get_user_profile
+from userena.utils import get_profile_model, get_user_profile, signin_redirect
 
 
 class ExtraContextTemplateView(TemplateView):
