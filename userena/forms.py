@@ -313,3 +313,7 @@ class EditProfileForm(forms.ModelForm):
         user.save()
 
         return profile
+
+class ActivationForm(forms.Form):
+    """Form for activating an account."""
+    pass

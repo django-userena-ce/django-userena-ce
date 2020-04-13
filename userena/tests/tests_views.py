@@ -34,7 +34,16 @@ class UserenaViewsTests(TestCase):
             },
         )
         user = User.objects.get(email="alice@example.com")
+
         response = self.client.get(
+            reverse(
+                "userena_activate",
+                kwargs={"activation_key": user.userena_signup.activation_key},
+            )
+        )
+        self.assertContains(response, "Activate your account")
+
+        response = self.client.post(
             reverse(
                 "userena_activate",
                 kwargs={"activation_key": user.userena_signup.activation_key},
@@ -65,7 +74,7 @@ class UserenaViewsTests(TestCase):
         user = User.objects.get(email="alice@example.com")
         user.date_joined = timezone.now() - timedelta(days=30)
         user.save()
-        response = self.client.get(
+        response = self.client.post(
             reverse(
                 "userena_activate",
                 kwargs={"activation_key": user.userena_signup.activation_key},
@@ -111,7 +120,7 @@ class UserenaViewsTests(TestCase):
         self.assertEqual(mail.outbox[1].to, ["alice@example.com"])
         self.assertTrue(mail.outbox[1].body.find("activate your account ") > -1)
 
-        response = self.client.get(
+        response = self.client.post(
             reverse(
                 "userena_activate",
                 kwargs={"activation_key": user.userena_signup.activation_key},
@@ -131,7 +140,7 @@ class UserenaViewsTests(TestCase):
         A ``GET`` to the activation view with a wrong ``activation_key``.
 
         """
-        response = self.client.get(
+        response = self.client.post(
             reverse("userena_activate", kwargs={"activation_key": "fake"})
         )
         self.assertEqual(response.status_code, 200)

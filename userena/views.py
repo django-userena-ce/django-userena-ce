@@ -20,6 +20,7 @@ from userena import settings as userena_settings
 from userena import signals as userena_signals
 from userena.decorators import secure_required
 from userena.forms import (
+    ActivationForm,
     SignupForm,
     SignupFormOnlyEmail,
     AuthenticationForm,
@@ -177,6 +178,8 @@ def signup(
 def activate(
     request,
     activation_key,
+    activation_form=ActivationForm,
+    template_name="userena/activate_form.html",
     fail_template_name="userena/activate_fail.html",
     retry_template_name="userena/activate_retry.html",
     success_url=None,
@@ -195,6 +198,14 @@ def activate(
 
     :param activation_key:
         Cryptographically generated string, 40 characters long
+
+    :param activation_form:
+        Form to use for activating the user. Defaults to
+        :class:`ActivationForm` supplied by userena.
+
+    :param template_name:
+        String defining the name of the template to use. Defaults to
+        ``userena/activate_form.html``.
 
     :param fail_template_name:
         String containing the template name that is used when the
@@ -220,48 +231,60 @@ def activate(
     if not extra_context:
         extra_context = dict()
 
-    try:
-        if (
-            not UserenaSignup.objects.check_expired_activation(activation_key)
-            or not userena_settings.USERENA_ACTIVATION_RETRY
-        ):
-            user = UserenaSignup.objects.activate_user(activation_key)
-            if user:
-                # Sign the user in.
-                auth_user = authenticate(
-                    identification=user.email, check_password=False
-                )
-                login(request, auth_user)
+    form = activation_form()
 
-                if userena_settings.USERENA_USE_MESSAGES:
-                    messages.success(
-                        request,
-                        _(
-                            "Your account has been activated and you have been signed in."
-                        ),
-                        fail_silently=True,
-                    )
+    if request.method == "POST":
+        form = activation_form(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                if (
+                    not UserenaSignup.objects.check_expired_activation(activation_key)
+                    or not userena_settings.USERENA_ACTIVATION_RETRY
+                ):
+                    user = UserenaSignup.objects.activate_user(activation_key)
+                    if user:
+                        # Sign the user in.
+                        auth_user = authenticate(
+                            identification=user.email, check_password=False
+                        )
+                        login(request, auth_user)
 
-                if success_url:
-                    redirect_to = success_url % {"username": user.username}
+                        if userena_settings.USERENA_USE_MESSAGES:
+                            messages.success(
+                                request,
+                                _(
+                                    "Your account has been activated and you have been signed in."
+                                ),
+                                fail_silently=True,
+                            )
+
+                        if success_url:
+                            redirect_to = success_url % {"username": user.username}
+                        else:
+                            redirect_to = reverse(
+                                "userena_profile_detail",
+                                kwargs={"username": user.username},
+                            )
+                        return redirect(redirect_to)
+                    else:
+                        return ExtraContextTemplateView.as_view(
+                            template_name=fail_template_name,
+                            extra_context=extra_context,
+                        )(request)
                 else:
-                    redirect_to = reverse(
-                        "userena_profile_detail", kwargs={"username": user.username}
-                    )
-                return redirect(redirect_to)
-            else:
+                    extra_context["activation_key"] = activation_key
+                    return ExtraContextTemplateView.as_view(
+                        template_name=retry_template_name, extra_context=extra_context
+                    )(request)
+            except UserenaSignup.DoesNotExist:
                 return ExtraContextTemplateView.as_view(
                     template_name=fail_template_name, extra_context=extra_context
                 )(request)
-        else:
-            extra_context["activation_key"] = activation_key
-            return ExtraContextTemplateView.as_view(
-                template_name=retry_template_name, extra_context=extra_context
-            )(request)
-    except UserenaSignup.DoesNotExist:
-        return ExtraContextTemplateView.as_view(
-            template_name=fail_template_name, extra_context=extra_context
-        )(request)
+
+    extra_context.update({"form": form})
+    return ExtraContextTemplateView.as_view(
+        template_name=template_name, extra_context=extra_context
+    )(request)
 
 
 @secure_required
