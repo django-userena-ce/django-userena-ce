@@ -102,7 +102,7 @@ msgid "Signup"
 msgstr "Inschrijven"
 
 #: templates/base.html:67
-msgid "Fork me hard"
+msgid "Fork me"
 msgstr "Fork me!"
 
 #: templates/base.html:74

@@ -15,10 +15,10 @@ signin_redirect
 
 .. autofunction:: userena.utils.signin_redirect
 
-generate_sha1
+generate_nonce
 -------------
 
-.. autofunction:: userena.utils.generate_sha1
+.. autofunction:: userena.utils.generate_nonce
 
 get_profile_model
 -----------------

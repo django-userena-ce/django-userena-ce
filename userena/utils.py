@@ -1,10 +1,10 @@
 import datetime
-import random
-from hashlib import sha1, md5
+import secrets
+from hashlib import md5
+from string import ascii_letters, digits
 
 from django.apps import apps
 from django.conf import settings
-from django.utils.encoding import smart_bytes
 from django.utils.functional import keep_lazy_text
 from django.utils.http import urlencode
 from django.utils.text import Truncator
@@ -96,31 +96,17 @@ def signin_redirect(redirect=None, user=None):
         return settings.LOGIN_REDIRECT_URL
 
 
-def generate_sha1(string, salt=None):
+def generate_nonce():
     """
-    Generates a sha1 hash for supplied string. Doesn't need to be very secure
-    because it's not used for password checking. We got Django for that.
+    Cryptographically generates a 40 char long nonce.
 
-    :param string:
-        The string that needs to be encrypted.
-
-    :param salt:
-        Optionally define your own salt. If none is supplied, will use a random
-        string of 5 characters.
-
-    :return: Tuple containing the salt and hash.
+    :return: String containing the nonce.
 
     """
-    if not isinstance(string, str):
-        string = str(string)
+    alphabet = ascii_letters + digits
+    nonce = "".join(secrets.choice(alphabet) for _ in range(40))
 
-    if not salt:
-        salt = sha1(str(random.random()).encode("utf-8")).hexdigest()[:5]
-
-    salted_bytes = smart_bytes(salt) + smart_bytes(string)
-    hash_ = sha1(salted_bytes).hexdigest()
-
-    return salt, hash_
+    return nonce
 
 
 def get_profile_model():

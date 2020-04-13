@@ -1,0 +1,21 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Activate your account" %}{% endblock %}
+
+{% block content %}
+
+    <form id="activationForm" action="" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend>{% trans "Activate your account" %}</legend>
+            {{ form.as_p }}
+        </fieldset>
+        <input type="submit" value="{% trans "Click here to activate your account" %}"/>
+    </form>
+
+    <script type="text/javascript">
+        document.getElementById("activationForm").submit();
+    </script>
+
+{% endblock %}

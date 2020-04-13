@@ -20,6 +20,7 @@ from userena import settings as userena_settings
 from userena import signals as userena_signals
 from userena.decorators import secure_required
 from userena.forms import (
+    ActivationForm,
     SignupForm,
     SignupFormOnlyEmail,
     AuthenticationForm,
@@ -177,7 +178,9 @@ def signup(
 def activate(
     request,
     activation_key,
-    template_name="userena/activate_fail.html",
+    activation_form=ActivationForm,
+    template_name="userena/activate_form.html",
+    fail_template_name="userena/activate_fail.html",
     retry_template_name="userena/activate_retry.html",
     success_url=None,
     extra_context=None,
@@ -185,20 +188,26 @@ def activate(
     """
     Activate a user with an activation key.
 
-    The key is a SHA1 string. When the SHA1 is found with an
+    The key is a nonce. When the nonce is found with an
     :class:`UserenaSignup`, the :class:`User` of that account will be
     activated.  After a successful activation the view will redirect to
-    ``success_url``.  If the SHA1 is not found, the user will be shown the
+    ``success_url``.  If the nonce is not found, the user will be shown the
     ``template_name`` template displaying a fail message.
-    If the SHA1 is found but expired, ``retry_template_name`` is used instead,
+    If the nonce is found but expired, ``retry_template_name`` is used instead,
     so the user can proceed to :func:`activate_retry` to get a new activation key.
 
     :param activation_key:
-        String of a SHA1 string of 40 characters long. A SHA1 is always 160bit
-        long, with 4 bits per character this makes it --160/4-- 40 characters
-        long.
+        Cryptographically generated string, 40 characters long
+
+    :param activation_form:
+        Form to use for activating the user. Defaults to
+        :class:`ActivationForm` supplied by userena.
 
     :param template_name:
+        String defining the name of the template to use. Defaults to
+        ``userena/activate_form.html``.
+
+    :param fail_template_name:
         String containing the template name that is used when the
         ``activation_key`` is invalid and the activation fails. Defaults to
         ``userena/activate_fail.html``.
@@ -219,54 +228,63 @@ def activate(
         context. Default to an empty dictionary.
 
     """
-    try:
-        if (
-            not UserenaSignup.objects.check_expired_activation(activation_key)
-            or not userena_settings.USERENA_ACTIVATION_RETRY
-        ):
-            user = UserenaSignup.objects.activate_user(activation_key)
-            if user:
-                # Sign the user in.
-                auth_user = authenticate(
-                    identification=user.email, check_password=False
-                )
-                login(request, auth_user)
+    if not extra_context:
+        extra_context = dict()
 
-                if userena_settings.USERENA_USE_MESSAGES:
-                    messages.success(
-                        request,
-                        _(
-                            "Your account has been activated and you have been signed in."
-                        ),
-                        fail_silently=True,
-                    )
+    form = activation_form()
 
-                if success_url:
-                    redirect_to = success_url % {"username": user.username}
+    if request.method == "POST":
+        form = activation_form(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                if (
+                    not UserenaSignup.objects.check_expired_activation(activation_key)
+                    or not userena_settings.USERENA_ACTIVATION_RETRY
+                ):
+                    user = UserenaSignup.objects.activate_user(activation_key)
+                    if user:
+                        # Sign the user in.
+                        auth_user = authenticate(
+                            identification=user.email, check_password=False
+                        )
+                        login(request, auth_user)
+
+                        if userena_settings.USERENA_USE_MESSAGES:
+                            messages.success(
+                                request,
+                                _(
+                                    "Your account has been activated and you have been signed in."
+                                ),
+                                fail_silently=True,
+                            )
+
+                        if success_url:
+                            redirect_to = success_url % {"username": user.username}
+                        else:
+                            redirect_to = reverse(
+                                "userena_profile_detail",
+                                kwargs={"username": user.username},
+                            )
+                        return redirect(redirect_to)
+                    else:
+                        return ExtraContextTemplateView.as_view(
+                            template_name=fail_template_name,
+                            extra_context=extra_context,
+                        )(request)
                 else:
-                    redirect_to = reverse(
-                        "userena_profile_detail", kwargs={"username": user.username}
-                    )
-                return redirect(redirect_to)
-            else:
-                if not extra_context:
-                    extra_context = dict()
+                    extra_context["activation_key"] = activation_key
+                    return ExtraContextTemplateView.as_view(
+                        template_name=retry_template_name, extra_context=extra_context
+                    )(request)
+            except UserenaSignup.DoesNotExist:
                 return ExtraContextTemplateView.as_view(
-                    template_name=template_name, extra_context=extra_context
+                    template_name=fail_template_name, extra_context=extra_context
                 )(request)
-        else:
-            if not extra_context:
-                extra_context = dict()
-            extra_context["activation_key"] = activation_key
-            return ExtraContextTemplateView.as_view(
-                template_name=retry_template_name, extra_context=extra_context
-            )(request)
-    except UserenaSignup.DoesNotExist:
-        if not extra_context:
-            extra_context = dict()
-        return ExtraContextTemplateView.as_view(
-            template_name=template_name, extra_context=extra_context
-        )(request)
+
+    extra_context.update({"form": form})
+    return ExtraContextTemplateView.as_view(
+        template_name=template_name, extra_context=extra_context
+    )(request)
 
 
 @secure_required
@@ -285,9 +303,7 @@ def activate_retry(
     :func:`activate` for error message display.
 
     :param activation_key:
-        String of a SHA1 string of 40 characters long. A SHA1 is always 160bit
-        long, with 4 bits per character this makes it --160/4-- 40 characters
-        long.
+        Cryptographically generated string, 40 characters long.
 
     :param template_name:
         String containing the template name that is used when new
@@ -336,7 +352,7 @@ def email_confirm(
     ``template_name``.
 
     :param confirmation_key:
-        String with a SHA1 representing the confirmation key used to verify a
+        String with representing the confirmation key used to verify a
         new email address.
 
     :param template_name:

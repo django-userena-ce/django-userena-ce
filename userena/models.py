@@ -10,7 +10,7 @@ from userena import settings as userena_settings
 from userena.managers import UserenaManager, UserenaBaseProfileManager
 from userena.utils import (
     get_gravatar,
-    generate_sha1,
+    generate_nonce,
     get_protocol,
     get_datetime_now,
     user_model_label,
@@ -30,7 +30,6 @@ def upload_to_mugshot(instance, filename):
 
     """
     extension = filename.split(".")[-1].lower()
-    salt, hash = generate_sha1(instance.pk)
     path = userena_settings.USERENA_MUGSHOT_PATH % {
         "username": instance.user.username,
         "id": instance.user.id,
@@ -39,7 +38,7 @@ def upload_to_mugshot(instance, filename):
     }
     return "%(path)s%(hash)s.%(extension)s" % {
         "path": path,
-        "hash": hash[:10],
+        "hash": generate_nonce()[:10],
         "extension": extension,
     }
 
@@ -114,8 +113,7 @@ class UserenaSignup(models.Model):
         """
         self.email_unconfirmed = email
 
-        salt, hash = generate_sha1(self.user.username)
-        self.email_confirmation_key = hash
+        self.email_confirmation_key = generate_nonce()
         self.email_confirmation_key_created = get_datetime_now()
         self.save()
 

@@ -10,7 +10,7 @@ from django.conf import settings
 
 from userena import settings as userena_settings
 from userena.utils import (
-    generate_sha1,
+    generate_nonce,
     get_profile_model,
     get_datetime_now,
     get_user_profile,
@@ -22,7 +22,7 @@ from guardian.shortcuts import assign_perm, get_perms
 
 import re
 
-SHA1_RE = re.compile("^[a-f0-9]{40}$")
+NONCE_RE = re.compile("^[\w]{40}$")
 
 ASSIGNED_PERMISSIONS = {
     "profile": (
@@ -94,12 +94,11 @@ class UserenaManager(UserManager):
         """
         if isinstance(user.username, str):
             user.username = smart_str(user.username)
-        salt, activation_key = generate_sha1(user.username)
 
         try:
             profile = self.get(user=user)
         except self.model.DoesNotExist:
-            profile = self.create(user=user, activation_key=activation_key)
+            profile = self.create(user=user, activation_key=generate_nonce())
         return profile
 
     def reissue_activation(self, activation_key):
@@ -108,7 +107,7 @@ class UserenaManager(UserManager):
         users let the previous key expire.
 
         :param activation_key:
-            String containing the secret SHA1 activation key.
+            String containing the secret nonce activation key.
 
         """
         try:
@@ -116,8 +115,7 @@ class UserenaManager(UserManager):
         except self.model.DoesNotExist:
             return False
         try:
-            salt, new_activation_key = generate_sha1(userena.user.username)
-            userena.activation_key = new_activation_key
+            userena.activation_key = generate_nonce()
             userena.save(using=self._db)
             userena.user.date_joined = get_datetime_now()
             userena.user.save(using=self._db)
@@ -134,13 +132,13 @@ class UserenaManager(UserManager):
         return it. Also sends the ``activation_complete`` signal.
 
         :param activation_key:
-            String containing the secret SHA1 for a valid activation.
+            String containing the secret nonce for a valid activation.
 
         :return:
             The newly activated :class:`User` or ``False`` if not successful.
 
         """
-        if SHA1_RE.search(activation_key):
+        if NONCE_RE.search(activation_key):
             try:
                 userena = self.get(activation_key=activation_key)
             except self.model.DoesNotExist:
@@ -166,13 +164,13 @@ class UserenaManager(UserManager):
          ``activation_key`` is not a valid string
 
         :param activation_key:
-            String containing the secret SHA1 for a valid activation.
+            String containing the secret nonce for a valid activation.
 
         :return:
             True if the ket has expired, False if still valid.
 
         """
-        if SHA1_RE.search(activation_key):
+        if NONCE_RE.search(activation_key):
             userena = self.get(activation_key=activation_key)
             return userena.activation_key_expired()
         raise self.model.DoesNotExist
@@ -187,13 +185,13 @@ class UserenaManager(UserManager):
         invalid. Also sends the ``confirmation_complete`` signal.
 
         :param confirmation_key:
-            String containing the secret SHA1 that is used for verification.
+            String containing the secret nonce that is used for verification.
 
         :return:
             The verified :class:`User` or ``False`` if not successful.
 
         """
-        if SHA1_RE.search(confirmation_key):
+        if NONCE_RE.search(confirmation_key):
             try:
                 userena = self.get(
                     email_confirmation_key=confirmation_key,
