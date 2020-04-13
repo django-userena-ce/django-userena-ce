@@ -177,7 +177,7 @@ def signup(
 def activate(
     request,
     activation_key,
-    template_name="userena/activate_fail.html",
+    fail_template_name="userena/activate_fail.html",
     retry_template_name="userena/activate_retry.html",
     success_url=None,
     extra_context=None,
@@ -196,7 +196,7 @@ def activate(
     :param activation_key:
         Cryptographically generated string, 40 characters long
 
-    :param template_name:
+    :param fail_template_name:
         String containing the template name that is used when the
         ``activation_key`` is invalid and the activation fails. Defaults to
         ``userena/activate_fail.html``.
@@ -217,6 +217,9 @@ def activate(
         context. Default to an empty dictionary.
 
     """
+    if not extra_context:
+        extra_context = dict()
+
     try:
         if (
             not UserenaSignup.objects.check_expired_activation(activation_key)
@@ -247,23 +250,17 @@ def activate(
                     )
                 return redirect(redirect_to)
             else:
-                if not extra_context:
-                    extra_context = dict()
                 return ExtraContextTemplateView.as_view(
-                    template_name=template_name, extra_context=extra_context
+                    template_name=fail_template_name, extra_context=extra_context
                 )(request)
         else:
-            if not extra_context:
-                extra_context = dict()
             extra_context["activation_key"] = activation_key
             return ExtraContextTemplateView.as_view(
                 template_name=retry_template_name, extra_context=extra_context
             )(request)
     except UserenaSignup.DoesNotExist:
-        if not extra_context:
-            extra_context = dict()
         return ExtraContextTemplateView.as_view(
-            template_name=template_name, extra_context=extra_context
+            template_name=fail_template_name, extra_context=extra_context
         )(request)
 
 
