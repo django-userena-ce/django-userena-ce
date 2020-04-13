@@ -22,7 +22,7 @@ from guardian.shortcuts import assign_perm, get_perms
 
 import re
 
-NONCE_RE = re.compile("^[\w]{40}$")
+NONCE_RE = re.compile(r"^[\w]{40}$")
 
 ASSIGNED_PERMISSIONS = {
     "profile": (

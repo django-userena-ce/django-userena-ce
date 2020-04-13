@@ -25,9 +25,9 @@ class UtilsTests(TestCase):
         h2 = generate_nonce()
         h3 = generate_nonce()
         # Check valid activation key
-        self.assertTrue(re.match("^[\w]{40}$", h1))
-        self.assertTrue(re.match("^[\w]{40}$", h2))
-        self.assertTrue(re.match("^[\w]{40}$", h3))
+        self.assertTrue(re.match(r"^[\w]{40}$", h1))
+        self.assertTrue(re.match(r"^[\w]{40}$", h2))
+        self.assertTrue(re.match(r"^[\w]{40}$", h3))
         self.assertNotEqual(h1, h2)
         self.assertNotEqual(h2, h3)
         self.assertNotEqual(h1, h3)
