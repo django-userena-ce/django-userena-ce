@@ -21,7 +21,7 @@ class UserenaViewsTests(TestCase):
     fixtures = ["users", "profiles"]
 
     def test_valid_activation(self):
-        """ A ``GET`` to the activation view """
+        """ A ``POST`` to the activation view """
         # First, register an account.
         self.client.post(
             reverse("userena_signup"),
@@ -365,6 +365,30 @@ class UserenaViewsTests(TestCase):
 
         self.assertRedirects(
             response, reverse("userena_disabled", kwargs={"username": user.username})
+        )
+
+    def test_signin_unactivated(self):
+        self.client.post(
+            reverse("userena_signup"),
+            data={
+                "username": "alice",
+                "email": "alice@example.com",
+                "password1": "swordfish",
+                "password2": "swordfish",
+                "tos": "on",
+            },
+        )
+
+        user = User.objects.get(email="alice@example.com")
+
+        response = self.client.post(
+            reverse("userena_signin"),
+            data={"identification": user.email, "password": "swordfish"},
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("userena_activate_pending", kwargs={"username": user.username}),
         )
 
     def test_signin_view_success(self):

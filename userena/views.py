@@ -441,7 +441,7 @@ def disabled_account(
 
     The ``disabled_account`` view has a high bar: it should only be
     shown if the user has a completed activation.  Otherwise,
-    redirect to `userena_activation_pending``.
+    redirect to `userena_activate_pending``.
 
     If no ``UserenaSignup`` object can be found for the user, we will
     still assume that it was deleted after expiration but not that
@@ -481,7 +481,7 @@ def disabled_account(
 
     if userena is not None and not userena.activation_completed:
         return redirect(
-            reverse("userena_activation_pending", kwargs={"username": user.username})
+            reverse("userena_activate_pending", kwargs={"username": user.username})
         )
 
     if not extra_context:
@@ -493,7 +493,7 @@ def disabled_account(
     )(request)
 
 
-def activation_pending(
+def activate_pending(
     request, username, template_name="userena/activate_pending.html", extra_context=None
 ):
     """
@@ -640,7 +640,7 @@ def signin(
                 else:
                     return redirect(
                         reverse(
-                            "userena_activation_pending",
+                            "userena_activate_pending",
                             kwargs={"username": user.username},
                         )
                     )

@@ -2,7 +2,7 @@
 
 ## Version 6.0.0 (Unreleased)
 
-This version includes 1 new view (`userena_activation_pending`) and two new templates (`"userena/activate_pending.html"` and `"userena/activate_form.html"`)
+This version includes 1 new view (`userena_activate_pending`) and two new templates (`"userena/activate_pending.html"` and `"userena/activate_form.html"`)
 
 Please note that the translation files have not been updated for this release - contributions welcome!
 
