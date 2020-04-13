@@ -4,7 +4,7 @@ Django accounts management made easy.
 
 default_app_config = "userena.apps.UserenaConfig"
 
-VERSION = (5, 1, 0)
+VERSION = (6, 0, 0)
 
 __version__ = ".".join((str(each) for each in VERSION[:4]))
 
