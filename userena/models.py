@@ -150,7 +150,8 @@ class UserenaSignup(models.Model):
         mailer.generate_mail("confirmation", "_new")
         mailer.send_mail(self.email_unconfirmed)
 
-    def activation_complected(self):
+    @property
+    def activation_completed(self):
         return self.activation_key == userena_settings.USERENA_ACTIVATED
 
     def activation_key_expired(self):
@@ -169,8 +170,7 @@ class UserenaSignup(models.Model):
             days=userena_settings.USERENA_ACTIVATION_DAYS
         )
         expiration_date = self.user.date_joined + expiration_days
-        if self.activation_complected() or \
-           get_datetime_now() >= expiration_date:
+        if self.activation_completed or (get_datetime_now() >= expiration_date):
             return True
         return False
 

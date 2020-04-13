@@ -5,7 +5,6 @@
 {% block content_title %}<h2>{% trans "Account not activated" %}</h2>{% endblock %}
 
 {% block content %}
-<p>{% trans "Your account has not been activiated yet, please check your email for the activation link." %}</p>
-<p><a href="{% url 'userena_activate_retry' activation_key %}">{% trans "Request a new activation link." %}</a></p>
+<p>{% trans "You have not confirmed your email address yet, please check your email for the activation link." %}</p>
 <p>{% trans "If you are unable to complete the activation steps, please contact the administrators for assistance." %}</p>
 {% endblock %}

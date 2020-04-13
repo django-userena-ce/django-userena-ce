@@ -7,5 +7,5 @@
 
 {% block content %}
 <p>{% trans "Your account could not be activated as your activation link has expired." %}</p>
-<p><a href="{% url 'userena_activate_retry' activation_key %}">{% trans "Request a new activation link." %}</a></p>
+<p><a href="{% url 'userena_activate_retry' activation_key=activation_key %}">{% trans "Request a new activation link." %}</a></p>
 {% endblock %}
