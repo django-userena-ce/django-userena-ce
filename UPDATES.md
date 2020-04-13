@@ -2,7 +2,15 @@
 
 ## Version 6.0.0 (Unreleased)
 
+This version includes 1 new view (`userena_activate_pending`) and two new templates (`"userena/activate_pending.html"` and `"userena/activate_form.html"`)
+
+Please note that the translation files have not been updated for this release - contributions welcome!
+
+- Use POST requests for activation (#114)
+- Added activation pending (#108)
+- Added arabic translation (#105)
 - Dropped support for Python 3.5
+- Updated the demo to Django 3.0
 
 ## Version 5.1.0
 

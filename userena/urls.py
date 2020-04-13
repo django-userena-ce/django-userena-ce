@@ -70,6 +70,12 @@ urlpatterns = [
         userena_views.activate_retry,
         name="userena_activate_retry",
     ),
+    # Activate pending
+    url(
+        r"^(?P<username>[\@\.\+\w-]+)/pending/$",
+        userena_views.activate_pending,
+        name="userena_activate_pending",
+    ),
     # Change email and confirm it
     url(
         r"^(?P<username>[\@\.\+\w-]+)/email/$",
@@ -98,12 +104,6 @@ urlpatterns = [
         r"^(?P<username>[\@\.\+\w-]+)/disabled/$",
         userena_views.disabled_account,
         name="userena_disabled",
-    ),
-    # Activation pending
-    url(
-        r"^(?P<username>[\@\.\+\w-]+)/pending/$",
-        userena_views.activation_pending,
-        name="userena_activation_pending",
     ),
     # Change password
     url(

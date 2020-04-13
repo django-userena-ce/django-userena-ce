@@ -46,7 +46,7 @@ class UserenaManagerTests(TestCase):
 
         # User has a valid activation key
         self.assertTrue(
-            re.match("^[\w]{40}$", new_user.userena_signup.activation_key)
+            re.match(r"^[\w]{40}$", new_user.userena_signup.activation_key)
         )
 
         # User now has an profile.

@@ -10,6 +10,7 @@ from django.utils import timezone
 
 from userena import forms
 from userena import settings as userena_settings
+from userena.models import UserenaSignup
 from userena.utils import get_user_profile
 
 User = get_user_model()
@@ -21,7 +22,7 @@ class UserenaViewsTests(TestCase):
     fixtures = ["users", "profiles"]
 
     def test_valid_activation(self):
-        """ A ``GET`` to the activation view """
+        """ A ``POST`` to the activation view """
         # First, register an account.
         self.client.post(
             reverse("userena_signup"),
@@ -182,12 +183,26 @@ class UserenaViewsTests(TestCase):
             reverse("userena_disabled", kwargs={"username": "john"})
         )
         self.assertEqual(response.status_code, 404)
-        u = User.objects.filter(username="john").update(is_active=False)
+
+        User.objects.filter(username="john").update(is_active=False)
         response = self.client.get(
             reverse("userena_disabled", kwargs={"username": "john"})
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "userena/disabled.html")
+
+        # Add an activation key to simulate that the account has not been
+        # activated yet
+        signup = UserenaSignup.objects.get(user__username="john")
+        signup.activation_key = "foo"
+        signup.save()
+
+        response = self.client.get(
+            reverse("userena_disabled", kwargs={"username": "john"})
+        )
+        self.assertRedirects(
+            response, reverse("userena_activate_pending", kwargs={"username": "john"}),
+        )
 
     def test_signup_view(self):
         """ A ``GET`` to the ``signup`` view """
@@ -365,6 +380,44 @@ class UserenaViewsTests(TestCase):
 
         self.assertRedirects(
             response, reverse("userena_disabled", kwargs={"username": user.username})
+        )
+
+    def test_signin_unactivated(self):
+        self.client.post(
+            reverse("userena_signup"),
+            data={
+                "username": "alice",
+                "email": "alice@example.com",
+                "password1": "swordfish",
+                "password2": "swordfish",
+                "tos": "on",
+            },
+        )
+
+        user = User.objects.get(email="alice@example.com")
+
+        response = self.client.post(
+            reverse("userena_signin"),
+            data={"identification": user.email, "password": "swordfish"},
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("userena_activate_pending", kwargs={"username": user.username}),
+        )
+
+    def test_activate_pending_disabled_redirect(self):
+        response = self.client.get(
+            reverse("userena_activate_pending", kwargs={"username": "john"})
+        )
+        self.assertEqual(response.status_code, 404)
+
+        User.objects.filter(username="john").update(is_active=False)
+        response = self.client.get(
+            reverse("userena_activate_pending", kwargs={"username": "john"})
+        )
+        self.assertRedirects(
+            response, reverse("userena_disabled", kwargs={"username": "john"}),
         )
 
     def test_signin_view_success(self):
