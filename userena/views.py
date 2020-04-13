@@ -474,12 +474,7 @@ def disabled_account(
         get_user_model(), username__iexact=username, is_active=False
     )
 
-    try:
-        userena = UserenaSignup.objects.get(user=user)
-    except UserenaSignup.DoesNotExist:
-        userena = None
-
-    if userena is not None and not userena.activation_completed:
+    if not user.userena_signup.activation_completed:
         return redirect(
             reverse("userena_activate_pending", kwargs={"username": user.username})
         )
@@ -521,16 +516,11 @@ def activate_pending(
         get_user_model(), username__iexact=username, is_active=False
     )
 
-    try:
-        userena = UserenaSignup.objects.get(user=user)
-    except UserenaSignup.DoesNotExist:
-        userena = None
-
     # If we know that the activation process was completed, but the
     # user is now not active, it is safe to assume that the user was
     # actually disabled after completion of activation.  In that
     # case, we will redirect to ``userena_disabled``.
-    if userena is None or userena.activation_completed:
+    if user.userena_signup.activation_completed:
         return redirect(reverse("userena_disabled", kwargs={"username": user.username}))
 
     if not extra_context:
@@ -625,15 +615,11 @@ def signin(
                 )
                 return HttpResponseRedirect(redirect_to)
             else:
-                try:
-                    userena = UserenaSignup.objects.get(user=user)
-                except UserenaSignup.DoesNotExist:
-                    userena = None
                 # If the user is inactive, despite completing the
                 # activation process, show the 'Account disabled'
                 # page.  Otherwise, show the 'Activation pending'
                 # page to encourage activation.
-                if userena is None or userena.activation_completed:
+                if user.userena_signup.activation_completed:
                     return redirect(
                         reverse("userena_disabled", kwargs={"username": user.username})
                     )
