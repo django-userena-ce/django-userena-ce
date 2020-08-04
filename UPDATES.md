@@ -1,5 +1,9 @@
 # UPDATES
 
+## Version 6.0.1
+
+- Added support for Django 3.1
+
 ## Version 6.0.0
 
 This version includes 1 new view (`userena_activate_pending`) and two new templates (`"userena/activate_pending.html"` and `"userena/activate_form.html"`)

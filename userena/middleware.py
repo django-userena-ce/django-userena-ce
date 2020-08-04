@@ -16,6 +16,14 @@ class UserenaLocaleMiddleware(MiddlewareMixin):
     switch languages depending if the cookie is set.
 
     """
+    def __init__(self, get_response=None):
+
+        if get_response is None:
+            # Fix RemovedInDjango40Warning: Passing None for the middleware
+            # get_response argument is deprecated
+            get_response = lambda r: r
+
+        super().__init__(get_response=get_response)
 
     def process_request(self, request):
         lang_cookie = request.session.get(settings.LANGUAGE_COOKIE_NAME)
