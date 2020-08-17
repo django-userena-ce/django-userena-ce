@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-17 11:51+0200\n"
-"PO-Revision-Date: 2020-08-17 13:07+0200\n"
+"PO-Revision-Date: 2020-08-17 18:06+0200\n"
 "Last-Translator: Steven Mohr <business@stevenmohr.de>\n"
 "Language-Team: German <de@li.org>\n"
 "Language: cs\n"
@@ -329,15 +329,15 @@ msgstr "registrace"
 
 #: models.py:203
 msgid "Open"
-msgstr "Založeno"
+msgstr "Kdokoli"
 
 #: models.py:204
 msgid "Registered"
-msgstr "Zaregistrováno"
+msgstr "Přihlášení"
 
 #: models.py:205
 msgid "Closed"
-msgstr "Uzavřeno"
+msgstr "Nikdo"
 
 #: models.py:217
 msgid "mugshot"
