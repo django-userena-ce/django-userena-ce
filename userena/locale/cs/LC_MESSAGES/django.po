@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-17 11:51+0200\n"
-"PO-Revision-Date: 2020-08-17 12:04+0200\n"
+"PO-Revision-Date: 2020-08-17 13:07+0200\n"
 "Last-Translator: Steven Mohr <business@stevenmohr.de>\n"
 "Language-Team: German <de@li.org>\n"
 "Language: cs\n"
@@ -237,7 +237,7 @@ msgstr "Heslo"
 #: forms.py:203 forms.py:212
 #, python-format
 msgid "Remember me for %(days)s"
-msgstr "Zapamatovat si přihlášení %(days)s dnů"
+msgstr "Zapamatovat si přihlášení %(days)s"
 
 #: forms.py:217
 msgid "Please supply your email."
@@ -410,7 +410,7 @@ msgstr ""
 
 #: settings.py:32
 msgid "a month"
-msgstr "měsíc"
+msgstr "30 dnů"
 
 #: templates/userena/activate_fail.html:4
 #: templates/userena/activate_retry.html:5
