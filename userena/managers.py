@@ -317,5 +317,6 @@ class UserenaBaseProfileManager(models.Manager):
             profiles = profiles.exclude(Q(privacy="closed") | Q(privacy="registered"))
         else:
             profiles = profiles.exclude(Q(privacy="closed"))
-        profiles = profiles.order_by('user_id')
+        if not self.model._meta.ordering:
+            profiles = profiles.order_by('id')
         return profiles
