@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.contrib.sites.models import Site
+from django.contrib.sites import shortcuts
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
@@ -138,7 +138,7 @@ class UserenaSignup(models.Model):
             "new_email": self.email_unconfirmed,
             "protocol": get_protocol(),
             "confirmation_key": self.email_confirmation_key,
-            "site": Site.objects.get_current(),
+            "site": shortcuts.get_current_site(request=None),
         }
 
         mailer = UserenaConfirmationMail(context=context)
@@ -188,7 +188,7 @@ class UserenaSignup(models.Model):
             "protocol": get_protocol(),
             "activation_days": userena_settings.USERENA_ACTIVATION_DAYS,
             "activation_key": self.activation_key,
-            "site": Site.objects.get_current(),
+            "site": shortcuts.get_current_site(request=None),
         }
 
         mailer = UserenaConfirmationMail(context=context)
