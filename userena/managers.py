@@ -225,9 +225,15 @@ class UserenaManager(UserManager):
         """
         deleted_users = []
         for user in get_user_model().objects.filter(is_staff=False, is_active=False):
-            if user.userena_signup.activation_key_expired():
-                deleted_users.append(user)
-                user.delete()
+            if hasattr(user, 'userena_signup'):
+                if user.userena_signup.activation_key_expired():
+                    try:
+                        user.delete()
+                        deleted_users.append(user)
+                    except Exception as e:
+                        print("Error Deleting Expired Activation Key for User {0}: {1}".format(str(user), str(e)))
+            else:
+                print("No UserenaSignUp for user: {0}".format(str(user)))
         return deleted_users
 
     def check_permissions(self):
