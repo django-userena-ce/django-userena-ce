@@ -1,7 +1,7 @@
 # Django Userena (Community Edition)
 
 [![PyPI version](https://badge.fury.io/py/django-userena-ce.svg)](https://badge.fury.io/py/django-userena-ce)
-[![Build Status](https://github.com/django-userena-ce/django-userena-ce/workflows/tox-tests/badge.svg)](https://github.com/django-userena-ce/django-userena-ce/actions?query=workflow%3Atox-tests+branch%3Amaster)
+[![Build Status](https://github.com/django-userena-ce/django-userena-ce/workflows/Tox%20Tests/badge.svg)](https://github.com/django-userena-ce/django-userena-ce/actions?query=workflow%3Atox-tests+branch%3Amaster)
 [![Coverage Status](https://coveralls.io/repos/github/django-userena-ce/django-userena-ce/badge.svg?branch=master)](https://coveralls.io/github/django-userena-ce/django-userena-ce?branch=master)
 [![Documentation Status](https://readthedocs.org/projects/django-userena-ce/badge/?version=latest)](http://django-userena-ce.readthedocs.io/en/latest/?badge=latest)
 [![Updates](https://pyup.io/repos/github/django-userena-ce/django-userena-ce/shield.svg)](https://pyup.io/repos/github/django-userena-ce/django-userena-ce/)
