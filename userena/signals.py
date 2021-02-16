@@ -1,10 +1,25 @@
 from django.dispatch import Signal
 
-signup_complete = Signal(providing_args=["user"])
-activation_complete = Signal(providing_args=["user"])
-confirmation_complete = Signal(providing_args=["user", "old_email"])
-password_complete = Signal(providing_args=["user"])
-email_change = Signal(providing_args=["user", "prev_email", "new_email"])
-profile_change = Signal(providing_args=["user"])
-account_signin = Signal(providing_args=["user"])
-account_signout = Signal(providing_args=["user"])
+# Arguments: "user"
+signup_complete = Signal()
+
+# Arguments: "user"
+activation_complete = Signal()
+
+# Arguments: "user", "old_email"
+confirmation_complete = Signal()
+
+# Arguments: "user"
+password_complete = Signal()
+
+# Arguments: "user", "prev_email", "new_email"
+email_change = Signal()
+
+# Arguments: "user"
+profile_change = Signal()
+
+# Arguments: "user"
+account_signin = Signal()
+
+# Arguments: "user"
+account_signout = Signal()
