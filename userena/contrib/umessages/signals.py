@@ -1,3 +1,4 @@
 from django.dispatch import Signal
 
-email_sent = Signal(providing_args=["msg"])
+# Arguments: "msg"
+email_sent = Signal()
