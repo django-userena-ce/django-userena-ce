@@ -44,4 +44,4 @@ demo/media/admin
 .idea/
 
 # Poetry
-poerty.lock
+poetry.lock
