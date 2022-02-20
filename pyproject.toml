@@ -30,7 +30,6 @@ Django = "^3.2 || ^4.0"
 [tool.poetry.dev-dependencies]
 six = "*"
 pytest = "*"
-pytest-xdist = "*"
 pytest-django = "*"
 pytest-cov = "*"
 coveralls = "*"
@@ -52,7 +51,7 @@ testpaths = [
     "userena/contrib/umessages/tests",
 ]
 python_files = "tests.py test_*.py *_tests.py tests_*.py"
-addopts = "--strict-markers --showlocals -n auto --dist loadscope"
+addopts = "--strict-markers --showlocals"
 markers = []
 filterwarnings = []
 
