@@ -51,7 +51,7 @@ def wrap_attachment():
     pass
 
 
-class UserenaConfirmationMail(object):
+class UserenaConfirmationMail:
 
     _message_txt = "userena/emails/{0}_email_message{1}.txt"
     _message_html = "userena/emails/{0}_email_message{1}.html"

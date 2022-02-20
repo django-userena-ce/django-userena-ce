@@ -144,6 +144,6 @@ class Migration(migrations.Migration):
             ),
         ),
         migrations.AlterUniqueTogether(
-            name="messagecontact", unique_together=set([("um_from_user", "um_to_user")])
+            name="messagecontact", unique_together={("um_from_user", "um_to_user")}
         ),
     ]

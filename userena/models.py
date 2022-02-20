@@ -36,11 +36,11 @@ def upload_to_mugshot(instance, filename):
         "date": instance.user.date_joined,
         "date_now": get_datetime_now().date(),
     }
-    return "%(path)s%(hash)s.%(extension)s" % {
-        "path": path,
-        "hash": generate_nonce()[:10],
-        "extension": extension,
-    }
+    return "{path}{hash}.{extension}".format(
+        path=path,
+        hash=generate_nonce()[:10],
+        extension=extension,
+    )
 
 
 class UserenaSignup(models.Model):
@@ -253,7 +253,7 @@ class UserenaBaseProfile(models.Model):
         permissions = PROFILE_PERMISSIONS
 
     def __str__(self):
-        return "Profile of %(username)s" % {"username": self.user.username}
+        return f"Profile of {self.user.username}"
 
     def get_mugshot_url(self):
         """
@@ -320,9 +320,9 @@ class UserenaBaseProfile(models.Model):
         else:
             # Fallback to the username if usernames are used
             if not userena_settings.USERENA_WITHOUT_USERNAMES:
-                name = "%(username)s" % {"username": user.username}
+                name = f"{user.username}"
             else:
-                name = "%(email)s" % {"email": user.email}
+                name = f"{user.email}"
         return name.strip()
 
     def can_view_profile(self, user):

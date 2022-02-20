@@ -136,7 +136,7 @@ class Message(models.Model):
     def __str__(self):
         """ Human representation, displaying first ten words of the body. """
         truncated_body = truncate_words(self.body, 10)
-        return "%(truncated_body)s" % {"truncated_body": truncated_body}
+        return f"{truncated_body}"
 
     def save_recipients(self, um_to_user_list):
         """

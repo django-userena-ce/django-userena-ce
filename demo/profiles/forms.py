@@ -25,7 +25,7 @@ class SignupFormExtra(SignupForm):
         form instead at the end.
         
         """
-        super(SignupFormExtra, self).__init__(*args, **kw)
+        super().__init__(*args, **kw)
         # Put the first and last name at the top
         new_order = self.fields.keyOrder[:-2]
         new_order.insert(0, 'first_name')
@@ -39,7 +39,7 @@ class SignupFormExtra(SignupForm):
 
         """
         # First save the parent form and get the user.
-        new_user = super(SignupFormExtra, self).save()
+        new_user = super().save()
 
         new_user.first_name = self.cleaned_data['first_name']
         new_user.last_name = self.cleaned_data['last_name']

@@ -58,10 +58,10 @@ def get_gravatar(email, size=80, default="identicon"):
     else:
         base_url = "//www.gravatar.com/avatar/"
 
-    gravatar_url = "%(base_url)s%(gravatar_id)s?" % {
-        "base_url": base_url,
-        "gravatar_id": md5(email.lower().encode("utf-8")).hexdigest(),
-    }
+    gravatar_url = "{base_url}{gravatar_id}?".format(
+        base_url=base_url,
+        gravatar_id=md5(email.lower().encode("utf-8")).hexdigest(),
+    )
 
     gravatar_url += urlencode({"s": str(size), "d": default})
     return gravatar_url

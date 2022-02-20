@@ -30,4 +30,4 @@ Complete documentation about the
 [F.A.Q.](https://django-userena-ce.readthedocs.io/en/latest/faq.html) is available on
 [Read the Docs](https://django-userena-ce.readthedocs.io/en/latest/index.html).
 
-For list of updates and changes see `UPDATES.md` file.
+For list of updates and changes see `HISTORY.md` file.

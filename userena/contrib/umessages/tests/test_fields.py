@@ -10,7 +10,7 @@ class CommaSeparatedTestForm(forms.Form):
     users = CommaSeparatedUserField()
 
     def __init__(self, *args, **kwargs):
-        super(CommaSeparatedTestForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields["users"]._recipient_filter = self.filter_jane
 
     def filter_jane(self, user):

@@ -12,7 +12,7 @@ class CommaSeparatedUserInput(widgets.Input):
             value = ""
         elif isinstance(value, (list, tuple)):
             value = ", ".join([user.username for user in value])
-        return super(CommaSeparatedUserInput, self).render(name, value, attrs, renderer)
+        return super().render(name, value, attrs, renderer)
 
 
 class CommaSeparatedUserField(forms.Field):
@@ -34,17 +34,17 @@ class CommaSeparatedUserField(forms.Field):
     def __init__(self, *args, **kwargs):
         recipient_filter = kwargs.pop("recipient_filter", None)
         self._recipient_filter = recipient_filter
-        super(CommaSeparatedUserField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def clean(self, value):
-        super(CommaSeparatedUserField, self).clean(value)
+        super().clean(value)
 
         names = set(value.split(","))
-        names_set = set([name.strip() for name in names])
+        names_set = {name.strip() for name in names}
         users = list(get_user_model().objects.filter(username__in=names_set))
 
         # Check for unknown names.
-        unknown_names = names_set ^ set([user.username for user in users])
+        unknown_names = names_set ^ {user.username for user in users}
 
         recipient_filter = self._recipient_filter
         invalid_users = []
