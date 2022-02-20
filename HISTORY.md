@@ -1,5 +1,12 @@
 # UPDATES
 
+## Version 7.0.0
+
+- Dropped support for Python 3.6, Django 2.2, Django 3.1
+- Added support for Python 3.10, Django 4.0
+- Removed `south_migrations`
+- Migrated to PEP517
+
 ## Version 6.0.1
 
 - Added support for Django 3.1

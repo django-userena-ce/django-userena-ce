@@ -96,6 +96,6 @@ commands =
 [testenv:coverage]
 passenv = COVERALLS_REPO_TOKEN
 commands =
-    pytest --cov=userena {posargs}
-    coveralls
+    poetry run pytest --cov=userena {posargs}
+    poetry run coveralls
 """
