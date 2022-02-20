@@ -43,3 +43,5 @@ demo/media/admin
 # Pycharm 
 .idea/
 
+# Poetry
+poerty.lock
