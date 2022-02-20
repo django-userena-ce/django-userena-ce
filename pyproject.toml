@@ -49,6 +49,7 @@ DJANGO_SETTINGS_MODULE = "userena.runtests.settings"
 minversion = "6.0"
 testpaths = [
     "userena/tests",
+    "userena/contrib/umessages/tests",
 ]
 python_files = "tests.py test_*.py *_tests.py tests_*.py"
 addopts = "--strict-markers --showlocals -n auto --dist loadscope"
