@@ -6,6 +6,7 @@
 - Added support for Python 3.10, Django 4.0
 - Removed `south_migrations`
 - Migrated to PEP517
+- Formatted code with `black`
 
 ## Version 6.0.1
 
@@ -20,7 +21,7 @@ Please note that the translation files have not been updated for this release - 
 - Use POST requests for activation (#114)
 - Added activation pending (#108)
 - Added arabic translation (#105)
-- Dropped support for Python 3.5. Please pin to version `< 6.0.0` if you still use this. 
+- Dropped support for Python 3.5. Please pin to version `< 6.0.0` if you still use this.
 - Updated the demo to Django 3.0
 
 ## Version 5.1.0
@@ -31,7 +32,7 @@ Please note that the translation files have not been updated for this release - 
 
 ## Version 5.0.0
 
-- Dropped support for Django 1.11 as `django-guardian` has dropped support for Django 1.11 from guardian 2.0 onwards. 
+- Dropped support for Django 1.11 as `django-guardian` has dropped support for Django 1.11 from guardian 2.0 onwards.
 Users who need to stick with Django 1.11 and/or python 2 will need to use `django-userena-ce<5.0`.
 - Dropped support for Python 2.7, 3.4, and Django 2.1 as these are end of life.
 - Added support for Python 3.8 and Django 3.0.
@@ -45,7 +46,7 @@ Users who need to stick with Django 1.11 and/or python 2 will need to use `djang
 - Adds support for Django 2.1 and Python 3.7
 - Note: you will probably need to generate a migrations for concrete implementations of `UserenaBaseProfile` and `UserenaLanguageBaseProfile`
 - Replaces `userena.views.signout` with the class based `userena.views.SignoutView`
-- Adds request argument to `userena.backends.authenticate` 
+- Adds request argument to `userena.backends.authenticate`
 
 ## Version 4.0.0
 
@@ -55,7 +56,7 @@ Users who need to stick with Django 1.11 and/or python 2 will need to use `djang
 
 ## Version 3.1.0
 
-Added support for Django 1.11 and Django 2.0, dropped support for Django 1.9 
+Added support for Django 1.11 and Django 2.0, dropped support for Django 1.9
 and Django 1.10.
 
 This is the final release that will support Django 1.8.

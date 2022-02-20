@@ -40,8 +40,8 @@ demo/media/admin
 # Backup files
 *~
 
-# Pycharm 
+# Pycharm
 .idea/
 
 # Poetry
-poerty.lock
+poetry.lock

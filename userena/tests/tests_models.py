@@ -1,16 +1,16 @@
 import datetime
 import hashlib
 import re
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import parse_qs, urlparse
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
 from django.core import mail
-from django.conf import settings
 from django.test import TestCase
 
-from userena.models import UserenaSignup, upload_to_mugshot
 from userena import settings as userena_settings
+from userena.models import UserenaSignup, upload_to_mugshot
 from userena.tests.profiles.models import Profile
 from userena.utils import get_user_profile
 
@@ -20,7 +20,7 @@ MUGSHOT_RE = re.compile("^[a-f0-9]{40}$")
 
 
 class UserenaSignupModelTests(TestCase):
-    """ Test the model of UserenaSignup """
+    """Test the model of UserenaSignup"""
 
     user_info = {
         "username": "alice",
@@ -45,12 +45,12 @@ class UserenaSignupModelTests(TestCase):
         self.assertNotEqual(filename, path)
 
         # Check if the correct path is returned
-        MUGSHOT_RE = re.compile(
+        mugshot_re = re.compile(
             r"^%(mugshot_path)s[\w]{10}.png$"
             % {"mugshot_path": userena_settings.USERENA_MUGSHOT_PATH}
         )
 
-        self.assertTrue(MUGSHOT_RE.search(path))
+        self.assertTrue(mugshot_re.search(path))
 
     def test_stringification(self):
         """
@@ -62,7 +62,7 @@ class UserenaSignupModelTests(TestCase):
         self.assertEqual(signup.__str__(), signup.user.username)
 
     def test_change_email(self):
-        """ TODO """
+        """TODO"""
         pass
 
     def test_activation_expired_account(self):
@@ -108,16 +108,14 @@ class UserenaSignupModelTests(TestCase):
         by ``UserenaSignup.send_activation_email``.
 
         """
-        new_user = UserenaSignup.objects.create_user(**self.user_info)
+        UserenaSignup.objects.create_user(**self.user_info)
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, [self.user_info["email"]])
 
     def test_plain_email(self):
-        """
-        If HTML emails are disabled, check that outgoing emails are not multipart
-        """
+        """If HTML emails are disabled, check that outgoing emails are not multipart"""
         userena_settings.USERENA_HTML_EMAIL = False
-        new_user = UserenaSignup.objects.create_user(**self.user_info)
+        UserenaSignup.objects.create_user(**self.user_info)
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(
             str(mail.outbox[0].message()).find("multipart/alternative"), -1
@@ -131,7 +129,7 @@ class UserenaSignupModelTests(TestCase):
         userena_settings.USERENA_HTML_EMAIL = True
         userena_settings.USERENA_USE_PLAIN_TEMPLATE = True
 
-        new_user = UserenaSignup.objects.create_user(**self.user_info)
+        UserenaSignup.objects.create_user(**self.user_info)
 
         # Reset configuration
         userena_settings.USERENA_HTML_EMAIL = False
@@ -143,9 +141,12 @@ class UserenaSignupModelTests(TestCase):
         self.assertTrue(str(mail.outbox[0].message()).find("text/html") > -1)
         self.assertTrue(str(mail.outbox[0].message()).find("<html>") > -1)
         self.assertTrue(
-            str(mail.outbox[0].message()).find("<p>Thank you for signing up") > -1
+            str(mail.outbox[0].message()).find("<p>Thank you for signing up")
+            > -1
         )
-        self.assertFalse(mail.outbox[0].body.find("<p>Thank you for signing up") > -1)
+        self.assertFalse(
+            mail.outbox[0].body.find("<p>Thank you for signing up") > -1
+        )
 
     def test_generated_plain_email(self):
         """
@@ -156,7 +157,7 @@ class UserenaSignupModelTests(TestCase):
         userena_settings.USERENA_HTML_EMAIL = True
         userena_settings.USERENA_USE_PLAIN_TEMPLATE = False
 
-        new_user = UserenaSignup.objects.create_user(**self.user_info)
+        UserenaSignup.objects.create_user(**self.user_info)
 
         # Reset configuration
         userena_settings.USERENA_HTML_EMAIL = False
@@ -170,18 +171,21 @@ class UserenaSignupModelTests(TestCase):
         self.assertTrue(str(mail.outbox[0].message()).find("text/html") > -1)
         self.assertTrue(str(mail.outbox[0].message()).find("<html>") > -1)
         self.assertTrue(
-            str(mail.outbox[0].message()).find("<p>Thank you for signing up") > -1
+            str(mail.outbox[0].message()).find("<p>Thank you for signing up")
+            > -1
         )
-        self.assertTrue(mail.outbox[0].body.find("Thank you for signing up") > -1)
+        self.assertTrue(
+            mail.outbox[0].body.find("Thank you for signing up") > -1
+        )
 
 
 class BaseProfileModelTest(TestCase):
-    """ Test the ``BaseProfile`` model """
+    """Test the ``BaseProfile`` model"""
 
     fixtures = ["users", "profiles"]
 
     def test_mugshot_url(self):
-        """ The user has uploaded it's own mugshot. This should be returned. """
+        """The user has uploaded it's own mugshot. This should be returned."""
         profile = Profile.objects.get(pk=1)
         profile.mugshot = "fake_image.png"
         profile.save()
@@ -192,9 +196,11 @@ class BaseProfileModelTest(TestCase):
         )
 
     def test_stringification(self):
-        """ Profile should return a human-readable name as an object """
+        """Profile should return a human-readable name as an object"""
         profile = Profile.objects.get(pk=1)
-        self.assertEqual(profile.__str__(), "Profile of %s" % profile.user.username)
+        self.assertEqual(
+            profile.__str__(), "Profile of %s" % profile.user.username
+        )
 
     def test_get_mugshot_url_without_gravatar(self):
         """
@@ -217,13 +223,12 @@ class BaseProfileModelTest(TestCase):
         userena_settings.USERENA_MUGSHOT_GRAVATAR = True
 
     def test_get_mugshot_url_with_gravatar(self):
-        """
-        Test if the correct mugshot is returned when the user makes use of gravatar.
-
-        """
+        """Test if the correct mugshot is returned when the user makes use of gravatar."""
         profile = Profile.objects.get(pk=1)
 
-        gravatar_hash = hashlib.md5(profile.user.email.encode("utf-8")).hexdigest()
+        gravatar_hash = hashlib.md5(
+            profile.user.email.encode("utf-8")
+        ).hexdigest()
 
         # Test with the default settings
         mugshot_url = profile.get_mugshot_url()
@@ -268,7 +273,7 @@ class BaseProfileModelTest(TestCase):
         userena_settings.USERENA_MUGSHOT_DEFAULT = "identicon"
 
     def test_get_full_name_or_username(self):
-        """ Test if the full name or username are returned correcly """
+        """Test if the full name or username are returned correcly"""
         user = User.objects.get(pk=1)
         profile = get_user_profile(user=user)
 
@@ -286,11 +291,13 @@ class BaseProfileModelTest(TestCase):
         # Finally, userena doesn't use any usernames, so we should return the
         # e-mail address.
         userena_settings.USERENA_WITHOUT_USERNAMES = True
-        self.assertEqual(profile.get_full_name_or_username(), "john@example.com")
+        self.assertEqual(
+            profile.get_full_name_or_username(), "john@example.com"
+        )
         userena_settings.USERENA_WITHOUT_USERNAMES = False
 
     def test_can_view_profile(self):
-        """ Test if the user can see the profile with three type of users. """
+        """Test if the user can see the profile with three type of users."""
         anon_user = AnonymousUser()
         super_user = User.objects.get(pk=1)
         reg_user = User.objects.get(pk=2)

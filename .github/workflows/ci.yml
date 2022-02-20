@@ -15,6 +15,22 @@ env:
   MINIMUM_PYTHON_VERSION: '3.8'
 
 jobs:
+  precommit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Python ${{ env.MINIMUM_PYTHON_VERSION }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
+      - uses: actions/checkout@v2
+      - name: Install pre-commit
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pre-commit virtualenv!=20.0.6
+          pre-commit install
+      - name: Run static code inspections
+        run: pre-commit run --all-files
+
   build:
     runs-on: ubuntu-latest
     strategy:
@@ -38,7 +54,7 @@ jobs:
 
   deploy:
     if: github.event_name == 'release'
-    needs: [build]
+    needs: [precommit, build]
     runs-on: ubuntu-latest
     steps:
       - name: Install Python ${{ env.MINIMUM_PYTHON_VERSION }}

@@ -8,7 +8,11 @@ urlpatterns = [
     # Signup, signin and signout
     re_path(r"^signup/$", userena_views.signup, name="userena_signup"),
     re_path(r"^signin/$", userena_views.signin, name="userena_signin"),
-    re_path(r"^signout/$", userena_views.SignoutView.as_view(), name="userena_signout"),
+    re_path(
+        r"^signout/$",
+        userena_views.SignoutView.as_view(),
+        name="userena_signout",
+    ),
     # Reset password
     re_path(
         r"^password/reset/$",
@@ -134,6 +138,8 @@ urlpatterns = [
         name="userena_profile_list_paginated",
     ),
     re_path(
-        r"^$", userena_views.ProfileListView.as_view(), name="userena_profile_list"
+        r"^$",
+        userena_views.ProfileListView.as_view(),
+        name="userena_profile_list",
     ),
 ]

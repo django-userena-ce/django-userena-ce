@@ -58,7 +58,7 @@ Contents
 
 .. toctree::
    :maxdepth: 2
-   
+
    installation
    settings
    signals

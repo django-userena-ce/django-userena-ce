@@ -1,11 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.urls import re_path
 
 from userena.contrib.umessages import views as messages_views
-from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     re_path(
-        r"^compose/$", messages_views.message_compose, name="userena_umessages_compose"
+        r"^compose/$",
+        messages_views.message_compose,
+        name="userena_umessages_compose",
     ),
     re_path(
         r"^compose/(?P<recipients>[\+\.\w]+)/$",
@@ -23,7 +25,9 @@ urlpatterns = [
         name="userena_umessages_detail",
     ),
     re_path(
-        r"^remove/$", messages_views.message_remove, name="userena_umessages_remove"
+        r"^remove/$",
+        messages_views.message_remove,
+        name="userena_umessages_remove",
     ),
     re_path(
         r"^unremove/$",

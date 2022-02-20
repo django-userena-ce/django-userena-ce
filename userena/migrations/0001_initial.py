@@ -1,9 +1,8 @@
-from django.db import models, migrations
 from django.conf import settings
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [migrations.swappable_dependency(settings.AUTH_USER_MODEL)]
 
     operations = [
@@ -31,21 +30,28 @@ class Migration(migrations.Migration):
                 (
                     "activation_key",
                     models.CharField(
-                        max_length=40, verbose_name="activation key", blank=True
+                        max_length=40,
+                        verbose_name="activation key",
+                        blank=True,
                     ),
                 ),
                 (
                     "activation_notification_send",
                     models.BooleanField(
                         default=False,
-                        help_text="Designates whether this user has already got a notification about activating their account.",
+                        help_text=(
+                            "Designates whether this user has already got a "
+                            "notification about activating their account."
+                        ),
                         verbose_name="notification send",
                     ),
                 ),
                 (
                     "email_unconfirmed",
                     models.EmailField(
-                        help_text="Temporary email address when the user requests an email change.",
+                        help_text=(
+                            "Temporary email address when the user requests an email change."
+                        ),
                         max_length=75,
                         verbose_name="unconfirmed email address",
                         blank=True,

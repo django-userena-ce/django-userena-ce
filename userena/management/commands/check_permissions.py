@@ -39,7 +39,11 @@ class Command(BaseCommand):
     help = "Check that user permissions are correct."
 
     def handle(self, **options):
-        permissions, users, warnings = UserenaSignup.objects.check_permissions()
+        (
+            permissions,
+            users,
+            warnings,
+        ) = UserenaSignup.objects.check_permissions()
         output = options.pop("output")
         test = options.pop("test")
         if test:
@@ -61,4 +65,6 @@ class Command(BaseCommand):
                 self.stdout.write("WARNING: %s\n" % w)
 
         if test:
-            self.stdout.write("\nFinished testing permissions command.. continuing..\n")
+            self.stdout.write(
+                "\nFinished testing permissions command.. continuing..\n"
+            )

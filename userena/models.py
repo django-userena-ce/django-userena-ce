@@ -1,4 +1,6 @@
 #!/usr/bin/python
+import datetime
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.sites import shortcuts
@@ -6,18 +8,17 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from guardian.shortcuts import get_perms
+
 from userena import settings as userena_settings
-from userena.managers import UserenaManager, UserenaBaseProfileManager
+from userena.managers import UserenaBaseProfileManager, UserenaManager
 from userena.utils import (
-    get_gravatar,
     generate_nonce,
-    get_protocol,
     get_datetime_now,
+    get_gravatar,
+    get_protocol,
     user_model_label,
 )
-import datetime
 from .mail import UserenaConfirmationMail
-
 
 PROFILE_PERMISSIONS = (("view_profile", "Can view profile"),)
 
@@ -36,11 +37,11 @@ def upload_to_mugshot(instance, filename):
         "date": instance.user.date_joined,
         "date_now": get_datetime_now().date(),
     }
-    return "%(path)s%(hash)s.%(extension)s" % {
-        "path": path,
-        "hash": generate_nonce()[:10],
-        "extension": extension,
-    }
+    return "{path}{hash}.{extension}".format(
+        path=path,
+        hash=generate_nonce()[:10],
+        extension=extension,
+    )
 
 
 class UserenaSignup(models.Model):
@@ -64,20 +65,25 @@ class UserenaSignup(models.Model):
         help_text=_("The last date that the user was active."),
     )
 
-    activation_key = models.CharField(_("activation key"), max_length=40, blank=True)
+    activation_key = models.CharField(
+        _("activation key"), max_length=40, blank=True
+    )
 
     activation_notification_send = models.BooleanField(
         _("notification send"),
         default=False,
         help_text=_(
-            "Designates whether this user has already got a notification about activating their account."
+            "Designates whether this user has already got a "
+            "notification about activating their account."
         ),
     )
 
     email_unconfirmed = models.EmailField(
         _("unconfirmed email address"),
         blank=True,
-        help_text=_("Temporary email address when the user requests an email change."),
+        help_text=_(
+            "Temporary email address when the user requests an email change."
+        ),
     )
 
     email_confirmation_key = models.CharField(
@@ -170,7 +176,9 @@ class UserenaSignup(models.Model):
             days=userena_settings.USERENA_ACTIVATION_DAYS
         )
         expiration_date = self.user.date_joined + expiration_days
-        if self.activation_completed or (get_datetime_now() >= expiration_date):
+        if self.activation_completed or (
+            get_datetime_now() >= expiration_date
+        ):
             return True
         return False
 
@@ -197,7 +205,7 @@ class UserenaSignup(models.Model):
 
 
 class UserenaBaseProfile(models.Model):
-    """ Base model needed for extra profile functionality """
+    """Base model needed for extra profile functionality"""
 
     PRIVACY_CHOICES = (
         ("open", _("Open")),
@@ -253,7 +261,7 @@ class UserenaBaseProfile(models.Model):
         permissions = PROFILE_PERMISSIONS
 
     def __str__(self):
-        return "Profile of %(username)s" % {"username": self.user.username}
+        return f"Profile of {self.user.username}"
 
     def get_mugshot_url(self):
         """
@@ -320,9 +328,9 @@ class UserenaBaseProfile(models.Model):
         else:
             # Fallback to the username if usernames are used
             if not userena_settings.USERENA_WITHOUT_USERNAMES:
-                name = "%(username)s" % {"username": user.username}
+                name = f"{user.username}"
             else:
-                name = "%(email)s" % {"email": user.email}
+                name = f"{user.email}"
         return name.strip()
 
     def can_view_profile(self, user):
@@ -359,7 +367,9 @@ class UserenaBaseProfile(models.Model):
         if self.privacy == "open":
             return True
         # Registered users.
-        elif self.privacy == "registered" and isinstance(user, get_user_model()):
+        elif self.privacy == "registered" and isinstance(
+            user, get_user_model()
+        ):
             return True
 
         # Checks done by guardian for owner and admins.

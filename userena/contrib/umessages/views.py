@@ -11,7 +11,11 @@ from django.views.generic.list import ListView
 
 from userena import settings as userena_settings
 from userena.contrib.umessages.forms import ComposeForm
-from userena.contrib.umessages.models import Message, MessageRecipient, MessageContact
+from userena.contrib.umessages.models import (
+    Message,
+    MessageContact,
+    MessageRecipient,
+)
 from userena.utils import get_datetime_now
 
 
@@ -40,11 +44,7 @@ class MessageListView(ListView):
 
 
 class MessageDetailListView(MessageListView):
-    """
-
-    Returns a conversation between two users
-
-    """
+    """Returns a conversation between two users"""
 
     template_name = "umessages/message_detail.html"
 
@@ -55,7 +55,9 @@ class MessageDetailListView(MessageListView):
 
     def get_queryset(self):
         username = self.kwargs["username"]
-        self.recipient = get_object_or_404(get_user_model(), username__iexact=username)
+        self.recipient = get_object_or_404(
+            get_user_model(), username__iexact=username
+        )
         queryset = Message.objects.get_conversation_between(
             self.request.user, self.recipient
         )
@@ -65,7 +67,9 @@ class MessageDetailListView(MessageListView):
     def _update_unread_messages(self, queryset):
         message_pks = [m.pk for m in queryset]
         unread_list = MessageRecipient.objects.filter(
-            message__in=message_pks, user=self.request.user, read_at__isnull=True
+            message__in=message_pks,
+            user=self.request.user,
+            read_at__isnull=True,
         )
         now = get_datetime_now()
         unread_list.update(read_at=now)
@@ -118,7 +122,10 @@ def message_compose(
     if recipients:
         username_list = [r.strip() for r in recipients.split("+")]
         recipients = [
-            u for u in get_user_model().objects.filter(username__in=username_list)
+            u
+            for u in get_user_model().objects.filter(
+                username__in=username_list
+            )
         ]
         initial_data["to"] = recipients
 
@@ -127,14 +134,17 @@ def message_compose(
         form = compose_form(request.POST)
         if form.is_valid():
             requested_redirect = request.GET.get(
-                REDIRECT_FIELD_NAME, request.POST.get(REDIRECT_FIELD_NAME, False)
+                REDIRECT_FIELD_NAME,
+                request.POST.get(REDIRECT_FIELD_NAME, False),
             )
 
-            message = form.save(request.user)
+            form.save(request.user)
             recipients = form.cleaned_data["to"]
 
             if userena_settings.USERENA_USE_MESSAGES:
-                messages.success(request, _("Message is sent."), fail_silently=True)
+                messages.success(
+                    request, _("Message is sent."), fail_silently=True
+                )
 
             # Redirect mechanism
             redirect_to = reverse("userena_umessages_list")
@@ -158,7 +168,7 @@ def message_compose(
 
 @login_required
 @require_http_methods(["POST"])
-def message_remove(request, undo=False):
+def message_remove(request, undo=False):  # noqa:C901
     """
     A ``POST`` to remove messages.
 
@@ -221,7 +231,9 @@ def message_remove(request, undo=False):
                 changed_message_list.add(message.pk)
 
         # Send messages
-        if (len(changed_message_list) > 0) and userena_settings.USERENA_USE_MESSAGES:
+        if (
+            len(changed_message_list) > 0
+        ) and userena_settings.USERENA_USE_MESSAGES:
             if undo:
                 message = ngettext(
                     "Message is succesfully restored.",

@@ -10,7 +10,9 @@ class UserenaAuthenticationBackend(ModelBackend):
 
     """
 
-    def authenticate(self, request, identification, password=None, check_password=True):
+    def authenticate(
+        self, request, identification, password=None, check_password=True
+    ):
         """
         Authenticates a user through the combination email/username with
         password.
@@ -34,7 +36,7 @@ class UserenaAuthenticationBackend(ModelBackend):
         :return: The signed in :class:`User`.
 
         """
-        User = get_user_model()
+        User = get_user_model()  # noqa: N806
         try:
             django.core.validators.validate_email(identification)
             try:
@@ -54,7 +56,7 @@ class UserenaAuthenticationBackend(ModelBackend):
             return user
 
     def get_user(self, user_id):
-        User = get_user_model()
+        User = get_user_model()  # noqa: N806
         try:
             return User.objects.get(pk=user_id)
         except User.DoesNotExist:

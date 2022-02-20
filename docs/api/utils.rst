@@ -24,4 +24,3 @@ get_profile_model
 -----------------
 
 .. autofunction:: userena.utils.get_profile_model
- 

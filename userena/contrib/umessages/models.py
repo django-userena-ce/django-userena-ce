@@ -1,12 +1,12 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from userena.utils import truncate_words
 from userena.contrib.umessages.managers import (
-    MessageManager,
     MessageContactManager,
+    MessageManager,
     MessageRecipientManager,
 )
+from userena.utils import truncate_words
 from userena.utils import user_model_label
 
 
@@ -85,7 +85,9 @@ class MessageRecipient(models.Model):
 
     read_at = models.DateTimeField(_("read at"), null=True, blank=True)
 
-    deleted_at = models.DateTimeField(_("recipient deleted at"), null=True, blank=True)
+    deleted_at = models.DateTimeField(
+        _("recipient deleted at"), null=True, blank=True
+    )
 
     objects = MessageRecipientManager()
 
@@ -97,12 +99,12 @@ class MessageRecipient(models.Model):
         return _("%(message)s") % {"message": self.message}
 
     def is_read(self):
-        """ Returns a boolean whether the recipient has read the message """
+        """Returns a boolean whether the recipient has read the message"""
         return self.read_at is None
 
 
 class Message(models.Model):
-    """ Private message model, from user to user(s) """
+    """Private message model, from user to user(s)"""
 
     body = models.TextField(_("body"))
 
@@ -134,9 +136,9 @@ class Message(models.Model):
         verbose_name_plural = _("messages")
 
     def __str__(self):
-        """ Human representation, displaying first ten words of the body. """
+        """Human representation, displaying first ten words of the body."""
         truncated_body = truncate_words(self.body, 10)
-        return "%(truncated_body)s" % {"truncated_body": truncated_body}
+        return f"{truncated_body}"
 
     def save_recipients(self, um_to_user_list):
         """

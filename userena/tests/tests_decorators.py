@@ -3,7 +3,7 @@ from django.urls import reverse
 
 
 class DecoratorTests(TestCase):
-    """ Test the decorators """
+    """Test the decorators"""
 
     def test_secure_required(self):
         """

@@ -1,26 +1,24 @@
+import re
+
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AnonymousUser, Permission, UserManager
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.db.models import Q
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import UserManager, Permission, AnonymousUser
-from django.contrib.contenttypes.models import ContentType
 from django.utils.encoding import smart_str
 from django.utils.translation import gettext as _
-from django.conf import settings
-
-from userena import settings as userena_settings
-from userena.utils import (
-    generate_nonce,
-    get_profile_model,
-    get_datetime_now,
-    get_user_profile,
-)
-from userena import signals as userena_signals
-
 from guardian.shortcuts import assign_perm, get_perms
 
-
-import re
+from userena import settings as userena_settings
+from userena import signals as userena_signals
+from userena.utils import (
+    generate_nonce,
+    get_datetime_now,
+    get_profile_model,
+    get_user_profile,
+)
 
 NONCE_RE = re.compile(r"^[\w]{40}$")
 
@@ -30,14 +28,19 @@ ASSIGNED_PERMISSIONS = {
         ("change_profile", "Can change profile"),
         ("delete_profile", "Can delete profile"),
     ),
-    "user": (("change_user", "Can change user"), ("delete_user", "Can delete user")),
+    "user": (
+        ("change_user", "Can change user"),
+        ("delete_user", "Can delete user"),
+    ),
 }
 
 
 class UserenaManager(UserManager):
-    """ Extra functionality for the Userena model. """
+    """Extra functionality for the Userena model."""
 
-    def create_user(self, username, email, password, active=False, send_email=True):
+    def create_user(
+        self, username, email, password, active=False, send_email=True
+    ):
         """
         A simple wrapper that creates a new :class:`User`.
 
@@ -63,7 +66,9 @@ class UserenaManager(UserManager):
 
         """
 
-        new_user = get_user_model().objects.create_user(username, email, password)
+        new_user = get_user_model().objects.create_user(
+            username, email, password
+        )
         new_user.is_active = active
         new_user.save()
 
@@ -151,7 +156,9 @@ class UserenaManager(UserManager):
                 user.save(using=self._db)
 
                 # Send the activation_complete signal
-                userena_signals.activation_complete.send(sender=None, user=user)
+                userena_signals.activation_complete.send(
+                    sender=None, user=user
+                )
 
                 return user
         return False
@@ -203,7 +210,10 @@ class UserenaManager(UserManager):
                 user = userena.user
                 old_email = user.email
                 user.email = userena.email_unconfirmed
-                userena.email_unconfirmed, userena.email_confirmation_key = "", ""
+                userena.email_unconfirmed, userena.email_confirmation_key = (
+                    "",
+                    "",
+                )
                 userena.save(using=self._db)
                 user.save(using=self._db)
 
@@ -224,13 +234,15 @@ class UserenaManager(UserManager):
 
         """
         deleted_users = []
-        for user in get_user_model().objects.filter(is_staff=False, is_active=False):
+        for user in get_user_model().objects.filter(
+            is_staff=False, is_active=False
+        ):
             if user.userena_signup.activation_key_expired():
                 deleted_users.append(user)
                 user.delete()
         return deleted_users
 
-    def check_permissions(self):
+    def check_permissions(self):  # noqa:C901
         """
         Checks that all permissions are set correctly for the users.
 
@@ -259,7 +271,9 @@ class UserenaManager(UserManager):
                 except Permission.DoesNotExist:
                     changed_permissions.append(perm[1])
                     Permission.objects.create(
-                        name=perm[1], codename=perm[0], content_type=model_content_type
+                        name=perm[1],
+                        codename=perm[0],
+                        content_type=model_content_type,
                     )
 
         # it is safe to rely on settings.ANONYMOUS_USER_NAME since it is a
@@ -271,10 +285,13 @@ class UserenaManager(UserManager):
                 user_profile = get_user_profile(user=user)
             except ObjectDoesNotExist:
                 warnings.append(
-                    _("No profile found for %(username)s") % {"username": user.username}
+                    _("No profile found for %(username)s")
+                    % {"username": user.username}
                 )
             else:
-                all_permissions = get_perms(user, user_profile) + get_perms(user, user)
+                all_permissions = get_perms(user, user_profile) + get_perms(
+                    user, user
+                )
 
                 for model, perms in ASSIGNED_PERMISSIONS.items():
                     if model == "profile":
@@ -291,7 +308,7 @@ class UserenaManager(UserManager):
 
 
 class UserenaBaseProfileManager(models.Manager):
-    """ Manager for :class:`UserenaProfile` """
+    """Manager for :class:`UserenaProfile`"""
 
     def get_visible_profiles(self, user=None):
         """
@@ -314,7 +331,9 @@ class UserenaBaseProfileManager(models.Manager):
 
         profiles = profiles.filter(**filter_kwargs)
         if user and isinstance(user, AnonymousUser):
-            profiles = profiles.exclude(Q(privacy="closed") | Q(privacy="registered"))
+            profiles = profiles.exclude(
+                Q(privacy="closed") | Q(privacy="registered")
+            )
         else:
             profiles = profiles.exclude(Q(privacy="closed"))
         return profiles

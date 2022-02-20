@@ -1,19 +1,19 @@
+import datetime
+import re
+
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-
-from userena.models import UserenaSignup
-from userena import settings as userena_settings
-from userena.utils import get_user_profile
-
 from guardian.shortcuts import get_perms
 
-import datetime, re
+from userena import settings as userena_settings
+from userena.models import UserenaSignup
+from userena.utils import get_user_profile
 
 User = get_user_model()
 
 
 class UserenaManagerTests(TestCase):
-    """ Test the manager of Userena """
+    """Test the manager of Userena"""
 
     user_info = {
         "username": "alice",
@@ -53,7 +53,9 @@ class UserenaManagerTests(TestCase):
         self.assertTrue(get_user_profile(user=new_user))
 
         # User should be saved
-        self.assertEqual(User.objects.filter(email=self.user_info["email"]).count(), 1)
+        self.assertEqual(
+            User.objects.filter(email=self.user_info["email"]).count(), 1
+        )
 
     def test_activation_valid(self):
         """
@@ -128,10 +130,7 @@ class UserenaManagerTests(TestCase):
         )
 
     def test_confirmation_valid(self):
-        """
-        Confirmation of a new e-mail address with turns out to be valid.
-
-        """
+        """Confirmation of a new e-mail address with turns out to be valid."""
         new_email = "john@newexample.com"
         user = User.objects.get(pk=1)
         user.userena_signup.change_email(new_email)
@@ -166,10 +165,7 @@ class UserenaManagerTests(TestCase):
         self.assertFalse(UserenaSignup.objects.confirm_email(10 * "a1b2"))
 
     def test_delete_expired_users(self):
-        """
-        Test if expired users are deleted from the database.
-
-        """
+        """Test if expired users are deleted from the database."""
         expired_user = UserenaSignup.objects.create_user(**self.user_info)
         expired_user.date_joined -= datetime.timedelta(
             days=userena_settings.USERENA_ACTIVATION_DAYS + 1
@@ -185,11 +181,9 @@ class UserenaManagersIssuesTests(TestCase):
     fixtures = ["users"]
 
     def test_issue_455_printing_user_model_from_userena_signup_objects_create_user(
-        self
+        self,
     ):
-        """
-        Issue: https://github.com/bread-and-pepper/django-userena/issues/455
-        """
+        """Issue: https://github.com/bread-and-pepper/django-userena/issues/455"""
         user = UserenaSignup.objects.create_user(
             "test", "test@t.com", "test", active=True, send_email=False
         )

@@ -1,13 +1,10 @@
-import re
-
 from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.translation import gettext as _
-from django.core.mail import EmailMultiAlternatives
+from html2text import html2text
 
 from userena import settings as userena_settings
-
-from html2text import html2text
 
 
 def send_mail(
@@ -16,7 +13,7 @@ def send_mail(
     message_html,
     email_from,
     email_to,
-    custom_headers={},
+    custom_headers=None,
     attachments=(),
 ):
     """
@@ -25,7 +22,9 @@ def send_mail(
     all the attached files.
     """
     if not message_plain and not message_html:
-        raise ValueError(_("Either message_plain or message_html should be not None"))
+        raise ValueError(
+            _("Either message_plain or message_html should be not None")
+        )
 
     if not message_plain:
         message_plain = html2text(message_html)
@@ -38,7 +37,7 @@ def send_mail(
     message["to"] = email_to
     if attachments:
         message["attachments"] = attachments
-    if custom_headers:
+    if custom_headers is not None:
         message["headers"] = custom_headers
 
     msg = EmailMultiAlternatives(**message)
@@ -51,8 +50,7 @@ def wrap_attachment():
     pass
 
 
-class UserenaConfirmationMail(object):
-
+class UserenaConfirmationMail:
     _message_txt = "userena/emails/{0}_email_message{1}.txt"
     _message_html = "userena/emails/{0}_email_message{1}.html"
     _subject_txt = "userena/emails/{0}_email_subject{1}.txt"

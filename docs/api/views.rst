@@ -54,5 +54,3 @@ profile_list
 ------------
 
 .. autofunction:: userena.views.profile_list
-
-

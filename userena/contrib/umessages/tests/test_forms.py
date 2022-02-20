@@ -5,7 +5,7 @@ from userena.contrib.umessages.forms import ComposeForm
 
 
 class ComposeFormTests(TestCase):
-    """ Test the compose form. """
+    """Test the compose form."""
 
     fixtures = ["users"]
 
@@ -33,7 +33,7 @@ class ComposeFormTests(TestCase):
             )
 
     def test_save_msg(self):
-        """ Test valid data """
+        """Test valid data"""
         valid_data = {"to": "john, jane", "body": "Body"}
 
         form = ComposeForm(data=valid_data)

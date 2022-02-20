@@ -1,9 +1,9 @@
 from django.test import TestCase
-from django.urls import reverse, NoReverseMatch
+from django.urls import NoReverseMatch, reverse
 
 
 class UserenaUrlsTests(TestCase):
-    """ Test url resolve """
+    """Test url resolve"""
 
     def test_resolve_email_with_plus_url(self):
         username = "foo+bar@example.com"

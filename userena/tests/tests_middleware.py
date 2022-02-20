@@ -2,12 +2,16 @@ from django.contrib.auth import get_user_model
 from django.http import HttpRequest
 from django.test import TestCase
 
-from userena.tests.profiles.models import Profile
-from userena.middleware import UserenaLocaleMiddleware
 from userena import settings as userena_settings
-from userena.utils import get_user_profile, get_profile_model
+from userena.middleware import UserenaLocaleMiddleware
+from userena.tests.profiles.models import Profile
+from userena.utils import get_profile_model, get_user_profile
 
 User = get_user_model()
+
+
+def get_response(r):
+    return r
 
 
 def has_profile(user):
@@ -16,7 +20,9 @@ def has_profile(user):
     try:
         profile = user.get_profile()
     except AttributeError:
-        related_name = profile_model._meta.get_field("user").related_query_name()
+        related_name = profile_model._meta.get_field(
+            "user"
+        ).related_query_name()
         profile = getattr(user, related_name, None)
     except profile_model.DoesNotExist:
         profile = None
@@ -25,12 +31,12 @@ def has_profile(user):
 
 
 class UserenaLocaleMiddlewareTests(TestCase):
-    """ Test the ``UserenaLocaleMiddleware`` """
+    """Test the ``UserenaLocaleMiddleware``"""
 
     fixtures = ["users", "profiles"]
 
     def _get_request_with_user(self, user):
-        """ Fake a request with an user """
+        """Fake a request with an user"""
         request = HttpRequest()
         request.META = {"SERVER_NAME": "testserver", "SERVER_PORT": 80}
         request.method = "GET"
@@ -41,7 +47,7 @@ class UserenaLocaleMiddlewareTests(TestCase):
         return request
 
     def test_preference_user(self):
-        """ Test the language preference of two users """
+        """Test the language preference of two users"""
         users = ((1, "nl"), (2, "en"))
 
         for pk, lang in users:
@@ -54,11 +60,13 @@ class UserenaLocaleMiddlewareTests(TestCase):
             self.assertEqual(profile.language, lang)
 
             # Request should have a ``LANGUAGE_CODE`` with dutch
-            UserenaLocaleMiddleware().process_request(req)
+            UserenaLocaleMiddleware(get_response=get_response).process_request(
+                req
+            )
             self.assertEqual(req.LANGUAGE_CODE, lang)
 
     def test_without_profile(self):
-        """ Middleware should do nothing when a user has no profile """
+        """Middleware should do nothing when a user has no profile"""
         # Delete the profile
         Profile.objects.get(pk=1).delete()
         user = User.objects.get(pk=1)
@@ -67,17 +75,17 @@ class UserenaLocaleMiddlewareTests(TestCase):
         self.assertFalse(has_profile(user))
 
         req = self._get_request_with_user(user)
-        UserenaLocaleMiddleware().process_request(req)
+        UserenaLocaleMiddleware(get_response=get_response).process_request(req)
 
         self.assertFalse(hasattr(req, "LANGUAGE_CODE"))
 
     def test_without_language_field(self):
-        """ Middleware should do nothing if the profile has no language field """
+        """Middleware should do nothing if the profile has no language field"""
         userena_settings.USERENA_LANGUAGE_FIELD = "non_existant_language_field"
         user = User.objects.get(pk=1)
 
         req = self._get_request_with_user(user)
 
         # Middleware should do nothing
-        UserenaLocaleMiddleware().process_request(req)
+        UserenaLocaleMiddleware(get_response=get_response).process_request(req)
         self.assertFalse(hasattr(req, "LANGUAGE_CODE"))

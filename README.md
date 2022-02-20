@@ -5,6 +5,7 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-userena-ce)](https://pypi.org/project/django-userena-ce/)
 [![Coverage Status](https://coveralls.io/repos/github/django-userena-ce/django-userena-ce/badge.svg?branch=master)](https://coveralls.io/github/django-userena-ce/django-userena-ce?branch=master)
 [![Documentation Status](https://readthedocs.org/projects/django-userena-ce/badge/?version=latest)](http://django-userena-ce.readthedocs.io/en/latest/?badge=latest)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 This project is a community edition fork of
 [django-userena](https://github.com/bread-and-pepper/django-userena).
@@ -30,4 +31,4 @@ Complete documentation about the
 [F.A.Q.](https://django-userena-ce.readthedocs.io/en/latest/faq.html) is available on
 [Read the Docs](https://django-userena-ce.readthedocs.io/en/latest/index.html).
 
-For list of updates and changes see `UPDATES.md` file.
+For list of updates and changes see `HISTORY.md` file.

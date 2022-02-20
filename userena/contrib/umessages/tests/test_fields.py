@@ -1,7 +1,7 @@
 import re
 
-from django.test import TestCase
 from django import forms
+from django.test import TestCase
 
 from userena.contrib.umessages.fields import CommaSeparatedUserField
 
@@ -10,7 +10,7 @@ class CommaSeparatedTestForm(forms.Form):
     users = CommaSeparatedUserField()
 
     def __init__(self, *args, **kwargs):
-        super(CommaSeparatedTestForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields["users"]._recipient_filter = self.filter_jane
 
     def filter_jane(self, user):
@@ -26,27 +26,41 @@ class CommaSeperatedFieldTests(TestCase):
         # Test invalid data supplied to the field.
         invalid_data_dicts = [
             # Empty username
-            {"data": {"users": ""}, "error": ("users", ["This field is required."])},
+            {
+                "data": {"users": ""},
+                "error": ("users", ["This field is required."]),
+            },
             # No data
             {"data": {}, "error": ("users", ["This field is required."])},
             # A list
-            {"data": {"users": []}, "error": ("users", ["This field is required."])},
+            {
+                "data": {"users": []},
+                "error": ("users", ["This field is required."]),
+            },
             # Forbidden username
             {
                 "data": {"users": "jane"},
-                "error": ("users", ["The following usernames are incorrect: jane."]),
+                "error": (
+                    "users",
+                    ["The following usernames are incorrect: jane."],
+                ),
             },
             # Non-existant username
             {
                 "data": {"users": "foo"},
-                "error": ("users", ["The following usernames are incorrect: foo."]),
+                "error": (
+                    "users",
+                    ["The following usernames are incorrect: foo."],
+                ),
             },
             # Multiple invalid usernames
             {
                 "data": {"users": "foo, bar"},
                 "error": (
                     "users",
-                    ["The following usernames are incorrect: (foo|bar), (foo|bar)."],
+                    [
+                        "The following usernames are incorrect: (foo|bar), (foo|bar)."
+                    ],
                 ),
             },
             # Valid and invalid
@@ -54,13 +68,18 @@ class CommaSeperatedFieldTests(TestCase):
                 "data": {"users": "foo, john, bar"},
                 "error": (
                     "users",
-                    ["The following usernames are incorrect: (foo|bar), (foo|bar)."],
+                    [
+                        "The following usernames are incorrect: (foo|bar), (foo|bar)."
+                    ],
                 ),
             },
             # Extra whitespace
             {
                 "data": {"users": "foo,    john  "},
-                "error": ("users", ["The following usernames are incorrect: foo."]),
+                "error": (
+                    "users",
+                    ["The following usernames are incorrect: foo."],
+                ),
             },
         ]
         for invalid_dict in invalid_data_dicts:

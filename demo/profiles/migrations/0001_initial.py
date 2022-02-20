@@ -72,7 +72,10 @@ class Migration(migrations.Migration):
                         verbose_name="language",
                     ),
                 ),
-                ("website", models.URLField(blank=True, verbose_name="website")),
+                (
+                    "website",
+                    models.URLField(blank=True, verbose_name="website"),
+                ),
                 (
                     "location",
                     models.CharField(
@@ -81,9 +84,14 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "birth_date",
-                    models.DateField(blank=True, null=True, verbose_name="birth date"),
+                    models.DateField(
+                        blank=True, null=True, verbose_name="birth date"
+                    ),
                 ),
-                ("about_me", models.TextField(blank=True, verbose_name="about me")),
+                (
+                    "about_me",
+                    models.TextField(blank=True, verbose_name="about me"),
+                ),
                 (
                     "user",
                     models.OneToOneField(

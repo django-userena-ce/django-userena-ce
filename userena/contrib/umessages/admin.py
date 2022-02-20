@@ -1,19 +1,21 @@
-from django import forms
-from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
-from django.contrib.auth.models import Group
+from django.utils.translation import gettext_lazy as _
 
-from userena.contrib.umessages.models import Message, MessageContact, MessageRecipient
+from userena.contrib.umessages.models import (
+    Message,
+    MessageContact,
+    MessageRecipient,
+)
 
 
 class MessageRecipientInline(admin.TabularInline):
-    """ Inline message recipients """
+    """Inline message recipients"""
 
     model = MessageRecipient
 
 
 class MessageAdmin(admin.ModelAdmin):
-    """ Admin message class with inline recipients """
+    """Admin message class with inline recipients"""
 
     inlines = [MessageRecipientInline]
 
@@ -21,7 +23,10 @@ class MessageAdmin(admin.ModelAdmin):
         (None, {"fields": ("sender", "body"), "classes": ("monospace")}),
         (
             _("Date/time"),
-            {"fields": ("sender_deleted_at",), "classes": ("collapse", "wide")},
+            {
+                "fields": ("sender_deleted_at",),
+                "classes": ("collapse", "wide"),
+            },
         ),
     )
     list_display = ("sender", "body", "sent_at")
