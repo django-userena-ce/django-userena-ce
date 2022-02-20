@@ -6,6 +6,7 @@
 - Added support for Python 3.10, Django 4.0
 - Removed `south_migrations`
 - Migrated to PEP517
+- Formatted code with `black`
 
 ## Version 6.0.1
 
