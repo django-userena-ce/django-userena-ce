@@ -28,6 +28,7 @@ html2text = "*"
 Django = "^3.2 || ^4.0"
 
 [tool.poetry.dev-dependencies]
+six = "*"
 pytest = "*"
 pytest-xdist = "*"
 pytest-django = "*"
