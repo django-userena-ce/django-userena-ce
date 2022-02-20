@@ -96,6 +96,9 @@ commands =
 [testenv:coverage]
 passenv = COVERALLS_REPO_TOKEN
 commands =
+    poetry lock
+    # See https://github.com/python-poetry/poetry/issues/1745#issuecomment-648365339
+    bash -c 'poetry export --dev --without-hashes -f requirements.txt | grep -v "^[dD]jango==" | poetry run pip install --no-deps -r /dev/stdin'
     poetry run pytest --cov=userena {posargs}
     poetry run coveralls
 """
