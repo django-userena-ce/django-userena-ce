@@ -73,7 +73,8 @@ class UserenaSignup(models.Model):
         _("notification send"),
         default=False,
         help_text=_(
-            "Designates whether this user has already got a notification about activating their account."
+            "Designates whether this user has already got a "
+            "notification about activating their account."
         ),
     )
 

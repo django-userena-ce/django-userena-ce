@@ -1,3 +1,3 @@
 # SiteProfileNotAvailable compatibility
-class SiteProfileNotAvailable(Exception):
+class SiteProfileNotAvailable(Exception):  # noqa: N818
     pass

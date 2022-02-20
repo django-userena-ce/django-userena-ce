@@ -265,7 +265,8 @@ def activate(
                             messages.success(
                                 request,
                                 _(
-                                    "Your account has been activated and you have been signed in."
+                                    "Your account has been activated and "
+                                    "you have been signed in."
                                 ),
                                 fail_silently=True,
                             )

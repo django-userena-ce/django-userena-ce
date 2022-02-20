@@ -13,7 +13,7 @@ def send_mail(
     message_html,
     email_from,
     email_to,
-    custom_headers={},
+    custom_headers=None,
     attachments=(),
 ):
     """
@@ -37,7 +37,7 @@ def send_mail(
     message["to"] = email_to
     if attachments:
         message["attachments"] = attachments
-    if custom_headers:
+    if custom_headers is not None:
         message["headers"] = custom_headers
 
     msg = EmailMultiAlternatives(**message)

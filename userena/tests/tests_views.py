@@ -145,10 +145,7 @@ class UserenaViewsTests(TestCase):
         userena_settings.USERENA_ACTIVATION_RETRY = False
 
     def test_invalid_activation(self):
-        """
-        A ``GET`` to the activation view with a wrong ``activation_key``.
-
-        """
+        """A ``GET`` to the activation view with a wrong ``activation_key``."""
         response = self.client.post(
             reverse("userena_activate", kwargs={"activation_key": "fake"})
         )
@@ -179,10 +176,7 @@ class UserenaViewsTests(TestCase):
         )
 
     def test_invalid_confirmation(self):
-        """
-        A ``GET`` to the verification view with an invalid verification key.
-
-        """
+        """A ``GET`` to the verification view with an invalid verification key."""
         response = self.client.get(
             reverse(
                 "userena_email_confirm", kwargs={"confirmation_key": "WRONG"}

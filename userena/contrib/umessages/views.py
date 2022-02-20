@@ -44,11 +44,7 @@ class MessageListView(ListView):
 
 
 class MessageDetailListView(MessageListView):
-    """
-
-    Returns a conversation between two users
-
-    """
+    """Returns a conversation between two users"""
 
     template_name = "umessages/message_detail.html"
 

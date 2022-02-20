@@ -125,10 +125,7 @@ class AuthenticationFormTests(TestCase):
     fixtures = ["users"]
 
     def test_signin_form(self):
-        """
-        Check that the ``SigninForm`` requires both identification and password
-
-        """
+        """Check that the ``SigninForm`` requires both identification and password"""
         invalid_data_dicts = [
             {
                 "data": {"identification": "", "password": "inhalefish"},
@@ -142,7 +139,8 @@ class AuthenticationFormTests(TestCase):
                 "error": (
                     "__all__",
                     [
-                        "Please enter a correct username or email and password. Note that both fields are case-sensitive."
+                        "Please enter a correct username or email and password. "
+                        "Note that both fields are case-sensitive."
                     ],
                 ),
             },

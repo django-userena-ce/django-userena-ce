@@ -39,14 +39,19 @@ class Migration(migrations.Migration):
                     "activation_notification_send",
                     models.BooleanField(
                         default=False,
-                        help_text="Designates whether this user has already got a notification about activating their account.",
+                        help_text=(
+                            "Designates whether this user has already got a "
+                            "notification about activating their account."
+                        ),
                         verbose_name="notification send",
                     ),
                 ),
                 (
                     "email_unconfirmed",
                     models.EmailField(
-                        help_text="Temporary email address when the user requests an email change.",
+                        help_text=(
+                            "Temporary email address when the user requests an email change."
+                        ),
                         max_length=75,
                         verbose_name="unconfirmed email address",
                         blank=True,

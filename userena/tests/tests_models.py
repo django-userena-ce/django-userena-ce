@@ -45,12 +45,12 @@ class UserenaSignupModelTests(TestCase):
         self.assertNotEqual(filename, path)
 
         # Check if the correct path is returned
-        MUGSHOT_RE = re.compile(
+        mugshot_re = re.compile(
             r"^%(mugshot_path)s[\w]{10}.png$"
             % {"mugshot_path": userena_settings.USERENA_MUGSHOT_PATH}
         )
 
-        self.assertTrue(MUGSHOT_RE.search(path))
+        self.assertTrue(mugshot_re.search(path))
 
     def test_stringification(self):
         """
@@ -113,9 +113,7 @@ class UserenaSignupModelTests(TestCase):
         self.assertEqual(mail.outbox[0].to, [self.user_info["email"]])
 
     def test_plain_email(self):
-        """
-        If HTML emails are disabled, check that outgoing emails are not multipart
-        """
+        """If HTML emails are disabled, check that outgoing emails are not multipart"""
         userena_settings.USERENA_HTML_EMAIL = False
         UserenaSignup.objects.create_user(**self.user_info)
         self.assertEqual(len(mail.outbox), 1)
@@ -225,10 +223,7 @@ class BaseProfileModelTest(TestCase):
         userena_settings.USERENA_MUGSHOT_GRAVATAR = True
 
     def test_get_mugshot_url_with_gravatar(self):
-        """
-        Test if the correct mugshot is returned when the user makes use of gravatar.
-
-        """
+        """Test if the correct mugshot is returned when the user makes use of gravatar."""
         profile = Profile.objects.get(pk=1)
 
         gravatar_hash = hashlib.md5(

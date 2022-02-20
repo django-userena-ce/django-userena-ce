@@ -70,7 +70,8 @@ class SignupForm(forms.Form):
             ):
                 raise forms.ValidationError(
                     _(
-                        "This username is already taken but not confirmed. Please check your email for verification steps."
+                        "This username is already taken but not confirmed. "
+                        "Please check your email for verification steps."
                     )
                 )
             raise forms.ValidationError(_("This username is already taken."))
@@ -94,7 +95,8 @@ class SignupForm(forms.Form):
             ):
                 raise forms.ValidationError(
                     _(
-                        "This email is already in use but not confirmed. Please check your email for verification steps."
+                        "This email is already in use but not confirmed. "
+                        "Please check your email for verification steps."
                     )
                 )
             raise forms.ValidationError(
@@ -204,10 +206,7 @@ def identification_field_factory(label, error_required):
 
 
 class AuthenticationForm(forms.Form):
-    """
-    A custom form where the identification can be a e-mail address or username.
-
-    """
+    """A custom form where the identification can be a e-mail address or username."""
 
     identification = identification_field_factory(
         _("Email or username"),
@@ -254,7 +253,8 @@ class AuthenticationForm(forms.Form):
             if user is None:
                 raise forms.ValidationError(
                     _(
-                        "Please enter a correct username or email and password. Note that both fields are case-sensitive."
+                        "Please enter a correct username or email and password. "
+                        "Note that both fields are case-sensitive."
                     )
                 )
         return self.cleaned_data

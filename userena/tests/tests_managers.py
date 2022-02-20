@@ -130,10 +130,7 @@ class UserenaManagerTests(TestCase):
         )
 
     def test_confirmation_valid(self):
-        """
-        Confirmation of a new e-mail address with turns out to be valid.
-
-        """
+        """Confirmation of a new e-mail address with turns out to be valid."""
         new_email = "john@newexample.com"
         user = User.objects.get(pk=1)
         user.userena_signup.change_email(new_email)
@@ -168,10 +165,7 @@ class UserenaManagerTests(TestCase):
         self.assertFalse(UserenaSignup.objects.confirm_email(10 * "a1b2"))
 
     def test_delete_expired_users(self):
-        """
-        Test if expired users are deleted from the database.
-
-        """
+        """Test if expired users are deleted from the database."""
         expired_user = UserenaSignup.objects.create_user(**self.user_info)
         expired_user.date_joined -= datetime.timedelta(
             days=userena_settings.USERENA_ACTIVATION_DAYS + 1
@@ -189,9 +183,7 @@ class UserenaManagersIssuesTests(TestCase):
     def test_issue_455_printing_user_model_from_userena_signup_objects_create_user(
         self,
     ):
-        """
-        Issue: https://github.com/bread-and-pepper/django-userena/issues/455
-        """
+        """Issue: https://github.com/bread-and-pepper/django-userena/issues/455"""
         user = UserenaSignup.objects.create_user(
             "test", "test@t.com", "test", active=True, send_email=False
         )

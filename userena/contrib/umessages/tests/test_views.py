@@ -78,26 +78,6 @@ class MessagesViewsTests(TestCase):
         # Test that the initial data of the form is set.
         self.assertEqual(response.context["form"].initial["to"], [jane, john])
 
-    def test_message_detail(self):
-        """A ``GET`` to the detail view"""
-        self._test_login("userena_umessages_detail", kwargs={"message_id": 2})
-
-        # Sign in
-        self.client.login(username="jane", password="blowfish")
-        response = self.client.get(
-            reverse("userena_umessages_detail", kwargs={"message_id": 1})
-        )
-
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "umessages/message_detail.html")
-
-        # Test that the message is read.
-        jane = User.objects.get(pk=2)
-        mr = MessageRecipient.objects.get(
-            message=Message.objects.get(pk=1), user=jane
-        )
-        self.assertTrue(mr.read_at)
-
     def test_valid_message_remove(self):
         """``POST`` to remove a message"""
         # Test that sign in is required
@@ -196,7 +176,7 @@ class MessagesViewsTests(TestCase):
 
         self.assertTemplateUsed(response, "umessages/message_list.html")
 
-    def test_message_detail_two_users(self):
+    def test_message_detail(self):
         """``GET`` to a detail page between two users"""
         self._test_login(
             "userena_umessages_detail", kwargs={"username": "jane"}
