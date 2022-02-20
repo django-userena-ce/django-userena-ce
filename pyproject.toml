@@ -13,7 +13,6 @@ classifiers = [
     'Development Status :: 5 - Production/Stable',
     'Environment :: Web Environment',
     'Framework :: Django',
-    'Framework :: Django :: 2.2',
     'Framework :: Django :: 3.2',
     'Framework :: Django :: 4.0',
     'Intended Audience :: Developers',
@@ -89,6 +88,7 @@ deps =
     django40: django>=4.0,<4.1
     coverage: django>=4.0,<4.1
 commands =
+    poetry lock
     # See https://github.com/python-poetry/poetry/issues/1745#issuecomment-648365339
     bash -c 'poetry export --dev --without-hashes -f requirements.txt | grep -v "^[dD]jango==" | poetry run pip install --no-deps -r /dev/stdin'
     poetry run pytest --basetemp={envtmpdir} {posargs}
