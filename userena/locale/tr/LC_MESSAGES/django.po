@@ -798,5 +798,3 @@ msgstr "konum"
 #: tests/profile.py:15 tests/profiles/models.py:27
 msgid "about me"
 msgstr "hakkımda"
-
-

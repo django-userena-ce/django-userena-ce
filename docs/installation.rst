@@ -69,7 +69,7 @@ Manual installation of development version with git.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Clone userena with::
-    
+
     git clone git://github.com/django-userena-ce/django-userena-ce.git
 
 You now have a directory ``django-userena`` which contains the ``userena``
@@ -84,8 +84,8 @@ Now userena is available to your project.
 Start New App
 ~~~~~~~~~~~~~
 
-You need to create a new app on your Django project. 
-In your Command Prompt shell, type: ``python manage.py startapp accounts``. 
+You need to create a new app on your Django project.
+In your Command Prompt shell, type: ``python manage.py startapp accounts``.
 We are creating a new app for Userena titled 'accounts'.
 
 Next, add ``accounts`` to the ``INSTALLED_APPS`` in your settings.py file.
@@ -103,8 +103,8 @@ Begin by adding ``userena``, ``guardian`` and ``easy_thumbnails`` to the
 ``django.contrib.sites`` must also be present if it is not already (see `Django docs
 <https://docs.djangoproject.com/en/1.11/ref/contrib/sites/>`_.).
 
-Next add ``UserenaAuthenticationBackend`` and ``ObjectPermissionBackend`` 
-also in your settings.py file, from django-guardian, at the top of ``AUTHENTICATION_BACKENDS``. 
+Next add ``UserenaAuthenticationBackend`` and ``ObjectPermissionBackend``
+also in your settings.py file, from django-guardian, at the top of ``AUTHENTICATION_BACKENDS``.
 If you only have Django's default backend, adding django-guardian and that of userena will get
 the following:
 
@@ -121,14 +121,14 @@ Email Backend
 
 Userena uses the Django email facilities to send mail to users, for example
 after user signup for email verification.  By default Django uses the SMTP
-backend, which may cause issues in development and/or if the default SMTP 
-settings are not suitable for your environment.  It is recommended to 
+backend, which may cause issues in development and/or if the default SMTP
+settings are not suitable for your environment.  It is recommended to
 explicitly set the email backend provider in your settings.py.  For example:
 
 .. code-block:: python
 
     EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
-    
+
 
 To use GMail SMTP, you may use the following code in your settings.py:
 
@@ -168,13 +168,13 @@ must also connect itself to the :class:`User` model of Django.
     from django.contrib.auth.models import User
     from django.utils.translation import gettext as _
     from userena.models import UserenaBaseProfile
-    
+
     class MyProfile(UserenaBaseProfile):
         user = models.OneToOneField(User,
                                     unique=True,
                                     verbose_name=_('user'),
                                     related_name='my_profile',
-                                    on_delete=models.CASCADE) 
+                                    on_delete=models.CASCADE)
         favourite_snack = models.CharField(_('favourite snack'),
                                            max_length=5)
 
@@ -188,10 +188,10 @@ The URI's
 ~~~~~~~~~
 
 Userena has a ``URLconf`` which sets all the urls and views for you. This
-should be included in your project's root ``URLconf``. 
+should be included in your project's root ``URLconf``.
 
 For example, to place the URIs under the prefix ``/accounts/``, you could add
-the following to your project's root ``URLconf``. 
+the following to your project's root ``URLconf``.
 Add this code under ``urlpatterns`` in your urls.py file.
 
 .. code-block:: python
@@ -232,14 +232,14 @@ your project. You can look into the next chapter to fully customize userena to
 your likings.
 
 To integrate Userena with your domain you must create a Site for it in the
-Django admin screen (e.g. http://<yoursite.com>/admin/sites/ ) and then 
+Django admin screen (e.g. http://<yoursite.com>/admin/sites/ ) and then
 put the id for that site in the SITE_ID setting variable.:
 
 .. code-block:: python
 
-   SITE_ID = <site.id of your site> # will probably be '1' if this is your 
+   SITE_ID = <site.id of your site> # will probably be '1' if this is your
                                     # first.
-                                    
+
 To look up your site_id open a shell in manage.py (manage.py shell) and:
 
 .. code-block:: python
@@ -266,7 +266,7 @@ the management :ref:`commands`.
 Migrating from bread-and-pepper/django-userena
 ==============================================
 
-This project was forked from bread-and-pepper/django-userena v2.0.1. 
+This project was forked from bread-and-pepper/django-userena v2.0.1.
 To migrate from this project you just need to install the package
 and update a key which was changed in django-guardian:
 
@@ -274,4 +274,3 @@ and update a key which was changed in django-guardian:
 2. `pip install django-userena-ce==3.1.0`
 3. Replace `django-userena` to `django-userena-ce` in your `INSTALLED_APPS`
 4. Update your django settings, remove `ANONYMOUS_USER_ID` and set `ANONYMOUS_USER_NAME`
-

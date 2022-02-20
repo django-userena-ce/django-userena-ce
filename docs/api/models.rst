@@ -29,4 +29,3 @@ UserenaLanguageBaseProfile
 
 .. autoclass:: userena.models.UserenaLanguageBaseProfile
    :members:
-

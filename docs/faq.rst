@@ -29,12 +29,12 @@ follows:
 
     # Unregister userena's
     admin.site.unregister(YOUR_PROFILE_MODEL)
-                
+
     # Register your own admin class and attach it to the model
     admin.site.register(YOUR_PROFILE_MODEL, YOUR_PROFILE_ADMIN)
 
 Can I still add users manually?
--------------------------------           
+-------------------------------
 Yes, but Userena requires there to be a `UserenaSignup` object for every
 registered user. If it's not there, you could receive the following error:
 
