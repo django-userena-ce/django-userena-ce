@@ -54,7 +54,7 @@ jobs:
 
   deploy:
     if: github.event_name == 'release'
-    needs: [pre-commit, build]
+    needs: [precommit, build]
     runs-on: ubuntu-latest
     steps:
       - name: Install Python ${{ env.MINIMUM_PYTHON_VERSION }}
