@@ -1,11 +1,10 @@
-# Userena settings file.
-#
-# Please consult the docs for more information about each setting.
-
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
-gettext = lambda s: s
+
+def gettext(s):
+    return s
+
 
 USERENA_SIGNIN_AFTER_SIGNUP = getattr(
     settings, "USERENA_SIGNIN_AFTER_SIGNUP", False
@@ -118,7 +117,7 @@ if hasattr(settings, "ANONYMOUS_USER_ID"):
     )
 
 try:
-    if settings.ANONYMOUS_USER_NAME == None:
+    if settings.ANONYMOUS_USER_NAME is None:
         raise ImproperlyConfigured(
             "settings.ANONYMOUS_USER_NAME must not be None."
         )

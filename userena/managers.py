@@ -242,7 +242,7 @@ class UserenaManager(UserManager):
                 user.delete()
         return deleted_users
 
-    def check_permissions(self):
+    def check_permissions(self):  # noqa:C901
         """
         Checks that all permissions are set correctly for the users.
 

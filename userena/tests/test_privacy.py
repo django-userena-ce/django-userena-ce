@@ -83,7 +83,7 @@ class PrivacyTests(TestCase):
 
     def test_edit_profile_view(self):
         """Editing a profile should only be available to the owner and the admin"""
-        profile = Profile.objects.get(pk=1)
+        Profile.objects.get(pk=1)
 
         users_status = (
             (None, 403),

@@ -10,6 +10,10 @@ from userena.utils import get_profile_model, get_user_profile
 User = get_user_model()
 
 
+def get_response(r):
+    return r
+
+
 def has_profile(user):
     """Test utility function to check if user has profile"""
     profile_model = get_profile_model()
@@ -56,7 +60,9 @@ class UserenaLocaleMiddlewareTests(TestCase):
             self.assertEqual(profile.language, lang)
 
             # Request should have a ``LANGUAGE_CODE`` with dutch
-            UserenaLocaleMiddleware().process_request(req)
+            UserenaLocaleMiddleware(get_response=get_response).process_request(
+                req
+            )
             self.assertEqual(req.LANGUAGE_CODE, lang)
 
     def test_without_profile(self):
@@ -69,7 +75,7 @@ class UserenaLocaleMiddlewareTests(TestCase):
         self.assertFalse(has_profile(user))
 
         req = self._get_request_with_user(user)
-        UserenaLocaleMiddleware().process_request(req)
+        UserenaLocaleMiddleware(get_response=get_response).process_request(req)
 
         self.assertFalse(hasattr(req, "LANGUAGE_CODE"))
 
@@ -81,5 +87,5 @@ class UserenaLocaleMiddlewareTests(TestCase):
         req = self._get_request_with_user(user)
 
         # Middleware should do nothing
-        UserenaLocaleMiddleware().process_request(req)
+        UserenaLocaleMiddleware(get_response=get_response).process_request(req)
         self.assertFalse(hasattr(req, "LANGUAGE_CODE"))

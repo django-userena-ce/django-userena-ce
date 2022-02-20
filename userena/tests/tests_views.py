@@ -255,7 +255,7 @@ class UserenaViewsTests(TestCase):
             self.client.login(username="john", password="blowfish")
         )
         # Post a new, valid signup
-        response = self.client.post(
+        self.client.post(
             reverse("userena_signup"),
             data={
                 "username": "alice",
@@ -307,7 +307,7 @@ class UserenaViewsTests(TestCase):
         # disregarding USERENA_SIGNIN_AFTER_SIGNUP setting
         userena_settings.USERENA_SIGNIN_AFTER_SIGNUP = True
         userena_settings.USERENA_ACTIVATION_REQUIRED = True
-        response = self.client.post(
+        self.client.post(
             reverse("userena_signup"),
             data={
                 "username": "alice",
@@ -328,7 +328,7 @@ class UserenaViewsTests(TestCase):
 
         userena_settings.USERENA_SIGNIN_AFTER_SIGNUP = True
         userena_settings.USERENA_ACTIVATION_REQUIRED = False
-        response = self.client.post(
+        self.client.post(
             reverse("userena_signup"),
             data={
                 "username": "johndoe",
@@ -360,7 +360,7 @@ class UserenaViewsTests(TestCase):
         ``REMEMBER_ME_DAYS``.
 
         """
-        response = self.client.post(
+        self.client.post(
             reverse("userena_signin"),
             data={
                 "identification": "john@example.com",
@@ -379,7 +379,7 @@ class UserenaViewsTests(TestCase):
         remembered.
 
         """
-        response = self.client.post(
+        self.client.post(
             reverse("userena_signin"),
             data={
                 "identification": "john@example.com",
@@ -512,7 +512,7 @@ class UserenaViewsTests(TestCase):
         self.assertEqual(response.status_code, 403)
 
         # Login
-        client = self.client.login(username="john", password="blowfish")
+        self.client.login(username="john", password="blowfish")
         response = self.client.get(
             reverse("userena_email_change", kwargs={"username": "john"})
         )

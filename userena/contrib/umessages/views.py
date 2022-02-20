@@ -142,7 +142,7 @@ def message_compose(
                 request.POST.get(REDIRECT_FIELD_NAME, False),
             )
 
-            message = form.save(request.user)
+            form.save(request.user)
             recipients = form.cleaned_data["to"]
 
             if userena_settings.USERENA_USE_MESSAGES:
@@ -172,7 +172,7 @@ def message_compose(
 
 @login_required
 @require_http_methods(["POST"])
-def message_remove(request, undo=False):
+def message_remove(request, undo=False):  # noqa:C901
     """
     A ``POST`` to remove messages.
 

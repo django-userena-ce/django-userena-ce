@@ -85,7 +85,7 @@ class CheckPermissionTests(TestCase):
         # Check it again should do nothing
         call_command("check_permissions", test=True)
 
-    def test_incomplete_permissions(self):
+    def test_incomplete_permissions(self):  # noqa:C901
         # Delete the neccesary permissions
         profile_model_obj = get_profile_model()
         content_type_profile = ContentType.objects.get_for_model(

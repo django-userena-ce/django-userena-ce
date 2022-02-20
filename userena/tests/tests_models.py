@@ -108,7 +108,7 @@ class UserenaSignupModelTests(TestCase):
         by ``UserenaSignup.send_activation_email``.
 
         """
-        new_user = UserenaSignup.objects.create_user(**self.user_info)
+        UserenaSignup.objects.create_user(**self.user_info)
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, [self.user_info["email"]])
 
@@ -117,7 +117,7 @@ class UserenaSignupModelTests(TestCase):
         If HTML emails are disabled, check that outgoing emails are not multipart
         """
         userena_settings.USERENA_HTML_EMAIL = False
-        new_user = UserenaSignup.objects.create_user(**self.user_info)
+        UserenaSignup.objects.create_user(**self.user_info)
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(
             str(mail.outbox[0].message()).find("multipart/alternative"), -1
@@ -131,7 +131,7 @@ class UserenaSignupModelTests(TestCase):
         userena_settings.USERENA_HTML_EMAIL = True
         userena_settings.USERENA_USE_PLAIN_TEMPLATE = True
 
-        new_user = UserenaSignup.objects.create_user(**self.user_info)
+        UserenaSignup.objects.create_user(**self.user_info)
 
         # Reset configuration
         userena_settings.USERENA_HTML_EMAIL = False
@@ -159,7 +159,7 @@ class UserenaSignupModelTests(TestCase):
         userena_settings.USERENA_HTML_EMAIL = True
         userena_settings.USERENA_USE_PLAIN_TEMPLATE = False
 
-        new_user = UserenaSignup.objects.create_user(**self.user_info)
+        UserenaSignup.objects.create_user(**self.user_info)
 
         # Reset configuration
         userena_settings.USERENA_HTML_EMAIL = False

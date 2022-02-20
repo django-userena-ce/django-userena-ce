@@ -22,7 +22,7 @@ class MessagesViewsTests(TestCase):
         self._test_login("userena_umessages_compose")
 
         # Sign in
-        client = self.client.login(username="john", password="blowfish")
+        self.client.login(username="john", password="blowfish")
         response = self.client.get(reverse("userena_umessages_compose"))
 
         self.assertEqual(response.status_code, 200)
@@ -32,7 +32,7 @@ class MessagesViewsTests(TestCase):
 
     def test_compose_post(self):
         """``POST`` to the compose view"""
-        client = self.client.login(username="john", password="blowfish")
+        self.client.login(username="john", password="blowfish")
 
         valid_data = {"to": "john", "body": "Hi"}
 
@@ -55,10 +55,9 @@ class MessagesViewsTests(TestCase):
 
     def test_compose_recipients(self):
         """A ``GET`` to the compose view with recipients"""
-        client = self.client.login(username="john", password="blowfish")
+        self.client.login(username="john", password="blowfish")
 
         valid_recipients = "john+jane"
-        invalid_recipients = "johny+jane"
 
         # Test valid recipients
         response = self.client.get(
@@ -84,7 +83,7 @@ class MessagesViewsTests(TestCase):
         self._test_login("userena_umessages_detail", kwargs={"message_id": 2})
 
         # Sign in
-        client = self.client.login(username="jane", password="blowfish")
+        self.client.login(username="jane", password="blowfish")
         response = self.client.get(
             reverse("userena_umessages_detail", kwargs={"message_id": 1})
         )
@@ -106,7 +105,7 @@ class MessagesViewsTests(TestCase):
         self.assertEqual(response.status_code, 302)
 
         # Sign in
-        client = self.client.login(username="john", password="blowfish")
+        self.client.login(username="john", password="blowfish")
 
         # Test that only posts are allowed
         response = self.client.get(reverse("userena_umessages_remove"))
@@ -121,7 +120,7 @@ class MessagesViewsTests(TestCase):
         self.assertTrue(msg.sender_deleted_at)
 
         # Test a valid post to delete a recipients message and a redirect
-        client = self.client.login(username="jane", password="blowfish")
+        self.client.login(username="jane", password="blowfish")
         response = self.client.post(
             reverse("userena_umessages_remove"),
             data={
@@ -137,7 +136,7 @@ class MessagesViewsTests(TestCase):
     def test_invalid_message_remove(self):
         """``POST`` to remove an invalid message"""
         # Sign in
-        client = self.client.login(username="john", password="blowfish")
+        self.client.login(username="john", password="blowfish")
 
         bef_len = Message.objects.filter(
             sender_deleted_at__isnull=False
@@ -157,7 +156,7 @@ class MessagesViewsTests(TestCase):
     def test_valid_message_remove_multiple(self):
         """``POST`` to remove multiple messages"""
         # Sign in
-        client = self.client.login(username="john", password="blowfish")
+        self.client.login(username="john", password="blowfish")
         response = self.client.post(
             reverse("userena_umessages_remove"), data={"message_pks": [1, 2]}
         )
@@ -171,7 +170,7 @@ class MessagesViewsTests(TestCase):
 
     def test_message_unremove(self):
         """Unremove a message"""
-        client = self.client.login(username="john", password="blowfish")
+        self.client.login(username="john", password="blowfish")
 
         # Delete a message as owner
         response = self.client.post(
@@ -191,18 +190,18 @@ class MessagesViewsTests(TestCase):
         """``GET`` the message list for a user"""
         self._test_login("userena_umessages_list")
 
-        client = self.client.login(username="john", password="blowfish")
+        self.client.login(username="john", password="blowfish")
         response = self.client.get(reverse("userena_umessages_list"))
         self.assertEqual(response.status_code, 200)
 
         self.assertTemplateUsed(response, "umessages/message_list.html")
 
-    def test_message_detail(self):
+    def test_message_detail_two_users(self):
         """``GET`` to a detail page between two users"""
         self._test_login(
             "userena_umessages_detail", kwargs={"username": "jane"}
         )
-        client = self.client.login(username="john", password="blowfish")
+        self.client.login(username="john", password="blowfish")
 
         response = self.client.get(
             reverse("userena_umessages_detail", kwargs={"username": "jane"})

@@ -56,7 +56,7 @@ class SignupForm(forms.Form):
 
         """
         try:
-            user = get_user_model().objects.get(
+            get_user_model().objects.get(
                 username__iexact=self.cleaned_data["username"]
             )
         except get_user_model().DoesNotExist:

@@ -1,7 +1,7 @@
 # Django settings for Userena demo project.
-DEBUG = True
-
 import os
+
+DEBUG = True
 
 settings_dir = os.path.dirname(__file__)
 PROJECT_ROOT = os.path.abspath(settings_dir)
@@ -22,7 +22,12 @@ DATABASES = {
 # Internationalization
 TIME_ZONE = "America/Chicago"
 LANGUAGE_CODE = "en-us"
-gettext = lambda s: s
+
+
+def gettext(s):
+    return s
+
+
 LANGUAGES = (
     ("en", gettext("English")),
     ("nl", gettext("Dutch")),

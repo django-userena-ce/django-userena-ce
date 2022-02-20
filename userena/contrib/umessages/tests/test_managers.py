@@ -18,7 +18,7 @@ class MessageManagerTests(TestCase):
         user_1 = User.objects.get(pk=1)
         user_2 = User.objects.get(pk=2)
 
-        messages = Message.objects.get_conversation_between(user_1, user_2)
+        Message.objects.get_conversation_between(user_1, user_2)
 
 
 class MessageRecipientManagerTest(TestCase):
