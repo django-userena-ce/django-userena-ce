@@ -1,0 +1,34 @@
+default_language_version:
+  python: python3.8
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.1.0
+    hooks:
+      - id: check-docstring-first
+      - id: debug-statements
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.31.0
+    hooks:
+      - id: pyupgrade
+        language: python
+        args: [--py37-plus]
+  - repo: https://github.com/ambv/black
+    rev: 22.1.0
+    hooks:
+      - id: black
+        language: python
+  #- repo: https://gitlab.com/pycqa/flake8
+  #  rev: 4.0.1
+  #  hooks:
+  #    - id: flake8
+  #      language: python
+  #      additional_dependencies:
+  #        - flake8-bugbear
+  #        - flake8-import-order
+  #        - pep8-naming
+  #        - flake8-docstrings
+  #        - mccabe
+  #        - yesqa
