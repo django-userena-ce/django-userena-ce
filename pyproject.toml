@@ -33,7 +33,6 @@ pytest-xdist = "*"
 pytest-django = "*"
 pytest-cov = "*"
 coveralls = "*"
-twine = "*"
 sphinx = "*"
 
 [build-system]
