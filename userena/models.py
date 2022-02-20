@@ -1,4 +1,6 @@
 #!/usr/bin/python
+import datetime
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.sites import shortcuts
@@ -6,18 +8,17 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from guardian.shortcuts import get_perms
+
 from userena import settings as userena_settings
-from userena.managers import UserenaManager, UserenaBaseProfileManager
+from userena.managers import UserenaBaseProfileManager, UserenaManager
 from userena.utils import (
-    get_gravatar,
     generate_nonce,
-    get_protocol,
     get_datetime_now,
+    get_gravatar,
+    get_protocol,
     user_model_label,
 )
-import datetime
 from .mail import UserenaConfirmationMail
-
 
 PROFILE_PERMISSIONS = (("view_profile", "Can view profile"),)
 

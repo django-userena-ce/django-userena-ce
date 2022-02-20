@@ -1,5 +1,5 @@
 from django.test import TestCase
-from django.urls import reverse, NoReverseMatch
+from django.urls import NoReverseMatch, reverse
 
 
 class UserenaUrlsTests(TestCase):

@@ -1,16 +1,16 @@
 import datetime
 import hashlib
 import re
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import parse_qs, urlparse
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
 from django.core import mail
-from django.conf import settings
 from django.test import TestCase
 
-from userena.models import UserenaSignup, upload_to_mugshot
 from userena import settings as userena_settings
+from userena.models import UserenaSignup, upload_to_mugshot
 from userena.tests.profiles.models import Profile
 from userena.utils import get_user_profile
 

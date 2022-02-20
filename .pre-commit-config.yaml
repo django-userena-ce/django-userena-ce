@@ -20,15 +20,15 @@ repos:
     hooks:
       - id: black
         language: python
-  - repo: https://gitlab.com/pycqa/flake8
-    rev: 4.0.1
-    hooks:
-      - id: flake8
-        language: python
-        additional_dependencies:
-          - flake8-bugbear
-          - flake8-import-order
-          - pep8-naming
-          - flake8-docstrings
-          - mccabe
-          - yesqa
+  #- repo: https://gitlab.com/pycqa/flake8
+  #  rev: 4.0.1
+  #  hooks:
+  #    - id: flake8
+  #      language: python
+  #      additional_dependencies:
+  #        - flake8-bugbear
+  #        - flake8-import-order
+  #        - pep8-naming
+  #        - flake8-docstrings
+  #        - mccabe
+  #        - yesqa

@@ -1,12 +1,12 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from userena.utils import truncate_words
 from userena.contrib.umessages.managers import (
-    MessageManager,
     MessageContactManager,
+    MessageManager,
     MessageRecipientManager,
 )
+from userena.utils import truncate_words
 from userena.utils import user_model_label
 
 

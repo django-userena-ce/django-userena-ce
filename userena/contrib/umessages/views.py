@@ -13,8 +13,8 @@ from userena import settings as userena_settings
 from userena.contrib.umessages.forms import ComposeForm
 from userena.contrib.umessages.models import (
     Message,
-    MessageRecipient,
     MessageContact,
+    MessageRecipient,
 )
 from userena.utils import get_datetime_now
 

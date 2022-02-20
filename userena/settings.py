@@ -7,7 +7,6 @@ from django.core.exceptions import ImproperlyConfigured
 
 gettext = lambda s: s
 
-
 USERENA_SIGNIN_AFTER_SIGNUP = getattr(
     settings, "USERENA_SIGNIN_AFTER_SIGNUP", False
 )
@@ -54,7 +53,6 @@ DEFAULT_USERENA_USE_HTTPS = False
 _USERENA_USE_HTTPS = getattr(
     settings, "USERENA_USE_HTTPS", DEFAULT_USERENA_USE_HTTPS
 )
-
 
 USERENA_MUGSHOT_GRAVATAR = getattr(settings, "USERENA_MUGSHOT_GRAVATAR", True)
 

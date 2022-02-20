@@ -1,18 +1,18 @@
-import re, six
-from urllib.parse import urlparse, parse_qs
+import re
+from urllib.parse import parse_qs, urlparse
 
-from django.test import TestCase
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.test import TestCase
 
+from userena.compat import SiteProfileNotAvailable
 from userena.utils import (
+    generate_nonce,
     get_gravatar,
-    signin_redirect,
     get_profile_model,
     get_protocol,
-    generate_nonce,
+    signin_redirect,
 )
-from userena.compat import SiteProfileNotAvailable
 
 
 class UtilsTests(TestCase):

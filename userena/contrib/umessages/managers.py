@@ -3,8 +3,6 @@ from django.db.models import Q
 
 from userena.contrib.umessages import signals
 
-import datetime
-
 
 class MessageContactManager(models.Manager):
     """Manager for the :class:`MessageContact` model"""

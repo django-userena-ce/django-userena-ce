@@ -1,10 +1,10 @@
+import datetime
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from userena.models import UserenaLanguageBaseProfile
 from userena.utils import user_model_label
-
-import datetime
 
 
 class Profile(UserenaLanguageBaseProfile):

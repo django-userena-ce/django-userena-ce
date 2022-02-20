@@ -1,7 +1,7 @@
 import re
 
-from django.test import TestCase
 from django import forms
+from django.test import TestCase
 
 from userena.contrib.umessages.fields import CommaSeparatedUserField
 

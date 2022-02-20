@@ -5,12 +5,12 @@
 
 {% block content %}
 
-<ul>
-{% for message in message_list %}
-<li>
-  {{ message }}
-  <p>{% blocktrans with message.sent_at as sent_at %}Received on {{ sent_at }}{% endblocktrans %}</p>
-</li>
-{% endfor %}
-</ul>
+    <ul>
+        {% for message in message_list %}
+            <li>
+                {{ message }}
+                <p>{% blocktrans with message.sent_at as sent_at %}Received on {{ sent_at }}{% endblocktrans %}</p>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

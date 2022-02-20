@@ -1,26 +1,24 @@
+import re
+
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AnonymousUser, Permission, UserManager
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.db.models import Q
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import UserManager, Permission, AnonymousUser
-from django.contrib.contenttypes.models import ContentType
 from django.utils.encoding import smart_str
 from django.utils.translation import gettext as _
-from django.conf import settings
-
-from userena import settings as userena_settings
-from userena.utils import (
-    generate_nonce,
-    get_profile_model,
-    get_datetime_now,
-    get_user_profile,
-)
-from userena import signals as userena_signals
-
 from guardian.shortcuts import assign_perm, get_perms
 
-
-import re
+from userena import settings as userena_settings
+from userena import signals as userena_signals
+from userena.utils import (
+    generate_nonce,
+    get_datetime_now,
+    get_profile_model,
+    get_user_profile,
+)
 
 NONCE_RE = re.compile(r"^[\w]{40}$")
 

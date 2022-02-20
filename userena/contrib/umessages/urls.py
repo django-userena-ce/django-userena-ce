@@ -1,7 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.urls import re_path
 
 from userena.contrib.umessages import views as messages_views
-from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     re_path(

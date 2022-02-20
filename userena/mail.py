@@ -1,13 +1,10 @@
-import re
-
 from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.translation import gettext as _
-from django.core.mail import EmailMultiAlternatives
+from html2text import html2text
 
 from userena import settings as userena_settings
-
-from html2text import html2text
 
 
 def send_mail(
@@ -54,7 +51,6 @@ def wrap_attachment():
 
 
 class UserenaConfirmationMail:
-
     _message_txt = "userena/emails/{0}_email_message{1}.txt"
     _message_html = "userena/emails/{0}_email_message{1}.html"
     _subject_txt = "userena/emails/{0}_email_subject{1}.txt"

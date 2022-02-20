@@ -1,8 +1,8 @@
+import re
+
 from django import template
 
 from userena.contrib.umessages.models import MessageRecipient
-
-import re
 
 register = template.Library()
 

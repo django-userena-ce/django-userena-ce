@@ -2,9 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from userena.contrib.umessages.fields import CommaSeparatedUserField
-from userena.contrib.umessages.models import Message, MessageRecipient
-
-import datetime
+from userena.contrib.umessages.models import Message
 
 
 class ComposeForm(forms.Form):

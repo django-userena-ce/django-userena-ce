@@ -13,4 +13,4 @@ class Command(BaseCommand):
     help = "Deletes expired users."
 
     def handle(self, *args, **kwargs):
-        users = UserenaSignup.objects.delete_expired_users()
+        UserenaSignup.objects.delete_expired_users()

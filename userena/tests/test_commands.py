@@ -1,17 +1,16 @@
-from django.test import TestCase
-from django.core.management import call_command
+import datetime
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
-
-from userena.models import UserenaSignup
-from userena.managers import ASSIGNED_PERMISSIONS
-from userena import settings as userena_settings
-from userena.utils import get_profile_model
-
+from django.core.management import call_command
+from django.test import TestCase
 from guardian.models import UserObjectPermission
 
-import datetime
+from userena import settings as userena_settings
+from userena.managers import ASSIGNED_PERMISSIONS
+from userena.models import UserenaSignup
+from userena.utils import get_profile_model
 
 User = get_user_model()
 

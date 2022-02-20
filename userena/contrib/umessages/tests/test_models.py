@@ -3,8 +3,8 @@ from django.test import TestCase
 
 from userena.contrib.umessages.models import (
     Message,
-    MessageRecipient,
     MessageContact,
+    MessageRecipient,
 )
 from userena.utils import truncate_words
 

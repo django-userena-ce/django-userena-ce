@@ -4,12 +4,12 @@
 {% block content_title %}<h2>{% trans "Compose" %}</h2>{% endblock %}
 
 {% block content %}
-<form action="" method="post" id="compose_message_form">
-  {% csrf_token %}
-  <fieldset>
-    <legend>{% trans "Compose message" %}</legend>
-    {{ form.as_p }}
-  </fieldset>
-  <input type="submit" name="send" value="{% trans "Send" %}" />
-</form>
+    <form action="" method="post" id="compose_message_form">
+        {% csrf_token %}
+        <fieldset>
+            <legend>{% trans "Compose message" %}</legend>
+            {{ form.as_p }}
+        </fieldset>
+        <input type="submit" name="send" value="{% trans "Send" %}"/>
+    </form>
 {% endblock %}
