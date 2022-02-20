@@ -16,6 +16,7 @@ class UserenaLocaleMiddleware(MiddlewareMixin):
     switch languages depending if the cookie is set.
 
     """
+
     def __init__(self, get_response=None):
 
         if get_response is None:
@@ -39,7 +40,9 @@ class UserenaLocaleMiddleware(MiddlewareMixin):
 
                 if profile:
                     try:
-                        lang = getattr(profile, userena_settings.USERENA_LANGUAGE_FIELD)
+                        lang = getattr(
+                            profile, userena_settings.USERENA_LANGUAGE_FIELD
+                        )
                         translation.activate(lang)
                         request.LANGUAGE_CODE = translation.get_language()
                     except AttributeError:

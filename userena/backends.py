@@ -10,7 +10,9 @@ class UserenaAuthenticationBackend(ModelBackend):
 
     """
 
-    def authenticate(self, request, identification, password=None, check_password=True):
+    def authenticate(
+        self, request, identification, password=None, check_password=True
+    ):
         """
         Authenticates a user through the combination email/username with
         password.

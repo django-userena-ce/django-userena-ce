@@ -61,15 +61,17 @@ class CheckPermissionTests(TestCase):
 
         # Remove all permissions
         UserObjectPermission.objects.filter(user=user).delete()
-        self.assertEqual(UserObjectPermission.objects.filter(user=user).count(), 0)
+        self.assertEqual(
+            UserObjectPermission.objects.filter(user=user).count(), 0
+        )
 
         # Check it
         call_command("check_permissions")
 
         # User should have all permissions again
-        user_permissions = UserObjectPermission.objects.filter(user=user).values_list(
-            "permission__codename", flat=True
-        )
+        user_permissions = UserObjectPermission.objects.filter(
+            user=user
+        ).values_list("permission__codename", flat=True)
 
         required_permissions = [
             "change_user",
@@ -87,7 +89,9 @@ class CheckPermissionTests(TestCase):
     def test_incomplete_permissions(self):
         # Delete the neccesary permissions
         profile_model_obj = get_profile_model()
-        content_type_profile = ContentType.objects.get_for_model(profile_model_obj)
+        content_type_profile = ContentType.objects.get_for_model(
+            profile_model_obj
+        )
         content_type_user = ContentType.objects.get_for_model(User)
         for model, perms in ASSIGNED_PERMISSIONS.items():
             if model == "profile":
@@ -95,7 +99,9 @@ class CheckPermissionTests(TestCase):
             else:
                 content_type = content_type_user
             for perm in perms:
-                Permission.objects.get(name=perm[1], content_type=content_type).delete()
+                Permission.objects.get(
+                    name=perm[1], content_type=content_type
+                ).delete()
 
         # Check if they are they are back
         for model, perms in ASSIGNED_PERMISSIONS.items():
@@ -131,7 +137,7 @@ class CheckPermissionTests(TestCase):
                     self.fail()
 
     def test_no_profile(self):
-        """ Check for warning when there is no profile """
+        """Check for warning when there is no profile"""
         # TODO: Dirty! Currently we check for the warning by getting a 100%
         # test coverage, meaning that it dit output some warning.
         user = UserenaSignup.objects.create_user(**self.user_info)

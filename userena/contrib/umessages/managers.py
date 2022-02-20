@@ -7,7 +7,7 @@ import datetime
 
 
 class MessageContactManager(models.Manager):
-    """ Manager for the :class:`MessageContact` model """
+    """Manager for the :class:`MessageContact` model"""
 
     def get_or_create(self, um_from_user, um_to_user, message):
         """
@@ -27,14 +27,18 @@ class MessageContactManager(models.Manager):
         except self.model.DoesNotExist:
             created = True
             contact = self.create(
-                um_from_user=um_from_user, um_to_user=um_to_user, latest_message=message
+                um_from_user=um_from_user,
+                um_to_user=um_to_user,
+                latest_message=message,
             )
 
         return (contact, created)
 
     def update_contact(self, um_from_user, um_to_user, message):
-        """ Get or update a contacts information """
-        contact, created = self.get_or_create(um_from_user, um_to_user, message)
+        """Get or update a contacts information"""
+        contact, created = self.get_or_create(
+            um_from_user, um_to_user, message
+        )
 
         # If the contact already existed, update the message
         if not created:
@@ -58,7 +62,7 @@ class MessageContactManager(models.Manager):
 
 
 class MessageManager(models.Manager):
-    """ Manager for the :class:`Message` model. """
+    """Manager for the :class:`Message` model."""
 
     def send_message(self, sender, um_to_user_list, body):
         """
@@ -85,7 +89,7 @@ class MessageManager(models.Manager):
         return msg
 
     def get_conversation_between(self, um_from_user, um_to_user):
-        """ Returns a conversation between two users """
+        """Returns a conversation between two users"""
         messages = self.filter(
             Q(
                 sender=um_from_user,
@@ -102,7 +106,7 @@ class MessageManager(models.Manager):
 
 
 class MessageRecipientManager(models.Manager):
-    """ Manager for the :class:`MessageRecipient` model. """
+    """Manager for the :class:`MessageRecipient` model."""
 
     def count_unread_messages_for(self, user):
         """

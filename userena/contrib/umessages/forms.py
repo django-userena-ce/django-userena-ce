@@ -10,7 +10,9 @@ import datetime
 class ComposeForm(forms.Form):
     to = CommaSeparatedUserField(label=_("To"))
     body = forms.CharField(
-        label=_("Message"), widget=forms.Textarea({"class": "message"}), required=True
+        label=_("Message"),
+        widget=forms.Textarea({"class": "message"}),
+        required=True,
     )
 
     def save(self, sender):

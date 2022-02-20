@@ -3,7 +3,7 @@ from django.urls import reverse, NoReverseMatch
 
 
 class UserenaUrlsTests(TestCase):
-    """ Test url resolve """
+    """Test url resolve"""
 
     def test_resolve_email_with_plus_url(self):
         username = "foo+bar@example.com"

@@ -11,7 +11,12 @@ class Migration(SchemaMigration):
         db.create_table(
             "umessages_messagecontact",
             (
-                ("id", self.gf("django.db.models.fields.AutoField")(primary_key=True)),
+                (
+                    "id",
+                    self.gf("django.db.models.fields.AutoField")(
+                        primary_key=True
+                    ),
+                ),
                 (
                     "um_from_user",
                     self.gf("django.db.models.fields.related.ForeignKey")(
@@ -43,7 +48,12 @@ class Migration(SchemaMigration):
         db.create_table(
             "umessages_messagerecipient",
             (
-                ("id", self.gf("django.db.models.fields.AutoField")(primary_key=True)),
+                (
+                    "id",
+                    self.gf("django.db.models.fields.AutoField")(
+                        primary_key=True
+                    ),
+                ),
                 (
                     "user",
                     self.gf("django.db.models.fields.related.ForeignKey")(
@@ -76,7 +86,12 @@ class Migration(SchemaMigration):
         db.create_table(
             "umessages_message",
             (
-                ("id", self.gf("django.db.models.fields.AutoField")(primary_key=True)),
+                (
+                    "id",
+                    self.gf("django.db.models.fields.AutoField")(
+                        primary_key=True
+                    ),
+                ),
                 ("body", self.gf("django.db.models.fields.TextField")()),
                 (
                     "sender",
@@ -119,7 +134,11 @@ class Migration(SchemaMigration):
     models = {
         "auth.group": {
             "Meta": {"object_name": "Group"},
-            "id": ("django.db.models.fields.AutoField", [], {"primary_key": "True"}),
+            "id": (
+                "django.db.models.fields.AutoField",
+                [],
+                {"primary_key": "True"},
+            ),
             "name": (
                 "django.db.models.fields.CharField",
                 [],
@@ -151,8 +170,16 @@ class Migration(SchemaMigration):
                 [],
                 {"to": "orm['contenttypes.ContentType']"},
             ),
-            "id": ("django.db.models.fields.AutoField", [], {"primary_key": "True"}),
-            "name": ("django.db.models.fields.CharField", [], {"max_length": "50"}),
+            "id": (
+                "django.db.models.fields.AutoField",
+                [],
+                {"primary_key": "True"},
+            ),
+            "name": (
+                "django.db.models.fields.CharField",
+                [],
+                {"max_length": "50"},
+            ),
         },
         "auth.user": {
             "Meta": {"object_name": "User"},
@@ -174,9 +201,17 @@ class Migration(SchemaMigration):
             "groups": (
                 "django.db.models.fields.related.ManyToManyField",
                 [],
-                {"to": "orm['auth.Group']", "symmetrical": "False", "blank": "True"},
+                {
+                    "to": "orm['auth.Group']",
+                    "symmetrical": "False",
+                    "blank": "True",
+                },
             ),
-            "id": ("django.db.models.fields.AutoField", [], {"primary_key": "True"}),
+            "id": (
+                "django.db.models.fields.AutoField",
+                [],
+                {"primary_key": "True"},
+            ),
             "is_active": (
                 "django.db.models.fields.BooleanField",
                 [],
@@ -234,14 +269,30 @@ class Migration(SchemaMigration):
                 [],
                 {"max_length": "100"},
             ),
-            "id": ("django.db.models.fields.AutoField", [], {"primary_key": "True"}),
-            "model": ("django.db.models.fields.CharField", [], {"max_length": "100"}),
-            "name": ("django.db.models.fields.CharField", [], {"max_length": "100"}),
+            "id": (
+                "django.db.models.fields.AutoField",
+                [],
+                {"primary_key": "True"},
+            ),
+            "model": (
+                "django.db.models.fields.CharField",
+                [],
+                {"max_length": "100"},
+            ),
+            "name": (
+                "django.db.models.fields.CharField",
+                [],
+                {"max_length": "100"},
+            ),
         },
         "umessages.message": {
             "Meta": {"ordering": "['-sent_at']", "object_name": "Message"},
             "body": ("django.db.models.fields.TextField", [], {}),
-            "id": ("django.db.models.fields.AutoField", [], {"primary_key": "True"}),
+            "id": (
+                "django.db.models.fields.AutoField",
+                [],
+                {"primary_key": "True"},
+            ),
             "recipients": (
                 "django.db.models.fields.related.ManyToManyField",
                 [],
@@ -279,7 +330,11 @@ class Migration(SchemaMigration):
                 [],
                 {"related_name": "'um_from_users'", "to": "orm['auth.User']"},
             ),
-            "id": ("django.db.models.fields.AutoField", [], {"primary_key": "True"}),
+            "id": (
+                "django.db.models.fields.AutoField",
+                [],
+                {"primary_key": "True"},
+            ),
             "latest_message": (
                 "django.db.models.fields.related.ForeignKey",
                 [],
@@ -298,7 +353,11 @@ class Migration(SchemaMigration):
                 [],
                 {"null": "True", "blank": "True"},
             ),
-            "id": ("django.db.models.fields.AutoField", [], {"primary_key": "True"}),
+            "id": (
+                "django.db.models.fields.AutoField",
+                [],
+                {"primary_key": "True"},
+            ),
             "message": (
                 "django.db.models.fields.related.ForeignKey",
                 [],

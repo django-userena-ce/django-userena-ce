@@ -22,7 +22,9 @@ class Migration(migrations.Migration):
                 ("body", models.TextField(verbose_name="body")),
                 (
                     "sent_at",
-                    models.DateTimeField(auto_now_add=True, verbose_name="sent at"),
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="sent at"
+                    ),
                 ),
                 (
                     "sender_deleted_at",
@@ -96,12 +98,16 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "read_at",
-                    models.DateTimeField(null=True, verbose_name="read at", blank=True),
+                    models.DateTimeField(
+                        null=True, verbose_name="read at", blank=True
+                    ),
                 ),
                 (
                     "deleted_at",
                     models.DateTimeField(
-                        null=True, verbose_name="recipient deleted at", blank=True
+                        null=True,
+                        verbose_name="recipient deleted at",
+                        blank=True,
                     ),
                 ),
                 (
@@ -121,7 +127,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name": "recipient", "verbose_name_plural": "recipients"},
+            options={
+                "verbose_name": "recipient",
+                "verbose_name_plural": "recipients",
+            },
         ),
         migrations.AddField(
             model_name="message",
@@ -144,6 +153,7 @@ class Migration(migrations.Migration):
             ),
         ),
         migrations.AlterUniqueTogether(
-            name="messagecontact", unique_together={("um_from_user", "um_to_user")}
+            name="messagecontact",
+            unique_together={("um_from_user", "um_to_user")},
         ),
     ]

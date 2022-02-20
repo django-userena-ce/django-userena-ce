@@ -17,7 +17,7 @@ class UserenaAuthenticationBackendTests(TestCase):
     backend = UserenaAuthenticationBackend()
 
     def test_with_username(self):
-        """ Test the backend when usernames are supplied. """
+        """Test the backend when usernames are supplied."""
         # Invalid usernames or passwords
         invalid_data_dicts = [
             # Invalid password
@@ -40,7 +40,7 @@ class UserenaAuthenticationBackendTests(TestCase):
         self.assertTrue(isinstance(result, User))
 
     def test_with_email(self):
-        """ Test the backend when email address is supplied """
+        """Test the backend when email address is supplied"""
         # Invalid e-mail adressses or passwords
         invalid_data_dicts = [
             # Invalid password
@@ -58,12 +58,14 @@ class UserenaAuthenticationBackendTests(TestCase):
 
         # Valid e-email address and password
         result = self.backend.authenticate(
-            request=None, identification="john@example.com", password="blowfish"
+            request=None,
+            identification="john@example.com",
+            password="blowfish",
         )
         self.assertTrue(isinstance(result, User))
 
     def test_get_user(self):
-        """ Test that the user is returned """
+        """Test that the user is returned"""
         user = self.backend.get_user(1)
         self.assertEqual(user.username, "john")
 

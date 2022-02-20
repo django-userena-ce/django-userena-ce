@@ -64,7 +64,9 @@ class UserenaSignup(models.Model):
         help_text=_("The last date that the user was active."),
     )
 
-    activation_key = models.CharField(_("activation key"), max_length=40, blank=True)
+    activation_key = models.CharField(
+        _("activation key"), max_length=40, blank=True
+    )
 
     activation_notification_send = models.BooleanField(
         _("notification send"),
@@ -77,7 +79,9 @@ class UserenaSignup(models.Model):
     email_unconfirmed = models.EmailField(
         _("unconfirmed email address"),
         blank=True,
-        help_text=_("Temporary email address when the user requests an email change."),
+        help_text=_(
+            "Temporary email address when the user requests an email change."
+        ),
     )
 
     email_confirmation_key = models.CharField(
@@ -170,7 +174,9 @@ class UserenaSignup(models.Model):
             days=userena_settings.USERENA_ACTIVATION_DAYS
         )
         expiration_date = self.user.date_joined + expiration_days
-        if self.activation_completed or (get_datetime_now() >= expiration_date):
+        if self.activation_completed or (
+            get_datetime_now() >= expiration_date
+        ):
             return True
         return False
 
@@ -197,7 +203,7 @@ class UserenaSignup(models.Model):
 
 
 class UserenaBaseProfile(models.Model):
-    """ Base model needed for extra profile functionality """
+    """Base model needed for extra profile functionality"""
 
     PRIVACY_CHOICES = (
         ("open", _("Open")),
@@ -359,7 +365,9 @@ class UserenaBaseProfile(models.Model):
         if self.privacy == "open":
             return True
         # Registered users.
-        elif self.privacy == "registered" and isinstance(user, get_user_model()):
+        elif self.privacy == "registered" and isinstance(
+            user, get_user_model()
+        ):
             return True
 
         # Checks done by guardian for owner and admins.

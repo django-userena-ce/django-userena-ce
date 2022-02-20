@@ -6,7 +6,7 @@ from userena.utils import user_model_label
 
 
 class Profile(UserenaBaseProfile):
-    """ Default profile """
+    """Default profile"""
 
     GENDER_CHOICES = ((1, _("Male")), (2, _("Female")))
 

@@ -31,7 +31,9 @@ class Migration(migrations.Migration):
                 (
                     "activation_key",
                     models.CharField(
-                        max_length=40, verbose_name="activation key", blank=True
+                        max_length=40,
+                        verbose_name="activation key",
+                        blank=True,
                     ),
                 ),
                 (

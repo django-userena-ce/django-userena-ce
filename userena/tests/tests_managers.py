@@ -13,7 +13,7 @@ User = get_user_model()
 
 
 class UserenaManagerTests(TestCase):
-    """ Test the manager of Userena """
+    """Test the manager of Userena"""
 
     user_info = {
         "username": "alice",
@@ -53,7 +53,9 @@ class UserenaManagerTests(TestCase):
         self.assertTrue(get_user_profile(user=new_user))
 
         # User should be saved
-        self.assertEqual(User.objects.filter(email=self.user_info["email"]).count(), 1)
+        self.assertEqual(
+            User.objects.filter(email=self.user_info["email"]).count(), 1
+        )
 
     def test_activation_valid(self):
         """
@@ -185,7 +187,7 @@ class UserenaManagersIssuesTests(TestCase):
     fixtures = ["users"]
 
     def test_issue_455_printing_user_model_from_userena_signup_objects_create_user(
-        self
+        self,
     ):
         """
         Issue: https://github.com/bread-and-pepper/django-userena/issues/455

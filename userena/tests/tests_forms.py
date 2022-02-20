@@ -7,7 +7,7 @@ from userena import settings as userena_settings
 
 
 class SignupFormTests(TestCase):
-    """ Test the signup form. """
+    """Test the signup form."""
 
     fixtures = ["users"]
 
@@ -45,7 +45,10 @@ class SignupFormTests(TestCase):
                     "password2": "foo2",
                     "tos": "on",
                 },
-                "error": ("__all__", [_("The two password fields didn't match.")]),
+                "error": (
+                    "__all__",
+                    [_("The two password fields didn't match.")],
+                ),
             },
             # Already taken username
             {
@@ -98,7 +101,8 @@ class SignupFormTests(TestCase):
                 form = forms.SignupForm(data=invalid_dict["data"])
                 self.assertFalse(form.is_valid())
                 self.assertEqual(
-                    form.errors[invalid_dict["error"][0]], invalid_dict["error"][1]
+                    form.errors[invalid_dict["error"][0]],
+                    invalid_dict["error"][1],
                 )
 
         # And finally, a valid form.
@@ -116,7 +120,7 @@ class SignupFormTests(TestCase):
 
 
 class AuthenticationFormTests(TestCase):
-    """ Test the ``AuthenticationForm`` """
+    """Test the ``AuthenticationForm``"""
 
     fixtures = ["users"]
 
@@ -153,7 +157,8 @@ class AuthenticationFormTests(TestCase):
                 form = forms.AuthenticationForm(data=invalid_dict["data"])
                 self.assertFalse(form.is_valid())
                 self.assertEqual(
-                    form.errors[invalid_dict["error"][0]], invalid_dict["error"][1]
+                    form.errors[invalid_dict["error"][0]],
+                    invalid_dict["error"][1],
                 )
 
         valid_data_dicts = [
@@ -222,7 +227,7 @@ class SignupFormOnlyEmailTests(TestCase):
 
 
 class ChangeEmailFormTests(TestCase):
-    """ Test the ``ChangeEmailForm`` """
+    """Test the ``ChangeEmailForm``"""
 
     fixtures = ["users"]
 
@@ -239,7 +244,9 @@ class ChangeEmailFormTests(TestCase):
                 "data": {"email": "jane@example.com"},
                 "error": (
                     "email",
-                    ["This email is already in use. Please supply a different email."],
+                    [
+                        "This email is already in use. Please supply a different email."
+                    ],
                 ),
             },
         ]
@@ -253,19 +260,22 @@ class ChangeEmailFormTests(TestCase):
                 form = forms.ChangeEmailForm(user, data=invalid_dict["data"])
                 self.assertFalse(form.is_valid())
                 self.assertEqual(
-                    form.errors[invalid_dict["error"][0]], invalid_dict["error"][1]
+                    form.errors[invalid_dict["error"][0]],
+                    invalid_dict["error"][1],
                 )
 
         # Test a valid post
-        form = forms.ChangeEmailForm(user, data={"email": "john@newexample.com"})
+        form = forms.ChangeEmailForm(
+            user, data={"email": "john@newexample.com"}
+        )
         self.assertTrue(form.is_valid())
 
     def test_form_init(self):
-        """ The form must be initialized with a ``User`` instance. """
+        """The form must be initialized with a ``User`` instance."""
         self.assertRaises(TypeError, forms.ChangeEmailForm, None)
 
 
 class EditAccountFormTest(TestCase):
-    """ Test the ``EditAccountForm`` """
+    """Test the ``EditAccountForm``"""
 
     pass

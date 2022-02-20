@@ -22,7 +22,7 @@ truncate_words = keep_lazy_text(truncate_words)
 
 
 def get_gravatar(email, size=80, default="identicon"):
-    """ Get's a Gravatar for a email address.
+    """Get's a Gravatar for a email address.
 
     :param size:
         The size in pixels of one side of the Gravatar's square image.
@@ -123,7 +123,9 @@ def get_profile_model():
         raise SiteProfileNotAvailable
 
     try:
-        profile_mod = apps.get_model(*settings.AUTH_PROFILE_MODULE.rsplit(".", 1))
+        profile_mod = apps.get_model(
+            *settings.AUTH_PROFILE_MODULE.rsplit(".", 1)
+        )
     except LookupError:
         profile_mod = None
 
@@ -137,7 +139,9 @@ def get_user_profile(user):
     try:
         profile = user.get_profile()
     except AttributeError:
-        related_name = profile_model._meta.get_field("user").related_query_name()
+        related_name = profile_model._meta.get_field(
+            "user"
+        ).related_query_name()
         profile = getattr(user, related_name, None)
     except profile_model.DoesNotExist:
         profile = None
@@ -156,7 +160,9 @@ def get_protocol():
     """
     protocol = "http"
     if getattr(
-        settings, "USERENA_USE_HTTPS", userena_settings.DEFAULT_USERENA_USE_HTTPS
+        settings,
+        "USERENA_USE_HTTPS",
+        userena_settings.DEFAULT_USERENA_USE_HTTPS,
     ):
         protocol = "https"
     return protocol

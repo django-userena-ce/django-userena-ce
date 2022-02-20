@@ -25,7 +25,9 @@ def send_mail(
     all the attached files.
     """
     if not message_plain and not message_html:
-        raise ValueError(_("Either message_plain or message_html should be not None"))
+        raise ValueError(
+            _("Either message_plain or message_html should be not None")
+        )
 
     if not message_plain:
         message_plain = html2text(message_html)

@@ -138,7 +138,9 @@ INSTALLED_APPS += ("easy_thumbnails",)
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "filters": {"require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}},
+    "filters": {
+        "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}
+    },
     "handlers": {
         "mail_admins": {
             "level": "ERROR",

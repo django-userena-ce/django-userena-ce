@@ -36,7 +36,8 @@ class SignupForm(forms.Form):
         },
     )
     email = forms.EmailField(
-        widget=forms.TextInput(attrs=dict(attrs_dict, maxlength=75)), label=_("Email")
+        widget=forms.TextInput(attrs=dict(attrs_dict, maxlength=75)),
+        label=_("Email"),
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs=attrs_dict, render_value=False),
@@ -61,10 +62,11 @@ class SignupForm(forms.Form):
         except get_user_model().DoesNotExist:
             pass
         else:
-            if userena_settings.USERENA_ACTIVATION_REQUIRED and UserenaSignup.objects.filter(
-                user__username__iexact=self.cleaned_data["username"]
-            ).exclude(
-                activation_key=userena_settings.USERENA_ACTIVATED
+            if (
+                userena_settings.USERENA_ACTIVATION_REQUIRED
+                and UserenaSignup.objects.filter(
+                    user__username__iexact=self.cleaned_data["username"]
+                ).exclude(activation_key=userena_settings.USERENA_ACTIVATED)
             ):
                 raise forms.ValidationError(
                     _(
@@ -80,12 +82,15 @@ class SignupForm(forms.Form):
         return self.cleaned_data["username"]
 
     def clean_email(self):
-        """ Validate that the e-mail address is unique. """
-        if get_user_model().objects.filter(email__iexact=self.cleaned_data["email"]):
-            if userena_settings.USERENA_ACTIVATION_REQUIRED and UserenaSignup.objects.filter(
-                user__email__iexact=self.cleaned_data["email"]
-            ).exclude(
-                activation_key=userena_settings.USERENA_ACTIVATED
+        """Validate that the e-mail address is unique."""
+        if get_user_model().objects.filter(
+            email__iexact=self.cleaned_data["email"]
+        ):
+            if (
+                userena_settings.USERENA_ACTIVATION_REQUIRED
+                and UserenaSignup.objects.filter(
+                    user__email__iexact=self.cleaned_data["email"]
+                ).exclude(activation_key=userena_settings.USERENA_ACTIVATED)
             ):
                 raise forms.ValidationError(
                     _(
@@ -93,7 +98,9 @@ class SignupForm(forms.Form):
                     )
                 )
             raise forms.ValidationError(
-                _("This email is already in use. Please supply a different email.")
+                _(
+                    "This email is already in use. Please supply a different email."
+                )
             )
         return self.cleaned_data["email"]
 
@@ -104,13 +111,21 @@ class SignupForm(forms.Form):
         it doesn't apply to a single field.
 
         """
-        if "password1" in self.cleaned_data and "password2" in self.cleaned_data:
-            if self.cleaned_data["password1"] != self.cleaned_data["password2"]:
-                raise forms.ValidationError(_("The two password fields didn't match."))
+        if (
+            "password1" in self.cleaned_data
+            and "password2" in self.cleaned_data
+        ):
+            if (
+                self.cleaned_data["password1"]
+                != self.cleaned_data["password2"]
+            ):
+                raise forms.ValidationError(
+                    _("The two password fields didn't match.")
+                )
         return self.cleaned_data
 
     def save(self):
-        """ Creates a new user and account. Returns the newly created user. """
+        """Creates a new user and account. Returns the newly created user."""
         username, email, password = (
             self.cleaned_data["username"],
             self.cleaned_data["email"],
@@ -143,9 +158,11 @@ class SignupFormOnlyEmail(SignupForm):
         del self.fields["username"]
 
     def save(self):
-        """ Generate a random username before falling back to parent signup form """
+        """Generate a random username before falling back to parent signup form"""
         while True:
-            username = sha1(str(random.random()).encode("utf-8")).hexdigest()[:5]
+            username = sha1(str(random.random()).encode("utf-8")).hexdigest()[
+                :5
+            ]
             try:
                 get_user_model().objects.get(username__iexact=username)
             except get_user_model().DoesNotExist:
@@ -156,12 +173,14 @@ class SignupFormOnlyEmail(SignupForm):
 
 
 class SignupFormTos(SignupForm):
-    """ Add a Terms of Service button to the ``SignupForm``. """
+    """Add a Terms of Service button to the ``SignupForm``."""
 
     tos = forms.BooleanField(
         widget=forms.CheckboxInput(attrs=attrs_dict),
         label=_("I have read and agree to the Terms of Service"),
-        error_messages={"required": _("You must agree to the terms to register.")},
+        error_messages={
+            "required": _("You must agree to the terms to register.")
+        },
     )
 
 
@@ -191,7 +210,8 @@ class AuthenticationForm(forms.Form):
     """
 
     identification = identification_field_factory(
-        _("Email or username"), _("Either supply us with your email or username.")
+        _("Email or username"),
+        _("Either supply us with your email or username."),
     )
     password = forms.CharField(
         label=_("Password"),
@@ -205,7 +225,7 @@ class AuthenticationForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
-        """ A custom init because we need to change the label if no usernames is used """
+        """A custom init because we need to change the label if no usernames is used"""
         super().__init__(*args, **kwargs)
         # Dirty hack, somehow the label doesn't get translated without declaring
         # it again here.
@@ -228,7 +248,9 @@ class AuthenticationForm(forms.Form):
         password = self.cleaned_data.get("password")
 
         if identification and password:
-            user = authenticate(identification=identification, password=password)
+            user = authenticate(
+                identification=identification, password=password
+            )
             if user is None:
                 raise forms.ValidationError(
                     _(
@@ -261,16 +283,20 @@ class ChangeEmailForm(forms.Form):
             self.user = user
 
     def clean_email(self):
-        """ Validate that the email is not already registered with another user """
+        """Validate that the email is not already registered with another user"""
         if self.cleaned_data["email"].lower() == self.user.email:
-            raise forms.ValidationError(_("You're already known under this email."))
+            raise forms.ValidationError(
+                _("You're already known under this email.")
+            )
         if (
             get_user_model()
             .objects.filter(email__iexact=self.cleaned_data["email"])
             .exclude(email__iexact=self.user.email)
         ):
             raise forms.ValidationError(
-                _("This email is already in use. Please supply a different email.")
+                _(
+                    "This email is already in use. Please supply a different email."
+                )
             )
         return self.cleaned_data["email"]
 
@@ -281,14 +307,20 @@ class ChangeEmailForm(forms.Form):
         email address.
 
         """
-        return self.user.userena_signup.change_email(self.cleaned_data["email"])
+        return self.user.userena_signup.change_email(
+            self.cleaned_data["email"]
+        )
 
 
 class EditProfileForm(forms.ModelForm):
-    """ Base form used for fields that are always required """
+    """Base form used for fields that are always required"""
 
-    first_name = forms.CharField(label=_("First name"), max_length=30, required=False)
-    last_name = forms.CharField(label=_("Last name"), max_length=30, required=False)
+    first_name = forms.CharField(
+        label=_("First name"), max_length=30, required=False
+    )
+    last_name = forms.CharField(
+        label=_("Last name"), max_length=30, required=False
+    )
 
     def __init__(self, *args, **kw):
         super().__init__(*args, **kw)
@@ -314,6 +346,8 @@ class EditProfileForm(forms.ModelForm):
 
         return profile
 
+
 class ActivationForm(forms.Form):
     """Form for activating an account."""
+
     pass
