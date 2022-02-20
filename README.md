@@ -6,7 +6,7 @@
 [![Documentation Status](https://readthedocs.org/projects/django-userena-ce/badge/?version=latest)](http://django-userena-ce.readthedocs.io/en/latest/?badge=latest)
 [![Updates](https://pyup.io/repos/github/django-userena-ce/django-userena-ce/shield.svg)](https://pyup.io/repos/github/django-userena-ce/django-userena-ce/)
 
-Due to a lack of maintainance this project is a community edition fork of
+This project is a community edition fork of
 [django-userena](https://github.com/bread-and-pepper/django-userena).
 
 Userena is a Django application that supplies your Django project with full
@@ -18,8 +18,8 @@ can use it commercially for free!
 
 Software | Versions
 ---|---
-Python | 3.6, 3.7, 3.8, 3.9
-Django | 2.2, 3.1, 3.2
+Python | 3.7, 3.8, 3.9, 3.10
+Django | 2.2, 3.2, 4.0
 Django Guardian | \>2.0
 
 ## [Documentation](https://django-userena-ce.readthedocs.io/en/latest/index.html)

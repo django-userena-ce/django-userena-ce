@@ -1,5 +1,0 @@
-pytest-django
-pytest-cov
-pip
-coveralls
-twine
