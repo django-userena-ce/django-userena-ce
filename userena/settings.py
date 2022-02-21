@@ -47,8 +47,8 @@ USERENA_FORBIDDEN_USERNAMES = getattr(
 )
 DEFAULT_USERENA_USE_HTTPS = False
 
-# NOTE: It is only for internal use. All those settings should be refactored to only defaults
-#       as specified in #452
+# NOTE: It is only for internal use.
+# All those settings should be refactored to only default as specified in #452
 _USERENA_USE_HTTPS = getattr(
     settings, "USERENA_USE_HTTPS", DEFAULT_USERENA_USE_HTTPS
 )

@@ -50,7 +50,8 @@ class Migration(migrations.Migration):
                     "email_unconfirmed",
                     models.EmailField(
                         help_text=(
-                            "Temporary email address when the user requests an email change."
+                            "Temporary email address when the user requests "
+                            "an email change."
                         ),
                         max_length=75,
                         verbose_name="unconfirmed email address",

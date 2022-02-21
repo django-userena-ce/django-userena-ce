@@ -31,7 +31,8 @@ class SignupFormTests(TestCase):
                     "username",
                     [
                         _(
-                            "Username must contain only letters, numbers, dots and underscores."
+                            "Username must contain only letters, numbers, "
+                            "dots and underscores."
                         )
                     ],
                 ),
@@ -85,7 +86,8 @@ class SignupFormTests(TestCase):
                     "email",
                     [
                         _(
-                            "This email is already in use. Please supply a different email."
+                            "This email is already in use. "
+                            "Please supply a different email."
                         )
                     ],
                 ),
@@ -243,7 +245,8 @@ class ChangeEmailFormTests(TestCase):
                 "error": (
                     "email",
                     [
-                        "This email is already in use. Please supply a different email."
+                        "This email is already in use. "
+                        "Please supply a different email."
                     ],
                 ),
             },
