@@ -224,7 +224,10 @@ class AuthenticationForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
-        """A custom init because we need to change the label if no usernames is used"""
+        """
+        A custom init because we need to change the label if no usernames
+        are used
+        """
         super().__init__(*args, **kwargs)
         # Dirty hack, somehow the label doesn't get translated without declaring
         # it again here.

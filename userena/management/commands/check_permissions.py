@@ -19,7 +19,10 @@ arguments = (
             "action": "store_true",
             "dest": "test",
             "default": False,
-            "help": "Displays that it's testing management command. Don't use it yourself.",
+            "help": (
+                "Displays that it's testing management command. "
+                "Don't use it yourself."
+            ),
         },
     ),
 )

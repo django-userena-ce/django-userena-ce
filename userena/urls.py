@@ -55,7 +55,9 @@ urlpatterns = [
         {
             "template_name": "userena/signup_complete.html",
             "extra_context": {
-                "userena_activation_required": userena_settings.USERENA_ACTIVATION_REQUIRED,
+                "userena_activation_required": (
+                    userena_settings.USERENA_ACTIVATION_REQUIRED
+                ),
                 "userena_activation_days": userena_settings.USERENA_ACTIVATION_DAYS,
             },
         },

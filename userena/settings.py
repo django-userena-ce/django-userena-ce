@@ -47,8 +47,8 @@ USERENA_FORBIDDEN_USERNAMES = getattr(
 )
 DEFAULT_USERENA_USE_HTTPS = False
 
-# NOTE: It is only for internal use. All those settings should be refactored to only defaults
-#       as specified in #452
+# NOTE: It is only for internal use.
+# All those settings should be refactored to only default as specified in #452
 _USERENA_USE_HTTPS = getattr(
     settings, "USERENA_USE_HTTPS", DEFAULT_USERENA_USE_HTTPS
 )
@@ -113,8 +113,9 @@ USERENA_REGISTER_USER = getattr(settings, "USERENA_REGISTER_USER", True)
 
 if hasattr(settings, "ANONYMOUS_USER_ID"):
     raise ImproperlyConfigured(
-        "settings.ANONYMOUS_USER_ID is deprecated for settings.ANONYMOUS_USER_NAME. "
-        "See https://django-guardian.readthedocs.io/en/stable/configuration.html"
+        "settings.ANONYMOUS_USER_ID is deprecated for "
+        "settings.ANONYMOUS_USER_NAME. See "
+        "https://django-userena-ce.github.io/django-userena-ce/installation.html#migrating-from-bread-and-pepper-django-userena"
     )
 
 try:
@@ -124,6 +125,6 @@ try:
         )
 except AttributeError as e:
     raise ImproperlyConfigured(
-        "ANONYMOUS_USER_NAME must be set in settings. "
-        "See https://django-guardian.readthedocs.io/en/stable/configuration.html"
+        "ANONYMOUS_USER_NAME must be set in settings. See "
+        "https://django-userena-ce.github.io/django-userena-ce/installation.html#migrating-from-bread-and-pepper-django-userena"
     ) from e

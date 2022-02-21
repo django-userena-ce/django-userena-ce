@@ -113,7 +113,10 @@ class UserenaSignupModelTests(TestCase):
         self.assertEqual(mail.outbox[0].to, [self.user_info["email"]])
 
     def test_plain_email(self):
-        """If HTML emails are disabled, check that outgoing emails are not multipart"""
+        """
+        If HTML emails are disabled, check that
+        outgoing emails are not multipart
+        """
         userena_settings.USERENA_HTML_EMAIL = False
         UserenaSignup.objects.create_user(**self.user_info)
         self.assertEqual(len(mail.outbox), 1)
@@ -223,7 +226,10 @@ class BaseProfileModelTest(TestCase):
         userena_settings.USERENA_MUGSHOT_GRAVATAR = True
 
     def test_get_mugshot_url_with_gravatar(self):
-        """Test if the correct mugshot is returned when the user makes use of gravatar."""
+        """
+        Test if the correct mugshot is returned when the user
+        makes use of gravatar.
+        """
         profile = Profile.objects.get(pk=1)
 
         gravatar_hash = hashlib.md5(

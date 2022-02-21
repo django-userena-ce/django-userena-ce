@@ -16,7 +16,7 @@ signin_redirect
 .. autofunction:: userena.utils.signin_redirect
 
 generate_nonce
--------------
+--------------
 
 .. autofunction:: userena.utils.generate_nonce
 
