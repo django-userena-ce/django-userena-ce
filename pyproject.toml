@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-userena-ce"
-version = "7.0.0a1"
+version = "7.0.0"
 description = "Complete user management application for Django"
 authors = ["James Meakin <django-userena-ce@jmsmkn.com>"]
 license = "BSD-3-Clause"
