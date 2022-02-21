@@ -1,5 +1,9 @@
 # UPDATES
 
+## Version 7.0.1
+
+- Correct Python version support metadata
+
 ## Version 7.0.0
 
 - Dropped support for Python 3.6, Django 2.2, Django 3.1
