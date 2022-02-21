@@ -67,7 +67,7 @@ jobs:
           poetry install
           poetry run bash -c 'cd docs && make html'
       - name: Deploy the documentation on master
-        # if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

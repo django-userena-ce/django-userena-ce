@@ -4,7 +4,7 @@
 [![PyPI version](https://badge.fury.io/py/django-userena-ce.svg)](https://badge.fury.io/py/django-userena-ce)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-userena-ce)](https://pypi.org/project/django-userena-ce/)
 [![Coverage Status](https://coveralls.io/repos/github/django-userena-ce/django-userena-ce/badge.svg?branch=master)](https://coveralls.io/github/django-userena-ce/django-userena-ce?branch=master)
-[![Documentation Status](https://readthedocs.org/projects/django-userena-ce/badge/?version=latest)](http://django-userena-ce.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://github.com/django-userena-ce/django-userena-ce/workflows/CI/badge.svg)](https://django-userena-ce.github.io/django-userena-ce/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 This project is a community edition fork of
@@ -23,12 +23,12 @@ Python | 3.7, 3.8, 3.9, 3.10
 Django | 3.2, 4.0
 Django Guardian | \>2.0
 
-## [Documentation](https://django-userena-ce.readthedocs.io/en/latest/index.html)
+## [Documentation](https://django-userena-ce.github.io/django-userena-ce/index.html)
 
 Complete documentation about the
-[installation](https://django-userena-ce.readthedocs.io/en/latest/installation.html),
-[settings](https://django-userena-ce.readthedocs.io/en/latest/settings.html) and
-[F.A.Q.](https://django-userena-ce.readthedocs.io/en/latest/faq.html) is available on
-[Read the Docs](https://django-userena-ce.readthedocs.io/en/latest/index.html).
+[installation](https://django-userena-ce.github.io/django-userena-ce/installation.html),
+[settings](https://django-userena-ce.github.io/django-userena-ce/settings.html) and
+[F.A.Q.](https://django-userena-ce.github.io/django-userena-ce/faq.html) is available on
+[All Documentation](https://django-userena-ce.github.io/django-userena-ce/index.html).
 
 For list of updates and changes see `HISTORY.md` file.
