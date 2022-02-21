@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Forms &#8212; django-userena-ce 7.0.0a1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Managers" href="managers.html" />
+    <link rel="prev" title="Decorators" href="decorators.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="managers.html" title="Managers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="decorators.html" title="Decorators"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">django-userena-ce 7.0.0a1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">API Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Forms</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-userena.forms">
+<span id="forms"></span><span id="api-forms"></span><h1>Forms<a class="headerlink" href="#module-userena.forms" title="Permalink to this headline">¶</a></h1>
+<p>Return to <a class="reference internal" href="index.html#api"><span class="std std-ref">API Reference</span></a>.</p>
+<section id="signupform">
+<h2>SignupForm<a class="headerlink" href="#signupform" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="userena.forms.SignupForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">userena.forms.</span></span><span class="sig-name descname"><span class="pre">SignupForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.SignupForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Form for creating a new user account.</p>
+<p>Validates that the requested username and e-mail is not already in use.
+Also requires the password to be entered twice.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.forms.SignupForm.clean">
+<span class="sig-name descname"><span class="pre">clean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.SignupForm.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates that the values entered into the two password fields match.
+Note that an error here will end up in <code class="docutils literal notranslate"><span class="pre">non_field_errors()</span></code> because
+it doesn’t apply to a single field.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.forms.SignupForm.clean_email">
+<span class="sig-name descname"><span class="pre">clean_email</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.SignupForm.clean_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate that the e-mail address is unique.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.forms.SignupForm.clean_username">
+<span class="sig-name descname"><span class="pre">clean_username</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.SignupForm.clean_username" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate that the username is alphanumeric and is not already in use.
+Also validates that the username is not listed in
+<code class="docutils literal notranslate"><span class="pre">USERENA_FORBIDDEN_USERNAMES</span></code> list.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="userena.forms.SignupForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#userena.forms.SignupForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.forms.SignupForm.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.SignupForm.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new user and account. Returns the newly created user.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="signupformonlyemail">
+<h2>SignupFormOnlyEmail<a class="headerlink" href="#signupformonlyemail" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="userena.forms.SignupFormOnlyEmail">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">userena.forms.</span></span><span class="sig-name descname"><span class="pre">SignupFormOnlyEmail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.SignupFormOnlyEmail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Form for creating a new user account but not needing a username.</p>
+<p>This form is an adaptation of <a class="reference internal" href="#userena.forms.SignupForm" title="userena.forms.SignupForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">SignupForm</span></code></a>. It’s used when
+<code class="docutils literal notranslate"><span class="pre">USERENA_WITHOUT_USERNAME</span></code> setting is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>. And thus the user
+is not asked to supply an username, but one is generated for them. The user
+can than keep sign in by using their email.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="userena.forms.SignupFormOnlyEmail.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#userena.forms.SignupFormOnlyEmail.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.forms.SignupFormOnlyEmail.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.SignupFormOnlyEmail.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a random username before falling back to parent signup form</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="signupformtos">
+<h2>SignupFormTos<a class="headerlink" href="#signupformtos" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="userena.forms.SignupFormTos">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">userena.forms.</span></span><span class="sig-name descname"><span class="pre">SignupFormTos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.SignupFormTos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a Terms of Service button to the <code class="docutils literal notranslate"><span class="pre">SignupForm</span></code>.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="userena.forms.SignupFormTos.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#userena.forms.SignupFormTos.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="authenticationform">
+<h2>AuthenticationForm<a class="headerlink" href="#authenticationform" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="userena.forms.AuthenticationForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">userena.forms.</span></span><span class="sig-name descname"><span class="pre">AuthenticationForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.AuthenticationForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>A custom form where the identification can be a e-mail address or username.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.forms.AuthenticationForm.clean">
+<span class="sig-name descname"><span class="pre">clean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.AuthenticationForm.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks for the identification and password.</p>
+<p>If the combination can’t be found will raise an invalid sign in error.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="userena.forms.AuthenticationForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#userena.forms.AuthenticationForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="changeemailform">
+<h2>ChangeEmailForm<a class="headerlink" href="#changeemailform" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="userena.forms.ChangeEmailForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">userena.forms.</span></span><span class="sig-name descname"><span class="pre">ChangeEmailForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.ChangeEmailForm" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="userena.forms.ChangeEmailForm.clean_email">
+<span class="sig-name descname"><span class="pre">clean_email</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.ChangeEmailForm.clean_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate that the email is not already registered with another user</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="userena.forms.ChangeEmailForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#userena.forms.ChangeEmailForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.forms.ChangeEmailForm.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.ChangeEmailForm.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save method calls <code class="xref py py-func docutils literal notranslate"><span class="pre">user.change_email()</span></code> method which sends out an
+email with an verification key to verify and with it enable this new
+email address.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="editprofileform">
+<h2>EditProfileForm<a class="headerlink" href="#editprofileform" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="userena.forms.EditProfileForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">userena.forms.</span></span><span class="sig-name descname"><span class="pre">EditProfileForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.EditProfileForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base form used for fields that are always required</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="userena.forms.EditProfileForm.media">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#userena.forms.EditProfileForm.media" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.forms.EditProfileForm.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force_insert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.forms.EditProfileForm.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save this form’s self.instance object if commit=True. Otherwise, add
+a save_m2m() method to the form which can be called after the instance
+is saved manually at a later time. Return the model instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Forms</a><ul>
+<li><a class="reference internal" href="#signupform">SignupForm</a></li>
+<li><a class="reference internal" href="#signupformonlyemail">SignupFormOnlyEmail</a></li>
+<li><a class="reference internal" href="#signupformtos">SignupFormTos</a></li>
+<li><a class="reference internal" href="#authenticationform">AuthenticationForm</a></li>
+<li><a class="reference internal" href="#changeemailform">ChangeEmailForm</a></li>
+<li><a class="reference internal" href="#editprofileform">EditProfileForm</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="decorators.html"
+                          title="previous chapter">Decorators</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="managers.html"
+                          title="next chapter">Managers</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/forms.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="managers.html" title="Managers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="decorators.html" title="Decorators"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">django-userena-ce 7.0.0a1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Forms</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, 2011 Bread &amp; Pepper.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>

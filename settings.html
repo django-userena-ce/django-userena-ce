@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Settings &#8212; django-userena-ce 7.0.0a1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Signals" href="signals.html" />
+    <link rel="prev" title="Installation." href="installation.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signals.html" title="Signals"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation."
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-userena-ce 7.0.0a1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Settings</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="settings">
+<span id="id1"></span><h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
+<p>Userena comes with a few settings that enables you to tweak the user experience
+for you users. There are also a few Django settings that are relevant for
+Userena.</p>
+<section id="userena-settings">
+<h2>Userena settings<a class="headerlink" href="#userena-settings" title="Permalink to this headline">¶</a></h2>
+<section id="userena-signin-after-signup">
+<h3>USERENA_SIGNIN_AFTER_SIGNUP<a class="headerlink" href="#userena-signin-after-signup" title="Permalink to this headline">¶</a></h3>
+<p>Default <code class="docutils literal notranslate"><span class="pre">False</span></code> (integer)</p>
+<p>Boolean that defines if a user should be logged in after a successful sign up.</p>
+<p>If True, USERENA_ACTIVATION_REQUIRED must be False for the sign-in to happen.</p>
+<p>Note that USERENA_SIGNIN_REDIRECT_URL will not be respected for the automatic sign-in.
+The user will be redirect to the value of ‘success_url’ in userena.views.signup.</p>
+<p>You can override ‘success_url’ in your urls.py. See the “How do I add extra fields to forms?”
+example in the FAQ, where the ‘signup_form’ variable is overridden.</p>
+</section>
+<section id="userena-signin-redirect-url">
+<h3>USERENA_SIGNIN_REDIRECT_URL<a class="headerlink" href="#userena-signin-redirect-url" title="Permalink to this headline">¶</a></h3>
+<p>Default <code class="docutils literal notranslate"><span class="pre">/accounts/%(username)s/'</span></code> (string)</p>
+<p>A string which defines the URI where the user will be redirected to after
+signin.</p>
+</section>
+<section id="userena-activation-required">
+<h3>USERENA_ACTIVATION_REQUIRED<a class="headerlink" href="#userena-activation-required" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">True</span></code> (integer)</p>
+<p>Boolean that defines if a activation is required when creating a new user.</p>
+</section>
+<section id="userena-activation-days">
+<h3>USERENA_ACTIVATION_DAYS<a class="headerlink" href="#userena-activation-days" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">7</span></code> (integer)</p>
+<p>A integer which stands for the amount of days a user has to activate their
+account. The user will be deleted when they still haven’t activated their
+account after these amount of days by running the <code class="docutils literal notranslate"><span class="pre">cleanexpired</span></code>
+<a class="reference internal" href="commands.html#commands"><span class="std std-ref">command</span></a>.</p>
+</section>
+<section id="userena-activation-notify">
+<h3>USERENA_ACTIVATION_NOTIFY<a class="headerlink" href="#userena-activation-notify" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">True</span></code> (boolean)</p>
+<p>A boolean that turns on/off the sending of a notification when
+<code class="docutils literal notranslate"><span class="pre">USERENA_ACTIVATION_NOTIFY_DAYS</span></code> away the activation of the user will
+expire and the user will be deleted.</p>
+</section>
+<section id="userena-activation-notify-days">
+<h3>USERENA_ACTIVATION_NOTIFY_DAYS<a class="headerlink" href="#userena-activation-notify-days" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">2</span></code> (integer)</p>
+<p>The amount of days, before the expiration of an account, that a notification
+get’s send out. Warning the user of his coming demise.</p>
+</section>
+<section id="userena-activation-retry">
+<h3>USERENA_ACTIVATION_RETRY<a class="headerlink" href="#userena-activation-retry" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">False</span></code> (boolean)</p>
+<p>A boolean that designates whether a user is allowed to reissue a new
+activation key once the old key is expired.  As the new activation key
+is issued, it is also emailed automatically to the user.</p>
+</section>
+<section id="userena-activated">
+<h3>USERENA_ACTIVATED<a class="headerlink" href="#userena-activated" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">ALREADY_ACTIVATED</span></code> (string)</p>
+<p>String that defines the value that the <code class="docutils literal notranslate"><span class="pre">activation_key</span></code> will be set to after
+a successful signup.</p>
+</section>
+<section id="userena-remember-me-days">
+<h3>USERENA_REMEMBER_ME_DAYS<a class="headerlink" href="#userena-remember-me-days" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">(gettext('a</span> <span class="pre">month'),</span> <span class="pre">30))</span></code> (tuple)</p>
+<p>A tuple containing a string and an integer which stand for the amount of days a
+user can choose to be remembered by your project. The string is the human
+readable version that gets displayed in the form. The integer stands for the
+amount of days that this string represents.</p>
+</section>
+<section id="userena-forbidden-usernames">
+<h3>USERENA_FORBIDDEN_USERNAMES<a class="headerlink" href="#userena-forbidden-usernames" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">('signup',</span> <span class="pre">'signout',</span> <span class="pre">'signin',</span> <span class="pre">'activate',</span> <span class="pre">'me',</span> <span class="pre">'password')</span></code> (tuple)</p>
+<p>A tuple containing the names which cannot be used as username in the signup
+form.</p>
+</section>
+<section id="userena-mugshot-gravatar">
+<span id="id2"></span><h3>USERENA_MUGSHOT_GRAVATAR<a class="headerlink" href="#userena-mugshot-gravatar" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">True</span></code> (boolean)</p>
+<p>A boolean defining if mugshots should fallback to <a class="reference external" href="http://en.gravatar.com/">Gravatar</a> service when no mugshot is uploaded by the user.</p>
+</section>
+<section id="userena-mugshot-gravatar-secure">
+<h3>USERENA_MUGSHOT_GRAVATAR_SECURE<a class="headerlink" href="#userena-mugshot-gravatar-secure" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">USERENA_USE_HTTPS</span></code> (boolean)</p>
+<p>A boolean defining if the secure URI of Gravatar is used. Defaults to
+the same value as <code class="docutils literal notranslate"><span class="pre">USERENA_USE_HTTPS</span></code>.</p>
+</section>
+<section id="userena-mugshot-default">
+<h3>USERENA_MUGSHOT_DEFAULT<a class="headerlink" href="#userena-mugshot-default" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">identicon</span></code> (string)</p>
+<p>A string for the default image used when no mugshot is found. This can be
+either a URI to an image or if <a class="reference internal" href="#userena-mugshot-gravatar"><span class="std std-ref">USERENA_MUGSHOT_GRAVATAR</span></a> is
+<code class="docutils literal notranslate"><span class="pre">True</span></code> one of the following options:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">404</span></code></dt><dd><p>Do not load any image if none is associated with the email hash, instead
+return an HTTP 404 (File Not Found) response.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">mm</span></code></dt><dd><p>Mystery-man, a simple, cartoon-style silhouetted outline of a person (does
+not vary by email hash).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">identicon</span></code></dt><dd><p>A geometric pattern based on an email hash.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">monsterid</span></code></dt><dd><p>A generated ‘monster’ with different colors, faces, etc.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">wavatar</span></code></dt><dd><p>Generated faces with differing features and backgrounds</p>
+</dd>
+</dl>
+</section>
+<section id="userena-mugshot-size">
+<h3>USERENA_MUGSHOT_SIZE<a class="headerlink" href="#userena-mugshot-size" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">80</span></code> (int)</p>
+<p>Integer defining the size (in pixels) of the sides of the mugshot image.</p>
+</section>
+<section id="userena-mugshot-path">
+<h3>USERENA_MUGSHOT_PATH<a class="headerlink" href="#userena-mugshot-path" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">mugshots/</span></code> (string)</p>
+<p>The default path that the mugshots will be saved to. Is appended to the
+<code class="docutils literal notranslate"><span class="pre">MEDIA_PATH</span></code> in your Django settings.</p>
+<p>You can use the following options as arguments (f.ex. <code class="docutils literal notranslate"><span class="pre">mugshots/%(username)s/</span></code>):</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">id</span></code></dt><dd><p>User.id</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">username</span></code></dt><dd><p>User.username</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">date</span></code></dt><dd><p>User.date_joined</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">date_now</span></code></dt><dd><p>Current date</p>
+</dd>
+</dl>
+</section>
+<section id="userena-use-https">
+<h3>USERENA_USE_HTTPS<a class="headerlink" href="#userena-use-https" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">False</span></code> (boolean)</p>
+<p>Boolean that defines if you have a secure version of your website. If so,
+userena will redirect sensitive URI’s to the secure protocol.</p>
+</section>
+<section id="userena-default-privacy">
+<h3>USERENA_DEFAULT_PRIVACY<a class="headerlink" href="#userena-default-privacy" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">registered</span></code> (string)</p>
+<p>Defines the default privacy value for a newly registered user. There are three
+options:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">closed</span></code></dt><dd><p>Only the owner of the profile can view their profile.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">registered</span></code></dt><dd><p>All registered users can view their profile.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">open</span></code></dt><dd><p>All users (registered and anonymous) can view their profile.</p>
+</dd>
+</dl>
+</section>
+<section id="userena-profile-detail-template">
+<h3>USERENA_PROFILE_DETAIL_TEMPLATE<a class="headerlink" href="#userena-profile-detail-template" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">userena/profile_detail.html</span></code> (string)</p>
+<p>Template to use for rendering user profiles. This allows you to specify a
+template in your own project which extends <code class="docutils literal notranslate"><span class="pre">userena/profile_detail.html</span></code>.</p>
+</section>
+<section id="userena-profile-list-template">
+<h3>USERENA_PROFILE_LIST_TEMPLATE<a class="headerlink" href="#userena-profile-list-template" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">userena/profile_list.html</span></code> (string)</p>
+<p>Template to use for rendering users list. This allows you to specify a
+template in your own project which extends <code class="docutils literal notranslate"><span class="pre">userena/profile_list.html</span></code>.</p>
+</section>
+<section id="userena-disable-profile-list">
+<h3>USERENA_DISABLE_PROFILE_LIST<a class="headerlink" href="#userena-disable-profile-list" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">False</span></code> (boolean)</p>
+<p>Boolean value that defines if the <code class="docutils literal notranslate"><span class="pre">profile_list</span></code> view is enabled within the
+project. If so, users can view a list of different profiles.</p>
+</section>
+<section id="userena-disable-signup">
+<h3>USERENA_DISABLE_SIGNUP<a class="headerlink" href="#userena-disable-signup" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">False</span></code> (boolean)</p>
+<p>Boolean value that defines if signups are disabled within the project. If so,
+users trying to sign up will be denied.</p>
+</section>
+<section id="userena-use-messages">
+<h3>USERENA_USE_MESSAGES<a class="headerlink" href="#userena-use-messages" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">True</span></code> (boolean)</p>
+<p>Boolean value that defines if userena should use the django messages framework
+to notify the user of any changes.</p>
+</section>
+<section id="userena-language-field">
+<h3>USERENA_LANGUAGE_FIELD<a class="headerlink" href="#userena-language-field" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">language</span></code> (string)</p>
+<p>The language field that is used in the custom profile to define the preferred
+language of the user.</p>
+</section>
+<section id="userena-without-usernames">
+<h3>USERENA_WITHOUT_USERNAMES<a class="headerlink" href="#userena-without-usernames" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">False</span></code> (boolean)</p>
+<p>Defines if usernames are used within userena. Currently it’s often for the
+users convenience that only an email is used for identification. With this
+setting you get just that.</p>
+</section>
+<section id="userena-hide-email">
+<h3>USERENA_HIDE_EMAIL<a class="headerlink" href="#userena-hide-email" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">False</span></code> (boolean)</p>
+<p>Prevents email addresses from being displayed to other users if set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</section>
+<section id="userena-html-email">
+<h3>USERENA_HTML_EMAIL<a class="headerlink" href="#userena-html-email" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">False</span></code> (boolean)</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">True</span></code> multipart emails are generated using html templates.</p>
+</section>
+<section id="userena-use-plain-template">
+<h3>USERENA_USE_PLAIN_TEMPLATE<a class="headerlink" href="#userena-use-plain-template" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">True</span></code> (boolean)</p>
+<p>Uses a text template for plain text part (when <code class="docutils literal notranslate"><span class="pre">USERENA_HTML_EMAIL</span> <span class="pre">=</span> <span class="pre">True</span></code>).
+When <code class="docutils literal notranslate"><span class="pre">USERENA_HTML_EMAIL</span> <span class="pre">=</span> <span class="pre">False</span></code>, plain text templates are always used for
+emails even if <code class="docutils literal notranslate"><span class="pre">USERENA_USE_PLAIN_TEMPLATE</span> <span class="pre">=</span> <span class="pre">False</span></code>.</p>
+</section>
+<section id="userena-register-profile">
+<h3>USERENA_REGISTER_PROFILE<a class="headerlink" href="#userena-register-profile" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">True</span></code> (boolean)</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">True</span></code> userena will register the profile model with Django Admin for you.
+It uses a GuardedModelAdmin when registering. This allows per user object permissions
+to be set via the admin.
+If <code class="docutils literal notranslate"><span class="pre">False</span></code> you will have to regiter the profile with the Django Admin yourself.</p>
+</section>
+<section id="userena-register-user">
+<h3>USERENA_REGISTER_USER<a class="headerlink" href="#userena-register-user" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">True</span></code> (boolean)</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">True</span></code> userena will first unregister the user model with the admin and
+then reregister the user model using a GuardedModelAdmin. This allows you to
+set per user object permissons.
+If <code class="docutils literal notranslate"><span class="pre">False</span></code> and you want to you set per user object permissions on the user model
+via the admin you will have to unregister and reregiter the user model with the
+Django Admin yourself.</p>
+</section>
+</section>
+<section id="django-settings">
+<h2>Django settings<a class="headerlink" href="#django-settings" title="Permalink to this headline">¶</a></h2>
+<section id="login-url">
+<h3>LOGIN_URL<a class="headerlink" href="#login-url" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">/accounts/login/</span></code> (string)</p>
+<p>The URL where requests are redirected for login, especially when using the
+login_required() decorator.</p>
+<p>In userena this URI normally would be <code class="docutils literal notranslate"><span class="pre">/accounts/signin/</span></code>.</p>
+</section>
+<section id="logout-url">
+<h3>LOGOUT_URL<a class="headerlink" href="#logout-url" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">/accounts/logout/</span></code> (string)
+LOGIN_URL counterpart.</p>
+<p>In userena this URI normally would be <code class="docutils literal notranslate"><span class="pre">/accounts/signout/</span></code>.</p>
+</section>
+<section id="login-redirect-url">
+<h3>LOGIN_REDIRECT_URL<a class="headerlink" href="#login-redirect-url" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">/accounts/profile/</span></code></p>
+<p>In userena this URI should point to the profile of the user. Thus a string of
+<code class="docutils literal notranslate"><span class="pre">/accounts/%(username)s/</span></code> is best.</p>
+</section>
+<section id="auth-profile-module">
+<h3>AUTH_PROFILE_MODULE<a class="headerlink" href="#auth-profile-module" title="Permalink to this headline">¶</a></h3>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">defined</span></code></p>
+<p>This should point to the model that is your custom made profile.</p>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Settings</a><ul>
+<li><a class="reference internal" href="#userena-settings">Userena settings</a><ul>
+<li><a class="reference internal" href="#userena-signin-after-signup">USERENA_SIGNIN_AFTER_SIGNUP</a></li>
+<li><a class="reference internal" href="#userena-signin-redirect-url">USERENA_SIGNIN_REDIRECT_URL</a></li>
+<li><a class="reference internal" href="#userena-activation-required">USERENA_ACTIVATION_REQUIRED</a></li>
+<li><a class="reference internal" href="#userena-activation-days">USERENA_ACTIVATION_DAYS</a></li>
+<li><a class="reference internal" href="#userena-activation-notify">USERENA_ACTIVATION_NOTIFY</a></li>
+<li><a class="reference internal" href="#userena-activation-notify-days">USERENA_ACTIVATION_NOTIFY_DAYS</a></li>
+<li><a class="reference internal" href="#userena-activation-retry">USERENA_ACTIVATION_RETRY</a></li>
+<li><a class="reference internal" href="#userena-activated">USERENA_ACTIVATED</a></li>
+<li><a class="reference internal" href="#userena-remember-me-days">USERENA_REMEMBER_ME_DAYS</a></li>
+<li><a class="reference internal" href="#userena-forbidden-usernames">USERENA_FORBIDDEN_USERNAMES</a></li>
+<li><a class="reference internal" href="#userena-mugshot-gravatar">USERENA_MUGSHOT_GRAVATAR</a></li>
+<li><a class="reference internal" href="#userena-mugshot-gravatar-secure">USERENA_MUGSHOT_GRAVATAR_SECURE</a></li>
+<li><a class="reference internal" href="#userena-mugshot-default">USERENA_MUGSHOT_DEFAULT</a></li>
+<li><a class="reference internal" href="#userena-mugshot-size">USERENA_MUGSHOT_SIZE</a></li>
+<li><a class="reference internal" href="#userena-mugshot-path">USERENA_MUGSHOT_PATH</a></li>
+<li><a class="reference internal" href="#userena-use-https">USERENA_USE_HTTPS</a></li>
+<li><a class="reference internal" href="#userena-default-privacy">USERENA_DEFAULT_PRIVACY</a></li>
+<li><a class="reference internal" href="#userena-profile-detail-template">USERENA_PROFILE_DETAIL_TEMPLATE</a></li>
+<li><a class="reference internal" href="#userena-profile-list-template">USERENA_PROFILE_LIST_TEMPLATE</a></li>
+<li><a class="reference internal" href="#userena-disable-profile-list">USERENA_DISABLE_PROFILE_LIST</a></li>
+<li><a class="reference internal" href="#userena-disable-signup">USERENA_DISABLE_SIGNUP</a></li>
+<li><a class="reference internal" href="#userena-use-messages">USERENA_USE_MESSAGES</a></li>
+<li><a class="reference internal" href="#userena-language-field">USERENA_LANGUAGE_FIELD</a></li>
+<li><a class="reference internal" href="#userena-without-usernames">USERENA_WITHOUT_USERNAMES</a></li>
+<li><a class="reference internal" href="#userena-hide-email">USERENA_HIDE_EMAIL</a></li>
+<li><a class="reference internal" href="#userena-html-email">USERENA_HTML_EMAIL</a></li>
+<li><a class="reference internal" href="#userena-use-plain-template">USERENA_USE_PLAIN_TEMPLATE</a></li>
+<li><a class="reference internal" href="#userena-register-profile">USERENA_REGISTER_PROFILE</a></li>
+<li><a class="reference internal" href="#userena-register-user">USERENA_REGISTER_USER</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#django-settings">Django settings</a><ul>
+<li><a class="reference internal" href="#login-url">LOGIN_URL</a></li>
+<li><a class="reference internal" href="#logout-url">LOGOUT_URL</a></li>
+<li><a class="reference internal" href="#login-redirect-url">LOGIN_REDIRECT_URL</a></li>
+<li><a class="reference internal" href="#auth-profile-module">AUTH_PROFILE_MODULE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="installation.html"
+                          title="previous chapter">Installation.</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="signals.html"
+                          title="next chapter">Signals</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/settings.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="signals.html" title="Signals"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation."
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-userena-ce 7.0.0a1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Settings</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, 2011 Bread &amp; Pepper.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>

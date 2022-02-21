@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>F.A.Q &#8212; django-userena-ce 7.0.0a1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api/index.html" />
+    <link rel="prev" title="Commands." href="commands.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/index.html" title="API Reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="commands.html" title="Commands."
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-userena-ce 7.0.0a1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">F.A.Q</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="f-a-q">
+<span id="faq"></span><h1>F.A.Q<a class="headerlink" href="#f-a-q" title="Permalink to this headline">¶</a></h1>
+<section id="i-get-a-permission-matching-query-does-not-exist-exception">
+<h2>I get a “<code class="docutils literal notranslate"><span class="pre">Permission</span> <span class="pre">matching</span> <span class="pre">query</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exist</span></code>” exception<a class="headerlink" href="#i-get-a-permission-matching-query-does-not-exist-exception" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes Django decides not to install the default permissions for a model
+and thus the <code class="docutils literal notranslate"><span class="pre">change_profile</span></code> permission goes missing. To fix this, run the
+<code class="docutils literal notranslate"><span class="pre">check_permissions</span></code> in <a class="reference internal" href="commands.html#commands"><span class="std std-ref">Commands.</span></a>. This checks all permissions and adds
+those that are missing.</p>
+</section>
+<section id="i-get-a-site-matching-query-does-not-exist-exception">
+<h2>I get a “<code class="docutils literal notranslate"><span class="pre">Site</span> <span class="pre">matching</span> <span class="pre">query</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exist.</span></code>” exception<a class="headerlink" href="#i-get-a-site-matching-query-does-not-exist-exception" title="Permalink to this headline">¶</a></h2>
+<p>This means that your settings.SITE_ID value is incorrect. See the instructions
+on SITE_ID in the [Installation section](<a class="reference external" href="http://docs.django-userena.org/en/latest/installation.html">http://docs.django-userena.org/en/latest/installation.html</a>).</p>
+</section>
+<section id="profilemodel-is-already-registered-exception">
+<h2>&lt;ProfileModel&gt; is already registered exception<a class="headerlink" href="#profilemodel-is-already-registered-exception" title="Permalink to this headline">¶</a></h2>
+<p>Userena already registered your profile model for you. If you want to
+customize the profile model, you can do so by registering your profile as
+follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unregister userena&#39;s</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">YOUR_PROFILE_MODEL</span><span class="p">)</span>
+
+<span class="c1"># Register your own admin class and attach it to the model</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">YOUR_PROFILE_MODEL</span><span class="p">,</span> <span class="n">YOUR_PROFILE_ADMIN</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="can-i-still-add-users-manually">
+<h2>Can I still add users manually?<a class="headerlink" href="#can-i-still-add-users-manually" title="Permalink to this headline">¶</a></h2>
+<p>Yes, but Userena requires there to be a <cite>UserenaSignup</cite> object for every
+registered user. If it’s not there, you could receive the following error:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span> <span class="n">Type</span><span class="p">:</span> <span class="n">DoesNotExist</span> <span class="n">at</span> <span class="o">/</span><span class="n">accounts</span><span class="o">/</span><span class="n">mynewuser</span><span class="o">/</span><span class="n">email</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>So, whenever you are manually creating a user (outside of Userena), don’t
+forget to also create a <cite>UserenaSignup</cite> object.</p>
+</section>
+<section id="how-can-i-have-multiple-profiles-per-user">
+<h2>How can I have multiple profiles per user?<a class="headerlink" href="#how-can-i-have-multiple-profiles-per-user" title="Permalink to this headline">¶</a></h2>
+<p>One way to do this is by overriding the <cite>save</cite> method on <cite>SignupForm</cite> with
+your own form, extending userena’s form and supply this form with to the
+signup view. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; My extra profile &quot;&quot;&quot;</span>
+    <span class="c1"># Let userena do it&#39;s thing</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">SignupForm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="c1"># You do all the logic needed for your own extra profile</span>
+    <span class="n">custom_profile</span> <span class="o">=</span> <span class="n">ExtraProfile</span><span class="p">()</span>
+    <span class="n">custom_profile</span><span class="o">.</span><span class="n">extra_field</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;field&#39;</span><span class="p">]</span>
+    <span class="n">custom_profile</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="c1"># Always return the new user</span>
+    <span class="k">return</span> <span class="n">user</span>
+</pre></div>
+</div>
+<p>Important to note here is that you should always return the newly created
+<cite>User</cite> object. This is something that userena expects. Userena will take care
+of creating the user and the “standard” profile.</p>
+<p>Don’t forget to supply your own form to the signup view by overriding the URL
+in your <cite>urls.py</cite>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^accounts/signup/$&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;userena.views.signup&#39;</span><span class="p">,</span>
+ <span class="p">{</span><span class="s1">&#39;signup_form&#39;</span><span class="p">:</span> <span class="n">SignupExtraProfileForm</span><span class="p">}),</span>
+</pre></div>
+</div>
+</section>
+<section id="how-do-i-add-extra-fields-to-forms">
+<h2>How do I add extra fields to forms?<a class="headerlink" href="#how-do-i-add-extra-fields-to-forms" title="Permalink to this headline">¶</a></h2>
+<p>This is done by overriding the default templates. A demo tells more than a
+thousand words. So here’s how you add the first and last name to the signup
+form. First you override the signup form and add the fields.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">gettext_lazy</span> <span class="k">as</span> <span class="n">_</span>
+<span class="kn">from</span> <span class="nn">userena.forms</span> <span class="kn">import</span> <span class="n">SignupForm</span>
+
+<span class="k">class</span> <span class="nc">SignupFormExtra</span><span class="p">(</span><span class="n">SignupForm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A form to demonstrate how to add extra fields to the signup form, in this</span>
+<span class="sd">    case adding the first and last name.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">first_name</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;First name&#39;</span><span class="p">),</span>
+                                 <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                                 <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">last_name</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;Last name&#39;</span><span class="p">),</span>
+                                <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                                <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        A bit of hackery to get the first name and last name at the top of the</span>
+<span class="sd">        form instead at the end.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SignupFormExtra</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="c1"># Put the first and last name at the top</span>
+        <span class="n">new_order</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span>
+        <span class="n">new_order</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="s1">&#39;last_name&#39;</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">new_order</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="s1">&#39;first_name&#39;</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">=</span> <span class="n">new_order</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Override the save method to save the first and last name to the user</span>
+<span class="sd">        field.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># First save the parent form and get the user.</span>
+        <span class="n">new_user</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">SignupFormExtra</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+        <span class="c1"># Get the profile, the `save` method above creates a profile for each</span>
+        <span class="c1"># user because it calls the manager method `create_user`.</span>
+        <span class="c1"># See: https://github.com/django-userena-ce/django-userena-ce/blob/master/userena/managers.py#L65</span>
+        <span class="n">user_profile</span> <span class="o">=</span> <span class="n">new_user</span><span class="o">.</span><span class="n">my_profile</span>
+
+        <span class="n">user_profile</span><span class="o">.</span><span class="n">first_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;first_name&#39;</span><span class="p">]</span>
+        <span class="n">user_profile</span><span class="o">.</span><span class="n">last_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;last_name&#39;</span><span class="p">]</span>
+        <span class="n">user_profile</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+        <span class="c1"># Userena expects to get the new user from this form, so return the new</span>
+        <span class="c1"># user.</span>
+        <span class="k">return</span> <span class="n">new_user</span>
+</pre></div>
+</div>
+<p>Finally, to use this form instead of our own, override the default URI by
+placing a new URI above it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^accounts/signup/$&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;userena.views.signup&#39;</span><span class="p">,</span>
+ <span class="p">{</span><span class="s1">&#39;signup_form&#39;</span><span class="p">:</span> <span class="n">SignupFormExtra</span><span class="p">}),</span>
+</pre></div>
+</div>
+<p>That’s all there is to it!</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">F.A.Q</a><ul>
+<li><a class="reference internal" href="#i-get-a-permission-matching-query-does-not-exist-exception">I get a “<code class="docutils literal notranslate"><span class="pre">Permission</span> <span class="pre">matching</span> <span class="pre">query</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exist</span></code>” exception</a></li>
+<li><a class="reference internal" href="#i-get-a-site-matching-query-does-not-exist-exception">I get a “<code class="docutils literal notranslate"><span class="pre">Site</span> <span class="pre">matching</span> <span class="pre">query</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exist.</span></code>” exception</a></li>
+<li><a class="reference internal" href="#profilemodel-is-already-registered-exception">&lt;ProfileModel&gt; is already registered exception</a></li>
+<li><a class="reference internal" href="#can-i-still-add-users-manually">Can I still add users manually?</a></li>
+<li><a class="reference internal" href="#how-can-i-have-multiple-profiles-per-user">How can I have multiple profiles per user?</a></li>
+<li><a class="reference internal" href="#how-do-i-add-extra-fields-to-forms">How do I add extra fields to forms?</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="commands.html"
+                          title="previous chapter">Commands.</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="api/index.html"
+                          title="next chapter">API Reference</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/faq.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/index.html" title="API Reference"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="commands.html" title="Commands."
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-userena-ce 7.0.0a1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">F.A.Q</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, 2011 Bread &amp; Pepper.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>

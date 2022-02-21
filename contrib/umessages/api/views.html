@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Views &#8212; django-userena-ce 7.0.0a1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css" />
+    
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="Managers" href="managers.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="managers.html" title="Managers"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">django-userena-ce 7.0.0a1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >uMessages</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">API Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Views</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-userena.contrib.umessages.views">
+<span id="views"></span><span id="messages-api-views"></span><h1>Views<a class="headerlink" href="#module-userena.contrib.umessages.views" title="Permalink to this headline">¶</a></h1>
+<section id="messagelistview">
+<h2>MessageListView<a class="headerlink" href="#messagelistview" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="userena.contrib.umessages.views.MessageListView">
+<span class="sig-prename descclassname"><span class="pre">userena.contrib.umessages.views.</span></span><span class="sig-name descname"><span class="pre">MessageListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.contrib.umessages.views.MessageListView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the message list for this user. This is a list contacts
+which at the top has the user that the last conversation was with. This is
+an imitation of the iPhone SMS functionality.</p>
+</dd></dl>
+
+</section>
+<section id="messagedetaillistview">
+<h2>MessageDetailListView<a class="headerlink" href="#messagedetaillistview" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="userena.contrib.umessages.views.MessageDetailListView">
+<span class="sig-prename descclassname"><span class="pre">userena.contrib.umessages.views.</span></span><span class="sig-name descname"><span class="pre">MessageDetailListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.contrib.umessages.views.MessageDetailListView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a conversation between two users</p>
+</dd></dl>
+
+</section>
+<section id="message-compose">
+<h2>message_compose<a class="headerlink" href="#message-compose" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="userena.contrib.umessages.views.message_compose">
+<span class="sig-prename descclassname"><span class="pre">userena.contrib.umessages.views.</span></span><span class="sig-name descname"><span class="pre">message_compose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipients=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compose_form=&lt;class</span> <span class="pre">'userena.contrib.umessages.forms.ComposeForm'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">success_url=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">template_name='umessages/message_form.html'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recipient_filter=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_context=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.contrib.umessages.views.message_compose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compose a new message</p>
+<dl class="field-list simple">
+<dt class="field-odd">Recipients</dt>
+<dd class="field-odd"><p>String containing the usernames to whom the message is send to. Can be
+multiple username by seperating them with a <code class="docutils literal notranslate"><span class="pre">+</span></code> sign.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>compose_form</strong> – The form that is used for getting neccesary information. Defaults to
+<code class="xref py py-class docutils literal notranslate"><span class="pre">ComposeForm</span></code>.</p></li>
+<li><p><strong>success_url</strong> – String containing the named url which to redirect to after successfull
+sending a message. Defaults to <code class="docutils literal notranslate"><span class="pre">userena_umessages_list</span></code> if there are
+multiple recipients. If there is only one recipient, will redirect to
+<code class="docutils literal notranslate"><span class="pre">userena_umessages_detail</span></code> page, showing the conversation.</p></li>
+<li><p><strong>template_name</strong> – String containing the name of the template that is used.</p></li>
+<li><p><strong>recipient_filter</strong> – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code> that don”t want to receive any messages.</p></li>
+<li><p><strong>extra_context</strong> – Dictionary with extra variables supplied to the template.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Context</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">form</span></code></dt><dd><p>The form that is used.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="message-remove">
+<h2>message_remove<a class="headerlink" href="#message-remove" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="userena.contrib.umessages.views.message_remove">
+<span class="sig-prename descclassname"><span class="pre">userena.contrib.umessages.views.</span></span><span class="sig-name descname"><span class="pre">message_remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">undo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.contrib.umessages.views.message_remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">POST</span></code> to remove messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>undo</strong> – A Boolean that if <code class="docutils literal notranslate"><span class="pre">True</span></code> unremoves messages.</p>
+</dd>
+</dl>
+<p>POST can have the following keys:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">message_pks</span></code></dt><dd><p>List of message id’s that should be deleted.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">next</span></code></dt><dd><p>String containing the URI which to redirect to after the keys are
+removed. Redirect defaults to the inbox view.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">next</span></code> value can also be supplied in the URI with <code class="docutils literal notranslate"><span class="pre">?next=&lt;value&gt;</span></code>.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Views</a><ul>
+<li><a class="reference internal" href="#messagelistview">MessageListView</a></li>
+<li><a class="reference internal" href="#messagedetaillistview">MessageDetailListView</a></li>
+<li><a class="reference internal" href="#message-compose">message_compose</a></li>
+<li><a class="reference internal" href="#message-remove">message_remove</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="managers.html"
+                          title="previous chapter">Managers</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/contrib/umessages/api/views.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="managers.html" title="Managers"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">django-userena-ce 7.0.0a1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >uMessages</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >API Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Views</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, 2011 Bread &amp; Pepper.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>

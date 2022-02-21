@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Managers &#8212; django-userena-ce 7.0.0a1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Middleware" href="middleware.html" />
+    <link rel="prev" title="Forms" href="forms.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="middleware.html" title="Middleware"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="forms.html" title="Forms"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">django-userena-ce 7.0.0a1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">API Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Managers</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-userena.managers">
+<span id="managers"></span><span id="api-managers"></span><h1>Managers<a class="headerlink" href="#module-userena.managers" title="Permalink to this headline">¶</a></h1>
+<p>Return to <a class="reference internal" href="index.html#api"><span class="std std-ref">API Reference</span></a></p>
+<section id="userenamanager">
+<h2>UserenaManager<a class="headerlink" href="#userenamanager" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="userena.managers.UserenaManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">userena.managers.</span></span><span class="sig-name descname"><span class="pre">UserenaManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.managers.UserenaManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extra functionality for the Userena model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.managers.UserenaManager.activate_user">
+<span class="sig-name descname"><span class="pre">activate_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">activation_key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.managers.UserenaManager.activate_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activate an <code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code> by supplying a valid <code class="docutils literal notranslate"><span class="pre">activation_key</span></code>.</p>
+<p>If the key is valid and an user is found, activates the user and
+return it. Also sends the <code class="docutils literal notranslate"><span class="pre">activation_complete</span></code> signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>activation_key</strong> – String containing the secret nonce for a valid activation.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The newly activated <code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> if not successful.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.managers.UserenaManager.check_expired_activation">
+<span class="sig-name descname"><span class="pre">check_expired_activation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">activation_key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.managers.UserenaManager.check_expired_activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if <code class="docutils literal notranslate"><span class="pre">activation_key</span></code> is still valid.</p>
+<dl class="simple">
+<dt>Raises a <code class="docutils literal notranslate"><span class="pre">self.model.DoesNotExist</span></code> exception if key is not present or</dt><dd><p><code class="docutils literal notranslate"><span class="pre">activation_key</span></code> is not a valid string</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>activation_key</strong> – String containing the secret nonce for a valid activation.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the ket has expired, False if still valid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.managers.UserenaManager.check_permissions">
+<span class="sig-name descname"><span class="pre">check_permissions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#userena.managers.UserenaManager.check_permissions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that all permissions are set correctly for the users.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A set of users whose permissions was wrong.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.managers.UserenaManager.confirm_email">
+<span class="sig-name descname"><span class="pre">confirm_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">confirmation_key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.managers.UserenaManager.confirm_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Confirm an email address by checking a <code class="docutils literal notranslate"><span class="pre">confirmation_key</span></code>.</p>
+<p>A valid <code class="docutils literal notranslate"><span class="pre">confirmation_key</span></code> will set the newly wanted e-mail
+address as the current e-mail address. Returns the user after
+success or <code class="docutils literal notranslate"><span class="pre">False</span></code> when the confirmation key is
+invalid. Also sends the <code class="docutils literal notranslate"><span class="pre">confirmation_complete</span></code> signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>confirmation_key</strong> – String containing the secret nonce that is used for verification.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The verified <code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> if not successful.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.managers.UserenaManager.create_user">
+<span class="sig-name descname"><span class="pre">create_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">active</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">send_email</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.managers.UserenaManager.create_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple wrapper that creates a new <code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> – String containing the username of the new user.</p></li>
+<li><p><strong>email</strong> – String containing the email address of the new user.</p></li>
+<li><p><strong>password</strong> – String containing the password for the new user.</p></li>
+<li><p><strong>active</strong> – Boolean that defines if the user requires activation by clicking
+on a link in an e-mail. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><strong>send_email</strong> – Boolean that defines if the user should be sent an email. You could
+set this to <code class="docutils literal notranslate"><span class="pre">False</span></code> when you want to create a user in your own
+code, but don’t want the user to activate through email.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code> instance representing the new user.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.managers.UserenaManager.create_userena_profile">
+<span class="sig-name descname"><span class="pre">create_userena_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.managers.UserenaManager.create_userena_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an <code class="xref py py-class docutils literal notranslate"><span class="pre">UserenaSignup</span></code> instance for this user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> – Django <code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code> instance.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The newly created <code class="xref py py-class docutils literal notranslate"><span class="pre">UserenaSignup</span></code> instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.managers.UserenaManager.delete_expired_users">
+<span class="sig-name descname"><span class="pre">delete_expired_users</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#userena.managers.UserenaManager.delete_expired_users" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks for expired users and delete’s the <code class="docutils literal notranslate"><span class="pre">User</span></code> associated with
+it. Skips if the user <code class="docutils literal notranslate"><span class="pre">is_staff</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list containing the deleted users.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.managers.UserenaManager.reissue_activation">
+<span class="sig-name descname"><span class="pre">reissue_activation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">activation_key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.managers.UserenaManager.reissue_activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new <code class="docutils literal notranslate"><span class="pre">activation_key</span></code> resetting activation timeframe when
+users let the previous key expire.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>activation_key</strong> – String containing the secret nonce activation key.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="userenabaseprofilemanager">
+<h2>UserenaBaseProfileManager<a class="headerlink" href="#userenabaseprofilemanager" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="userena.managers.UserenaBaseProfileManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">userena.managers.</span></span><span class="sig-name descname"><span class="pre">UserenaBaseProfileManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.managers.UserenaBaseProfileManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manager for <code class="xref py py-class docutils literal notranslate"><span class="pre">UserenaProfile</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="userena.managers.UserenaBaseProfileManager.get_visible_profiles">
+<span class="sig-name descname"><span class="pre">get_visible_profiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#userena.managers.UserenaBaseProfileManager.get_visible_profiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all the visible profiles available to this user.</p>
+<p>For now keeps it simple by just applying the cases when a user is not
+active, a user has it’s profile closed to everyone or a user only
+allows registered users to view their profile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> – A Django <code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code> instance.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>All profiles that are visible to this user.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Managers</a><ul>
+<li><a class="reference internal" href="#userenamanager">UserenaManager</a></li>
+<li><a class="reference internal" href="#userenabaseprofilemanager">UserenaBaseProfileManager</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="forms.html"
+                          title="previous chapter">Forms</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="middleware.html"
+                          title="next chapter">Middleware</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/managers.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="middleware.html" title="Middleware"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="forms.html" title="Forms"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">django-userena-ce 7.0.0a1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >API Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Managers</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, 2011 Bread &amp; Pepper.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Userena Introduction &#8212; django-userena-ce 7.0.0a1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation." href="installation.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation."
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">django-userena-ce 7.0.0a1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Userena Introduction</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="userena-introduction">
+<h1>Userena Introduction<a class="headerlink" href="#userena-introduction" title="Permalink to this headline">¶</a></h1>
+<p>This documentation covers 7.0.0a1 release of django-userena-ce application.
+A Django application that takes care of your account needs.</p>
+</section>
+<section id="why-userena">
+<h1>Why userena?<a class="headerlink" href="#why-userena" title="Permalink to this headline">¶</a></h1>
+<p>Because we have done the hard work for you. Userena supplies you with signup,
+signin, account editing, privacy settings and private messaging. All you have
+to do is plug it into your project and you will have created account
+management with the following options:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>User has to <strong>activate</strong> their account by clicking on a activation link
+in an email sent to them.</p></li>
+<li><p><strong>Permissions</strong> for viewing, changing and deleting accounts is
+implemented on an user and object basis with the help of django-guardian.</p></li>
+<li><p>Optionally <strong>secure</strong> userena by using https. If you change the settings
+to use https, userena will switch to the secure protocol on it’s views
+and emails.</p></li>
+<li><p>All <strong>templates</strong> are already supplied for you. Only override those that
+don’t fit with your needs.</p></li>
+<li><p>Mugshots are supplied by <strong>Gravatar</strong> or uploaded by the user. The
+default mugshot can be set in the settings.</p></li>
+<li><p><strong>Messaging</strong> system between users that either get’s displayed as
+conversations (iPhone like) or sorted per subject (Gmail).</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="help-out">
+<h1>Help out<a class="headerlink" href="#help-out" title="Permalink to this headline">¶</a></h1>
+<p>Found a bug in userena? File an issue at Github. Have an improvement? Fork it
+and add it, or if you can’t code it, contact us to do it.</p>
+</section>
+<section id="changes-and-releases">
+<h1>Changes and releases<a class="headerlink" href="#changes-and-releases" title="Permalink to this headline">¶</a></h1>
+<p>For changes history and available releases see following pages on GitHub
+repository:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/django-userena-ce/django-userena-ce/blob/master/UPDATES.md">UDATES.md</a></p></li>
+<li><p><a class="reference external" href="https://github.com/django-userena-ce/django-userena-ce/releases">releases</a></p></li>
+</ul>
+</section>
+<section id="contents">
+<h1>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#support-for-old-django-and-python-versions">Support for old Django and Python Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-django-userena-ce">Installing django-userena-ce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#required-settings">Required settings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#migrating-from-bread-and-pepper-django-userena">Migrating from bread-and-pepper/django-userena</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#userena-settings">Userena settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html#django-settings">Django settings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="signals.html">Signals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="signals.html#signup-complete">signup_complete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.html#activation-complete">activation_complete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.html#confirmation-complete">confirmation_complete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="signals.html#password-complete">password_complete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Commands.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#clean-expired">Clean expired</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html#check-permissions">Check permissions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">F.A.Q</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#i-get-a-permission-matching-query-does-not-exist-exception">I get a “<code class="docutils literal notranslate"><span class="pre">Permission</span> <span class="pre">matching</span> <span class="pre">query</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exist</span></code>” exception</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#i-get-a-site-matching-query-does-not-exist-exception">I get a “<code class="docutils literal notranslate"><span class="pre">Site</span> <span class="pre">matching</span> <span class="pre">query</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exist.</span></code>” exception</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#profilemodel-is-already-registered-exception">&lt;ProfileModel&gt; is already registered exception</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#can-i-still-add-users-manually">Can I still add users manually?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-can-i-have-multiple-profiles-per-user">How can I have multiple profiles per user?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-add-extra-fields-to-forms">How do I add extra fields to forms?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/backends.html">Backends</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/decorators.html">Decorators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/forms.html">Forms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/managers.html">Managers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/middleware.html">Middleware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/models.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils.html">Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/views.html">Views</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="contrib-umessages">
+<h2>Contrib: uMessages<a class="headerlink" href="#contrib-umessages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contrib/umessages/index.html">uMessages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contrib/umessages/index.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contrib/umessages/api/index.html">API Reference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Userena Introduction</a></li>
+<li><a class="reference internal" href="#why-userena">Why userena?</a></li>
+<li><a class="reference internal" href="#help-out">Help out</a></li>
+<li><a class="reference internal" href="#changes-and-releases">Changes and releases</a></li>
+<li><a class="reference internal" href="#contents">Contents</a><ul>
+<li><a class="reference internal" href="#contrib-umessages">Contrib: uMessages</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="installation.html"
+                          title="next chapter">Installation.</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation."
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">django-userena-ce 7.0.0a1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Userena Introduction</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, 2011 Bread &amp; Pepper.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>

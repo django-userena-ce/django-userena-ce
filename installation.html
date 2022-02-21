@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Installation. &#8212; django-userena-ce 7.0.0a1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Settings" href="settings.html" />
+    <link rel="prev" title="Userena Introduction" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="settings.html" title="Settings"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Userena Introduction"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-userena-ce 7.0.0a1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Installation.</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="installation">
+<span id="id1"></span><h1>Installation.<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Before install django-userena-ce, you’ll need to have a copy of <a class="reference external" href="http://www.djangoproject.com">Django</a> 2.2, 3.1 or 3.2 installed. django-userena-ce is
+tested under Python 3.6, 3.7, 3.8 and 3.9 (all versions on which
+Django 2.2 and higher is declared to work)</p>
+<p>For further information, consult the <a class="reference external" href="http://www.djangoproject.com/download/">Django download page</a>, which offers convenient packaged
+downloads and installation instructions.</p>
+<section id="support-for-old-django-and-python-versions">
+<h2>Support for old Django and Python Versions<a class="headerlink" href="#support-for-old-django-and-python-versions" title="Permalink to this headline">¶</a></h2>
+<p>From version 5.0.0 only django versions 2.2, 3.1 or 3.2 will be supported.
+Django 1.11 and/or Python 2 users should install <code class="docutils literal notranslate"><span class="pre">django-userena-ce&lt;5.0</span></code>.</p>
+</section>
+<section id="installing-django-userena-ce">
+<h2>Installing django-userena-ce<a class="headerlink" href="#installing-django-userena-ce" title="Permalink to this headline">¶</a></h2>
+<p>You can install django-userena automagically with <code class="docutils literal notranslate"><span class="pre">pip</span></code>. Or by manually
+placing it on on your <code class="docutils literal notranslate"><span class="pre">PYTHON_PATH</span></code>. The recommended way is the shown in
+<a class="reference internal" href="#pip-install"><span class="std std-ref">Automatic installation with pip.</span></a>.</p>
+<p><em>It is also recommended to use</em> <a class="reference external" href="http://pypi.python.org/pypi/virtualenv">virtualenv</a> <em>to have an isolated python
+environment. This way it’s possible to create a tailored environment for each
+project.</em></p>
+<section id="automatic-installation-with-pip">
+<span id="pip-install"></span><h3>Automatic installation with pip.<a class="headerlink" href="#automatic-installation-with-pip" title="Permalink to this headline">¶</a></h3>
+<p>Automatic install with <a class="reference external" href="http://www.pip-installer.org/en/latest/index.html">pip</a>. All you have to do is
+run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">django</span><span class="o">-</span><span class="n">userena</span><span class="o">-</span><span class="n">ce</span>
+</pre></div>
+</div>
+<p>If you want to have a specific version of userena, you can do so by adding the
+following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">django</span><span class="o">-</span><span class="n">userena</span><span class="o">-</span><span class="n">ce</span><span class="o">==</span><span class="mf">4.0.0</span>
+</pre></div>
+</div>
+</section>
+<section id="manual-installation-with-easy-install">
+<h3>Manual installation with easy_install.<a class="headerlink" href="#manual-installation-with-easy-install" title="Permalink to this headline">¶</a></h3>
+<p>Clone the Git repository from Github. Then you can direct easy_install to the
+<code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file. For ex.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">django</span><span class="o">-</span><span class="n">userena</span><span class="o">-</span><span class="n">ce</span><span class="o">/</span><span class="n">django</span><span class="o">-</span><span class="n">userena</span><span class="o">-</span><span class="n">ce</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">django</span><span class="o">-</span><span class="n">userena</span>
+<span class="n">easy_install</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</section>
+<section id="automatic-installation-of-development-version-with-pip">
+<h3>Automatic installation of development version with pip.<a class="headerlink" href="#automatic-installation-of-development-version-with-pip" title="Permalink to this headline">¶</a></h3>
+<p>You can tell <a class="reference external" href="http://www.pip-installer.org/en/latest/index.html">pip</a> to install django-userena by supplying it with the git
+repository on Github. Do this by typing the following in your terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="n">git</span><span class="o">+</span><span class="n">git</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">django</span><span class="o">-</span><span class="n">userena</span><span class="o">-</span><span class="n">ce</span><span class="o">/</span><span class="n">django</span><span class="o">-</span><span class="n">userena</span><span class="o">-</span><span class="n">ce</span><span class="o">.</span><span class="n">git</span><span class="c1">#egg=userena</span>
+</pre></div>
+</div>
+</section>
+<section id="manual-installation-of-development-version-with-git">
+<h3>Manual installation of development version with git.<a class="headerlink" href="#manual-installation-of-development-version-with-git" title="Permalink to this headline">¶</a></h3>
+<p>Clone userena with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">django</span><span class="o">-</span><span class="n">userena</span><span class="o">-</span><span class="n">ce</span><span class="o">/</span><span class="n">django</span><span class="o">-</span><span class="n">userena</span><span class="o">-</span><span class="n">ce</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>You now have a directory <code class="docutils literal notranslate"><span class="pre">django-userena</span></code> which contains the <code class="docutils literal notranslate"><span class="pre">userena</span></code>
+application. You can add userena to your <code class="docutils literal notranslate"><span class="pre">$PYTHONPATH</span></code> by symlinking it. For
+example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">YOUR_PYTHON_PATH</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">~/</span><span class="n">src</span><span class="o">/</span><span class="n">django</span><span class="o">-</span><span class="n">userena</span><span class="o">/</span><span class="n">userena</span> <span class="n">userena</span>
+</pre></div>
+</div>
+<p>Now userena is available to your project.</p>
+</section>
+<section id="start-new-app">
+<h3>Start New App<a class="headerlink" href="#start-new-app" title="Permalink to this headline">¶</a></h3>
+<p>You need to create a new app on your Django project.
+In your Command Prompt shell, type: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">startapp</span> <span class="pre">accounts</span></code>.
+We are creating a new app for Userena titled ‘accounts’.</p>
+<p>Next, add <code class="docutils literal notranslate"><span class="pre">accounts</span></code> to the <code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code> in your settings.py file.</p>
+</section>
+</section>
+<section id="required-settings">
+<h2>Required settings<a class="headerlink" href="#required-settings" title="Permalink to this headline">¶</a></h2>
+<p>Next, you need to make some changes in the Django settings if you want to use Userena in
+your project. This means modifying <code class="docutils literal notranslate"><span class="pre">AUTHENTICATION_BACKENDS</span></code>,
+<code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code> and optionally <code class="docutils literal notranslate"><span class="pre">MIDDLEWARE_CLASSES</span></code>.</p>
+<p>Begin by adding <code class="docutils literal notranslate"><span class="pre">userena</span></code>, <code class="docutils literal notranslate"><span class="pre">guardian</span></code> and <code class="docutils literal notranslate"><span class="pre">easy_thumbnails</span></code> to the
+<code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code> in your settings.py file of your project.
+<code class="docutils literal notranslate"><span class="pre">django.contrib.sites</span></code> must also be present if it is not already (see <a class="reference external" href="https://docs.djangoproject.com/en/1.11/ref/contrib/sites/">Django docs</a>.).</p>
+<p>Next add <code class="docutils literal notranslate"><span class="pre">UserenaAuthenticationBackend</span></code> and <code class="docutils literal notranslate"><span class="pre">ObjectPermissionBackend</span></code>
+also in your settings.py file, from django-guardian, at the top of <code class="docutils literal notranslate"><span class="pre">AUTHENTICATION_BACKENDS</span></code>.
+If you only have Django’s default backend, adding django-guardian and that of userena will get
+the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">AUTHENTICATION_BACKENDS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s1">&#39;userena.backends.UserenaAuthenticationBackend&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;guardian.backends.ObjectPermissionBackend&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.auth.backends.ModelBackend&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<section id="email-backend">
+<h3>Email Backend<a class="headerlink" href="#email-backend" title="Permalink to this headline">¶</a></h3>
+<p>Userena uses the Django email facilities to send mail to users, for example
+after user signup for email verification.  By default Django uses the SMTP
+backend, which may cause issues in development and/or if the default SMTP
+settings are not suitable for your environment.  It is recommended to
+explicitly set the email backend provider in your settings.py.  For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">EMAIL_BACKEND</span> <span class="o">=</span> <span class="s1">&#39;django.core.mail.backends.dummy.EmailBackend&#39;</span>
+</pre></div>
+</div>
+<p>To use GMail SMTP, you may use the following code in your settings.py:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">EMAIL_USE_TLS</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">EMAIL_HOST</span> <span class="o">=</span> <span class="s1">&#39;smtp.gmail.com&#39;</span>
+<span class="n">EMAIL_PORT</span> <span class="o">=</span> <span class="mi">587</span>
+<span class="n">EMAIL_HOST_USER</span> <span class="o">=</span> <span class="s1">&#39;yourgmailaccount@gmail.com&#39;</span>
+<span class="n">EMAIL_HOST_PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;yourgmailpassword&#39;</span>
+</pre></div>
+</div>
+<p>See: <a class="reference external" href="https://docs.djangoproject.com/en/dev/topics/email/">Django Email Documentation</a></p>
+</section>
+<section id="profiles">
+<h3>Profiles<a class="headerlink" href="#profiles" title="Permalink to this headline">¶</a></h3>
+<p>Userena needs you to define the profile that is used by supplying Django’s
+<code class="docutils literal notranslate"><span class="pre">AUTH_PROFILE_MODULE</span></code> setting. Userena supplies the following two base
+profiles for you that you should use for your own profile model by inheriting
+from them:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">UserenaBaseProfile</span></code></dt><dd><p>Basic profile that supplies your user with mugshots and the necessary
+fields for privacy settings.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">UserenaLanguageBaseProfile</span></code></dt><dd><p>Adds an extra field that lets the user define its preferred language
+after logging in to your site.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>IMPORTANT</strong>: The above profiles are <code class="docutils literal notranslate"><span class="pre">abstract</span></code> models. This means that you
+cannot use them directly in <code class="docutils literal notranslate"><span class="pre">AUTH_PROFILE_MODULE</span></code> but you must create your
+own profile model which inherits from one of the above models. This models
+must also connect itself to the <code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code> model of Django.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">django.utils.translation</span> <span class="kn">import</span> <span class="n">gettext</span> <span class="k">as</span> <span class="n">_</span>
+<span class="kn">from</span> <span class="nn">userena.models</span> <span class="kn">import</span> <span class="n">UserenaBaseProfile</span>
+
+<span class="k">class</span> <span class="nc">MyProfile</span><span class="p">(</span><span class="n">UserenaBaseProfile</span><span class="p">):</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">OneToOneField</span><span class="p">(</span><span class="n">User</span><span class="p">,</span>
+                                <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                <span class="n">verbose_name</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">),</span>
+                                <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;my_profile&#39;</span><span class="p">,</span>
+                                <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">favourite_snack</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;favourite snack&#39;</span><span class="p">),</span>
+                                       <span class="n">max_length</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you want the user have the ability to choose their default language in their
+profile, you must add <code class="docutils literal notranslate"><span class="pre">userena.middleware.UserenaLocaleMiddleware</span></code> at the end of
+<code class="docutils literal notranslate"><span class="pre">MIDDLEWARE_CLASSES</span></code> in your Django settings. This does require a profile
+model which has a language field. You can use the
+<code class="docutils literal notranslate"><span class="pre">UserenaLanguageBaseProfile</span></code> class of userena that does this for you.</p>
+</section>
+<section id="the-uri-s">
+<h3>The URI’s<a class="headerlink" href="#the-uri-s" title="Permalink to this headline">¶</a></h3>
+<p>Userena has a <code class="docutils literal notranslate"><span class="pre">URLconf</span></code> which sets all the urls and views for you. This
+should be included in your project’s root <code class="docutils literal notranslate"><span class="pre">URLconf</span></code>.</p>
+<p>For example, to place the URIs under the prefix <code class="docutils literal notranslate"><span class="pre">/accounts/</span></code>, you could add
+the following to your project’s root <code class="docutils literal notranslate"><span class="pre">URLconf</span></code>.
+Add this code under <code class="docutils literal notranslate"><span class="pre">urlpatterns</span></code> in your urls.py file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^accounts/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;userena.urls&#39;</span><span class="p">)),</span>
+</pre></div>
+</div>
+<p>This should have you a working accounts application for your project. See the
+<a class="reference internal" href="settings.html#settings"><span class="std std-ref">settings</span></a> for further configuration options.</p>
+</section>
+<section id="id2">
+<h3>Required settings<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Django-guardian requires you to set the <code class="docutils literal notranslate"><span class="pre">ANONYMOUS_USER_NAME</span></code> setting.
+As noted before, you are also required to set the
+<code class="docutils literal notranslate"><span class="pre">AUTH_PROFILE_MODULE</span></code> to your custom defined profile.</p>
+<p>For example, add the following into your settings.py file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ANONYMOUS_USER_NAME</span> <span class="o">=</span> <span class="s1">&#39;AnonymousUser&#39;</span>
+
+<span class="n">AUTH_PROFILE_MODULE</span> <span class="o">=</span> <span class="s1">&#39;accounts.MyProfile&#39;</span>
+</pre></div>
+</div>
+<p>To integrate Django with userena you should alter the following three settings
+to reflect the URI you have chosen for userena. For example, if userena lives
+under <code class="docutils literal notranslate"><span class="pre">accounts</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">USERENA_SIGNIN_REDIRECT_URL</span> <span class="o">=</span> <span class="s1">&#39;/accounts/</span><span class="si">%(username)s</span><span class="s1">/&#39;</span>
+<span class="n">LOGIN_URL</span> <span class="o">=</span> <span class="s1">&#39;/accounts/signin/&#39;</span>
+<span class="n">LOGOUT_URL</span> <span class="o">=</span> <span class="s1">&#39;/accounts/signout/&#39;</span>
+</pre></div>
+</div>
+<p>The above should supply you with a fully functional account management app for
+your project. You can look into the next chapter to fully customize userena to
+your likings.</p>
+<p>To integrate Userena with your domain you must create a Site for it in the
+Django admin screen (e.g. <a class="reference external" href="http:/">http:/</a>/&lt;yoursite.com&gt;/admin/sites/ ) and then
+put the id for that site in the SITE_ID setting variable.:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SITE_ID</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">site</span><span class="o">.</span><span class="n">id</span> <span class="n">of</span> <span class="n">your</span> <span class="n">site</span><span class="o">&gt;</span> <span class="c1"># will probably be &#39;1&#39; if this is your</span>
+                                 <span class="c1"># first.</span>
+</pre></div>
+</div>
+<p>To look up your site_id open a shell in manage.py (manage.py shell) and:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.contrib.sites.models</span> <span class="kn">import</span> <span class="n">Site</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">Site</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+   <span class="nb">print</span> <span class="s2">&quot;id: </span><span class="si">{0}</span><span class="s2">  name: </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Set SITE_ID to the id of the desired name. (eks: 1)</p>
+</section>
+<section id="run-migrations">
+<h3>Run Migrations<a class="headerlink" href="#run-migrations" title="Permalink to this headline">¶</a></h3>
+<p>run <cite>python manage.py makemigrations</cite> and <cite>python manage.py migrate</cite></p>
+</section>
+<section id="permission-check">
+<h3>Permission check<a class="headerlink" href="#permission-check" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes Django decides to skip installing the default permissions for a
+model. To check if all permissions are there, run the <code class="docutils literal notranslate"><span class="pre">check_permissions</span></code> in
+the management <a class="reference internal" href="commands.html#commands"><span class="std std-ref">Commands.</span></a>.</p>
+</section>
+</section>
+</section>
+<section id="migrating-from-bread-and-pepper-django-userena">
+<h1>Migrating from bread-and-pepper/django-userena<a class="headerlink" href="#migrating-from-bread-and-pepper-django-userena" title="Permalink to this headline">¶</a></h1>
+<p>This project was forked from bread-and-pepper/django-userena v2.0.1.
+To migrate from this project you just need to install the package
+and update a key which was changed in django-guardian:</p>
+<ol class="arabic simple">
+<li><p>Remove <cite>django-userena</cite> from your installation <cite>pip uninstall django-userena</cite></p></li>
+<li><p><cite>pip install django-userena-ce==3.1.0</cite></p></li>
+<li><p>Replace <cite>django-userena</cite> to <cite>django-userena-ce</cite> in your <cite>INSTALLED_APPS</cite></p></li>
+<li><p>Update your django settings, remove <cite>ANONYMOUS_USER_ID</cite> and set <cite>ANONYMOUS_USER_NAME</cite></p></li>
+</ol>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Installation.</a><ul>
+<li><a class="reference internal" href="#support-for-old-django-and-python-versions">Support for old Django and Python Versions</a></li>
+<li><a class="reference internal" href="#installing-django-userena-ce">Installing django-userena-ce</a><ul>
+<li><a class="reference internal" href="#automatic-installation-with-pip">Automatic installation with pip.</a></li>
+<li><a class="reference internal" href="#manual-installation-with-easy-install">Manual installation with easy_install.</a></li>
+<li><a class="reference internal" href="#automatic-installation-of-development-version-with-pip">Automatic installation of development version with pip.</a></li>
+<li><a class="reference internal" href="#manual-installation-of-development-version-with-git">Manual installation of development version with git.</a></li>
+<li><a class="reference internal" href="#start-new-app">Start New App</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#required-settings">Required settings</a><ul>
+<li><a class="reference internal" href="#email-backend">Email Backend</a></li>
+<li><a class="reference internal" href="#profiles">Profiles</a></li>
+<li><a class="reference internal" href="#the-uri-s">The URI’s</a></li>
+<li><a class="reference internal" href="#id2">Required settings</a></li>
+<li><a class="reference internal" href="#run-migrations">Run Migrations</a></li>
+<li><a class="reference internal" href="#permission-check">Permission check</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migrating-from-bread-and-pepper-django-userena">Migrating from bread-and-pepper/django-userena</a></li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">Userena Introduction</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="settings.html"
+                          title="next chapter">Settings</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/installation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="settings.html" title="Settings"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Userena Introduction"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">django-userena-ce 7.0.0a1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Installation.</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, 2011 Bread &amp; Pepper.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>
