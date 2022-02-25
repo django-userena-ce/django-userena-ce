@@ -21,7 +21,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.7,<3.11"
+python = "^3.7"
 easy-thumbnails = "*"
 django-guardian = ">=2.0"
 html2text = "*"
