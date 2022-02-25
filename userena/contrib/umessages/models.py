@@ -6,8 +6,7 @@ from userena.contrib.umessages.managers import (
     MessageManager,
     MessageRecipientManager,
 )
-from userena.utils import truncate_words
-from userena.utils import user_model_label
+from userena.utils import truncate_words, user_model_label
 
 
 class MessageContact(models.Model):
