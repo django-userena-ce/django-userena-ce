@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from django.utils.translation import gettext_lazy as _, override
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import override
 
 from userena import forms
 from userena import settings as userena_settings

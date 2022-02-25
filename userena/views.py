@@ -4,10 +4,10 @@ from django.contrib import messages
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME,
     authenticate,
+    get_user_model,
     login,
     logout,
 )
-from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
