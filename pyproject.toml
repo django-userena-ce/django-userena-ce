@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-userena-ce"
-version = "7.0.1"
+version = "8.0.0-rc1"
 description = "Complete user management application for Django"
 authors = ["James Meakin <django-userena-ce@jmsmkn.com>"]
 license = "BSD-3-Clause"
@@ -21,11 +21,11 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7"
-easy-thumbnails = "*"
-django-guardian = ">=2.0"
+python = "^3.10"
+easy-thumbnails = "^2.8.3"
+django-guardian = "^2.4.0"
 html2text = "*"
-Django = ">=3.2,<4.1"
+Django = "^4.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"

@@ -45,3 +45,5 @@ demo/media/admin
 
 # Poetry
 poetry.lock
+.history
+.vscode
