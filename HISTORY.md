@@ -1,5 +1,9 @@
 # UPDATES
 
+## Version 7.0.2
+
+- Added support for Python 3.11, Django 4.1
+
 ## Version 7.0.1
 
 - Correct Python version support metadata
