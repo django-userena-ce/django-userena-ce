@@ -45,11 +45,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install tox tox-gh-actions poetry
+        python -m pip install tox tox-gh-actions
+        curl -sSL https://install.python-poetry.org | python3 -
     - name: Test with tox
       env:
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       run: |
+        poetry self add poetry-plugin-export
         tox
 
   docs:
@@ -63,7 +65,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install poetry
+          curl -sSL https://install.python-poetry.org | python3 -
           poetry install
           poetry run bash -c 'cd docs && make html'
       - name: Deploy the documentation on master
@@ -86,7 +88,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install poetry
+          curl -sSL https://install.python-poetry.org | python3 -
       - name: Upload to pypi
         env:
           POETRY_PYPI_TOKEN_PYPI: ${{ secrets.POETRY_PYPI_TOKEN_PYPI }}
