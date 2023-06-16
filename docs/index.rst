@@ -49,7 +49,7 @@ Changes and releases
 For changes history and available releases see following pages on GitHub
 repository:
 
-* `UDATES.md <https://github.com/django-userena-ce/django-userena-ce/blob/master/UPDATES.md>`_
+* `HISTORY.md <https://github.com/django-userena-ce/django-userena-ce/blob/master/HISTORY.md>`_
 * `releases <https://github.com/django-userena-ce/django-userena-ce/releases>`_
 
 
