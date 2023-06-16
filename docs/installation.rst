@@ -4,9 +4,8 @@ Installation.
 =============
 
 Before install django-userena-ce, you'll need to have a copy of `Django
-<http://www.djangoproject.com>`_ 2.2, 3.1 or 3.2 installed. django-userena-ce is
-tested under Python 3.6, 3.7, 3.8 and 3.9 (all versions on which
-Django 2.2 and higher is declared to work)
+<http://www.djangoproject.com>`_ 3.2, 4.1, 4.2 installed. django-userena-ce is
+tested under Python 3.8, 3.9, 3.10 or 3.11.
 
 For further information, consult the `Django download page
 <http://www.djangoproject.com/download/>`_, which offers convenient packaged

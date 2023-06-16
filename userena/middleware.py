@@ -20,7 +20,6 @@ class UserenaLocaleMiddleware(MiddlewareMixin):
     def process_request(self, request):
         lang_cookie = request.session.get(settings.LANGUAGE_COOKIE_NAME)
         if not lang_cookie:
-
             authenticated = request.user.is_authenticated
 
             if authenticated:
