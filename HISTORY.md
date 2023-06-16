@@ -1,5 +1,10 @@
 # UPDATES
 
+## Version 7.0.3
+
+- Removed support for Python 3.7, Django 4.0
+- Added support for Django 4.2
+
 ## Version 7.0.2
 
 - Added support for Python 3.11, Django 4.1

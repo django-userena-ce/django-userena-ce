@@ -20,7 +20,7 @@ can use it commercially for free!
 Software | Versions
 ---|---
 Python | 3.8, 3.9, 3.10, 3.11
-Django | 3.2, 4.0, 4.1
+Django | 3.2, 4.1, 4.2
 Django Guardian | \>2.0
 
 ## [Documentation](https://django-userena-ce.github.io/django-userena-ce/index.html)
