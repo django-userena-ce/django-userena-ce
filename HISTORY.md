@@ -1,5 +1,9 @@
 # UPDATES
 
+## Unreleased
+
+- Added support for Python 3.12
+
 ## Version 7.0.3
 
 - Removed support for Python 3.7, Django 4.0
