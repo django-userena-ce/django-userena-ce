@@ -2,7 +2,7 @@
 name = "django-userena-ce"
 version = "7.0.3"
 description = "Complete user management application for Django"
-authors = ["James Meakin <django-userena-ce@jmsmkn.com>"]
+authors = ["James Meakin"]
 license = "BSD-3-Clause"
 readme = "README.md"
 repository = "https://github.com/django-userena-ce/django-userena-ce"
