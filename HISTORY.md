@@ -1,5 +1,9 @@
 # UPDATES
 
+## Version 8.0.0
+
+- Deprecates Package
+
 ## Version 7.0.3
 
 - Removed support for Python 3.7, Django 4.0
