@@ -1,0 +1,47 @@
+name: Publish Package
+
+on:
+  release:
+    types:
+      - published
+
+env:
+  MINIMUM_PYTHON_VERSION: '3.10'
+
+jobs:
+  build-for-pypi:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Python ${{ env.MINIMUM_PYTHON_VERSION }}
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
+      - name: Build the package
+        run: uv build
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-dist
+          path: dist/
+          if-no-files-found: error
+          retention-days: 1
+
+  deploy-to-pypi:
+    # IMPORTANT: use a separate job for this as each step has access to the tokens
+    needs: build-for-pypi
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+    # IMPORTANT: this permission is mandatory for Trusted Publishing
+      id-token: write
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: python-dist
+        path: dist
+    - name: Publish package distributions
+      uses: pypa/gh-action-pypi-publish@release/v1
