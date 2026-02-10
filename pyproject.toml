@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "django-userena-ce"
-version = "7.0.3"
-description = "Complete user management application for Django"
+version = "8.0.0"
+description = "Complete user management application for Django [DEPRECATED]"
 authors = ["James Meakin"]
 license = "BSD-3-Clause"
 readme = "README.md"
@@ -10,7 +10,7 @@ packages = [
     { include = "userena" },
 ]
 classifiers = [
-    'Development Status :: 5 - Production/Stable',
+    'Development Status :: 7 - Inactive',
     'Environment :: Web Environment',
     'Framework :: Django',
     'Framework :: Django :: 3.2',
@@ -58,7 +58,9 @@ testpaths = [
 python_files = "tests.py test_*.py *_tests.py tests_*.py"
 addopts = "--strict-markers --showlocals"
 markers = []
-filterwarnings = []
+filterwarnings = [
+    "ignore:django-userena-ce is deprecated:DeprecationWarning",
+]
 
 [tool.tox]
 legacy_tox_ini = """
