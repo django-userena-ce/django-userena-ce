@@ -36,6 +36,7 @@ dev = [
     "pytest-cov",
     "coveralls",
     "sphinx",
+    "pre-commit",
 ]
 
 [tool.isort]
